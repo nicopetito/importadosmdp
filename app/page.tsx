@@ -2,9 +2,14 @@
 
 import Link from 'next/link';
 import Image from 'next/image';
-import { useRef, useEffect } from 'react';
+import { useRef } from 'react';
 import { motion, useScroll, useTransform } from 'framer-motion';
 import dynamic from 'next/dynamic';
+
+const HeroParticles = dynamic(
+  () => import('@/app/components/HeroParticles'),
+  { ssr: false }
+)
 
 const MapEmbed = dynamic(() => import('@/app/components/MapEmbed'), {
   ssr: false,
@@ -28,6 +33,11 @@ const featuredMocks = [
 
 export default function Home() {
   const containerRef = useRef(null);
+  const scrollRef = useRef<HTMLDivElement>(null);
+
+  const scrollLeft = () => scrollRef.current?.scrollBy({ left: -340, behavior: 'smooth' });
+  const scrollRight = () => scrollRef.current?.scrollBy({ left: 340, behavior: 'smooth' });
+
   const { scrollYProgress } = useScroll({
     target: containerRef,
     offset: ['start start', 'end start']
@@ -52,7 +62,19 @@ export default function Home() {
       </nav>
 
       {/* HERO */}
-      <section className="min-h-[calc(100vh-64px)] grid grid-cols-1 lg:grid-cols-[55%_45%] items-center px-6 lg:px-20 py-12 lg:py-0">
+      <section
+        className="min-h-[calc(100vh-64px)]"
+        style={{
+          display: 'grid',
+          gridTemplateColumns: '1fr 1fr',
+          gap: '40px',
+          alignItems: 'center',
+          maxWidth: '1200px',
+          margin: '0 auto',
+          padding: '60px 80px',
+          width: '100%',
+        }}
+      >
         <div>
           <p className="font-body font-normal text-[12px] text-[#5A72ED] uppercase tracking-[0.15em] mb-[20px] opacity-0 animate-reveal-up [animation-delay:0ms]">
             Mar del Plata · Tecnología importada
@@ -86,76 +108,76 @@ export default function Home() {
         </div>
 
         {/* COLUMNA DERECHA - MOCKUP PARALLAX */}
-        <div ref={containerRef} className="relative w-full h-full flex items-center justify-center mt-16 lg:mt-0 min-h-[500px]">
-          
-          {/* Elementos decorativos de fondo */}
-          <div style={{ position: 'absolute', width: '420px', height: '420px', borderRadius: '50%', background: '#E0E8FF', filter: 'blur(60px)', opacity: 0.7, top: '50%', left: '50%', transform: 'translate(-50%, -50%)', zIndex: 0 }} />
-          <div style={{ position: 'absolute', width: '200px', height: '200px', borderRadius: '50%', background: '#C7D4FF', filter: 'blur(40px)', opacity: 0.5, bottom: '10%', right: '10%', zIndex: 0 }} />
+        <div
+          ref={containerRef}
+          style={{
+            position: 'relative',
+            width: '100%',
+            height: '100%',
+            minHeight: '520px',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            overflow: 'visible',
+            borderRadius: '24px',
+          }}
+        >
+          {/* Partículas interactivas en el fondo */}
+          <HeroParticles />
 
-          <svg style={{ position: 'absolute', top: '8%', left: '4%', opacity: 0.4, zIndex: 0 }} width="80" height="80" viewBox="0 0 80 80">
-            {[0,1,2,3].map(row => [0,1,2,3].map(col => <circle key={`dots1-${row}-${col}`} cx={col * 20 + 10} cy={row * 20 + 10} r="2" fill="#5A72ED" />))}
-          </svg>
-
-          <svg style={{ position: 'absolute', bottom: '8%', right: '4%', opacity: 0.3, zIndex: 0 }} width="80" height="80" viewBox="0 0 80 80">
-            {[0,1,2,3].map(row => [0,1,2,3].map(col => <circle key={`dots2-${row}-${col}`} cx={col * 20 + 10} cy={row * 20 + 10} r="2" fill="#5A72ED" />))}
-          </svg>
-
-          <svg style={{ position: 'absolute', bottom: '20%', left: '0%', opacity: 0.2, zIndex: 0 }} width="120" height="60" viewBox="0 0 120 60">
-            <path d="M0 30 Q60 0 120 30" fill="none" stroke="#5A72ED" strokeWidth="1.5" strokeDasharray="4 4" />
-          </svg>
-
-          {/* MOCKUP CELULAR CONTENEDOR */}
-          <motion.div style={{ y: phoneY, zIndex: 10, position: 'relative' }}>
-            <motion.div
-              initial={{ opacity: 0, y: 60, scale: 0.92, filter: 'blur(8px)' }}
-              animate={{ opacity: 1, y: 0, scale: 1, filter: 'blur(0px)' }}
-              transition={{ duration: 0.9, delay: 0.4, ease: [0.22, 1, 0.36, 1] }}
-            >
+          {/* Celular encima con z-index superior */}
+          <div style={{ position: 'relative', zIndex: 10 }}>
+            <motion.div style={{ y: phoneY }}>
               <motion.div
-                animate={{ y: [0, -18, 0] }}
-                transition={{ duration: 4, repeat: Infinity, ease: 'easeInOut', repeatType: 'loop' }}
+                initial={{ opacity: 0, y: 60, scale: 0.92, filter: 'blur(8px)' }}
+                animate={{ opacity: 1, y: 0, scale: 1, filter: 'blur(0px)' }}
+                transition={{ duration: 0.9, delay: 0.4, ease: [0.22, 1, 0.36, 1] }}
               >
-                
-                {/* PRESENTACIÓN MULTIDISPOSITIVO (NUEVA IMAGEN) */}
-                <div className="relative flex items-center justify-center w-full">
-                  <Image 
-                    src="/images/mockup-triple.png" 
-                    alt="ImportadosMDP Multidispositivo"
-                    width={800}
-                    height={500}
-                    priority
-                    className="w-full max-w-[500px] lg:max-w-[650px] xl:max-w-[750px] h-auto object-contain hover:scale-105 transition-transform duration-700"
-                    style={{ filter: 'drop-shadow(0 40px 80px rgba(26,37,128,0.2))' }}
-                  />
+                <motion.div
+                  animate={{ y: [0, -18, 0] }}
+                  transition={{ duration: 4, repeat: Infinity, ease: 'easeInOut', repeatType: 'loop' }}
+                >
+                  {/* PRESENTACIÓN MULTIDISPOSITIVO */}
+                  <div className="relative flex items-center justify-center w-full">
+                    <Image
+                      src="/images/mockup-triple.png"
+                      alt="ImportadosMDP Multidispositivo"
+                      width={800}
+                      height={500}
+                      priority
+                      className="w-full max-w-[500px] lg:max-w-[650px] xl:max-w-[750px] h-auto object-contain hover:scale-105 transition-transform duration-700"
+                      style={{ filter: 'drop-shadow(0 40px 80px rgba(26,37,128,0.2))' }}
+                    />
 
-                  {/* Badge Flotante 1: En línea ahora */}
-                  <motion.div
-                    initial={{ opacity: 0, scale: 0.8, y: 10 }}
-                    animate={{ opacity: 1, scale: 1, y: 0 }}
-                    transition={{ delay: 1.2, duration: 0.5, ease: 'backOut' }}
-                    style={{ position: 'absolute', top: '10%', right: '-10px', background: 'white', border: '1px solid #C7D4FF', borderRadius: '12px', padding: '8px 12px', boxShadow: '0 8px 24px rgba(90,114,237,0.15)', zIndex: 20, display: 'flex', alignItems: 'center', gap: '6px' }}
-                  >
-                    <div style={{ width: '8px', height: '8px', borderRadius: '50%', background: '#25D366', animation: 'pulse 2s infinite' }} />
-                    <span style={{ fontSize: '11px', fontWeight: 600, color: '#1A2580', fontFamily: 'var(--font-body)' }}>En línea ahora</span>
-                  </motion.div>
+                    {/* Badge Flotante 1: En línea ahora */}
+                    <motion.div
+                      initial={{ opacity: 0, scale: 0.8, y: 10 }}
+                      animate={{ opacity: 1, scale: 1, y: 0 }}
+                      transition={{ delay: 1.2, duration: 0.5, ease: 'backOut' }}
+                      style={{ position: 'absolute', top: '10%', right: '-10px', background: 'white', border: '1px solid #C7D4FF', borderRadius: '12px', padding: '8px 12px', boxShadow: '0 8px 24px rgba(90,114,237,0.15)', zIndex: 20, display: 'flex', alignItems: 'center', gap: '6px' }}
+                    >
+                      <div style={{ width: '8px', height: '8px', borderRadius: '50%', background: '#25D366', animation: 'pulse 2s infinite' }} />
+                      <span style={{ fontSize: '11px', fontWeight: 600, color: '#1A2580', fontFamily: 'var(--font-body)' }}>En línea ahora</span>
+                    </motion.div>
 
-                  {/* Badge Flotante 2: Calificación */}
-                  <motion.div
-                    initial={{ opacity: 0, scale: 0.8, y: -10 }}
-                    animate={{ opacity: 1, scale: 1, y: 0 }}
-                    transition={{ delay: 1.4, duration: 0.5, ease: 'backOut' }}
-                    style={{ position: 'absolute', bottom: '10%', left: '-10px', background: '#1A2580', border: '1px solid #3D52C4', borderRadius: '12px', padding: '8px 12px', boxShadow: '0 8px 24px rgba(26,37,128,0.3)', zIndex: 20, display: 'flex', alignItems: 'center', gap: '8px' }}
-                  >
-                    <span style={{ fontSize: '14px' }}>⭐</span>
-                    <div style={{ display: 'flex', flexDirection: 'column' }}>
-                      <span style={{ fontSize: '11px', fontWeight: 700, color: 'white', fontFamily: 'var(--font-display)', lineHeight: 1 }}>4.9 / 5.0</span>
-                      <span style={{ fontSize: '8px', color: '#C7D4FF', fontWeight: 500 }}>+500 reseñas</span>
-                    </div>
-                  </motion.div>
-                </div>
+                    {/* Badge Flotante 2: Calificación */}
+                    <motion.div
+                      initial={{ opacity: 0, scale: 0.8, y: -10 }}
+                      animate={{ opacity: 1, scale: 1, y: 0 }}
+                      transition={{ delay: 1.4, duration: 0.5, ease: 'backOut' }}
+                      style={{ position: 'absolute', bottom: '10%', left: '-10px', background: '#FFFFFF', border: '1px solid #C7D4FF', borderRadius: '12px', padding: '8px 14px', boxShadow: '0 8px 24px rgba(90,114,237,0.12)', zIndex: 20, display: 'flex', alignItems: 'center', gap: '8px' }}
+                    >
+                      <span style={{ fontSize: '14px' }}>⭐</span>
+                      <div style={{ display: 'flex', flexDirection: 'column' }}>
+                        <span style={{ fontSize: '11px', fontWeight: 700, color: '#1A2580', fontFamily: 'var(--font-display)', lineHeight: 1 }}>4.9 / 5.0</span>
+                        <span style={{ fontSize: '8px', color: '#6B7280', fontWeight: 500 }}>+500 reseñas</span>
+                      </div>
+                    </motion.div>
+                  </div>
+                </motion.div>
               </motion.div>
             </motion.div>
-          </motion.div>
+          </div>
         </div>
       </section>
 
@@ -215,9 +237,9 @@ export default function Home() {
 
       {/* CARDS DE ACCESO RÁPIDO */}
       <section className="bg-[#F0F4FF] px-6 py-10 lg:py-20 lg:px-20">
-        <div className="max-w-[900px] mx-auto grid grid-cols-1 lg:grid-cols-2 gap-[24px]">
-          
-          {/* Card 1 */}
+        <div className="max-w-[1100px] mx-auto" style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '20px' }}>
+
+          {/* Card 1 — Catálogo */}
           <Link href="/catalogo" className="group bg-white border border-[#C7D4FF] rounded-[20px] p-[32px] lg:px-[28px] transition-all duration-250 block hover:bg-[#E0E8FF] hover:border-[#5A72ED] hover:-translate-y-[6px]">
             <h4 className="font-display font-extrabold text-[52px] text-[#5A72ED] leading-[1] mb-[4px]">+60</h4>
             <p className="font-body font-light text-[12px] text-[#6B7280] mb-[20px]">productos disponibles</p>
@@ -228,8 +250,52 @@ export default function Home() {
             <span className="font-body text-[13px] font-medium text-[#5A72ED] group-hover:text-[#3D52C4]">Ver productos →</span>
           </Link>
 
+          {/* Card 2 — Reseñas */}
+          <Link href="/resenas" style={{ textDecoration: 'none' }}>
+            <div
+              style={{
+                background: '#FFFFFF',
+                border: '1px solid #C7D4FF',
+                borderRadius: '20px',
+                padding: '32px 28px',
+                cursor: 'pointer',
+                transition: 'all 250ms ease',
+                height: '100%',
+              }}
+              onMouseEnter={e => {
+                e.currentTarget.style.background = '#E0E8FF'
+                e.currentTarget.style.borderColor = '#5A72ED'
+                e.currentTarget.style.transform = 'translateY(-6px)'
+              }}
+              onMouseLeave={e => {
+                e.currentTarget.style.background = '#FFFFFF'
+                e.currentTarget.style.borderColor = '#C7D4FF'
+                e.currentTarget.style.transform = 'translateY(0)'
+              }}
+            >
+              <div style={{ fontFamily: 'var(--font-display)', fontWeight: 800, fontSize: '52px', color: '#5A72ED', lineHeight: 1, marginBottom: '4px' }}>
+                4.9★
+              </div>
+              <div style={{ fontFamily: 'var(--font-body)', fontWeight: 300, fontSize: '12px', color: '#6B7280', marginBottom: '20px' }}>
+                calificación promedio
+              </div>
+              <hr style={{ border: 'none', borderTop: '1px solid #E0E8FF', marginBottom: '20px' }} />
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" style={{ marginBottom: '10px' }}>
+                <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" fill="#5A72ED" />
+              </svg>
+              <div style={{ fontFamily: 'var(--font-display)', fontWeight: 700, fontSize: '18px', color: '#1A2580', marginBottom: '8px' }}>
+                Lo que dicen nuestros clientes
+              </div>
+              <div style={{ fontFamily: 'var(--font-body)', fontSize: '14px', color: '#4A5568', lineHeight: 1.5, marginBottom: '16px' }}>
+                Más de 500 ventas en Mar del Plata.
+              </div>
+              <span style={{ fontFamily: 'var(--font-body)', fontSize: '13px', fontWeight: 500, color: '#5A72ED' }}>
+                Leer reseñas →
+              </span>
+            </div>
+          </Link>
 
-          {/* Card 3 */}
+          {/* Card 3 — Contacto */}
           <Link href="/contacto" className="group bg-white border border-[#C7D4FF] rounded-[20px] p-[32px] lg:px-[28px] transition-all duration-250 block hover:bg-[#E0E8FF] hover:border-[#5A72ED] hover:-translate-y-[6px]">
             <h4 className="font-display font-extrabold text-[52px] text-[#5A72ED] leading-[1] mb-[4px]">&lt;3hs</h4>
             <p className="font-body font-light text-[12px] text-[#6B7280] mb-[20px]">tiempo de respuesta</p>
@@ -257,7 +323,30 @@ export default function Home() {
             </h2>
           </div>
 
-          <div className="flex items-center gap-[20px] bg-white border border-[#E0E8FF] shadow-[0_8px_32px_rgba(90,114,237,0.08)] rounded-[20px] p-[20px]">
+          <div className="flex flex-col items-end gap-[12px]">
+            {/* Botones de navegación del carrusel */}
+            <div style={{ display: 'flex', justifyContent: 'flex-end', gap: '8px' }}>
+              <button
+                onClick={scrollLeft}
+                style={{ width: '40px', height: '40px', borderRadius: '50%', background: '#FFFFFF', border: '1px solid #C7D4FF', display: 'flex', alignItems: 'center', justifyContent: 'center', cursor: 'pointer', transition: 'all 150ms ease' }}
+                onMouseEnter={e => { e.currentTarget.style.background = '#5A72ED'; e.currentTarget.style.borderColor = '#5A72ED'; (e.currentTarget.querySelector('svg') as SVGElement | null)?.setAttribute('stroke', 'white'); }}
+                onMouseLeave={e => { e.currentTarget.style.background = '#FFFFFF'; e.currentTarget.style.borderColor = '#C7D4FF'; (e.currentTarget.querySelector('svg') as SVGElement | null)?.setAttribute('stroke', '#1A2580'); }}
+                aria-label="Anterior"
+              >
+                <svg width="16" height="16" fill="none" stroke="#1A2580" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"></polyline></svg>
+              </button>
+              <button
+                onClick={scrollRight}
+                style={{ width: '40px', height: '40px', borderRadius: '50%', background: '#FFFFFF', border: '1px solid #C7D4FF', display: 'flex', alignItems: 'center', justifyContent: 'center', cursor: 'pointer', transition: 'all 150ms ease' }}
+                onMouseEnter={e => { e.currentTarget.style.background = '#5A72ED'; e.currentTarget.style.borderColor = '#5A72ED'; (e.currentTarget.querySelector('svg') as SVGElement | null)?.setAttribute('stroke', 'white'); }}
+                onMouseLeave={e => { e.currentTarget.style.background = '#FFFFFF'; e.currentTarget.style.borderColor = '#C7D4FF'; (e.currentTarget.querySelector('svg') as SVGElement | null)?.setAttribute('stroke', '#1A2580'); }}
+                aria-label="Siguiente"
+              >
+                <svg width="16" height="16" fill="none" stroke="#1A2580" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"></polyline></svg>
+              </button>
+            </div>
+
+            <div className="flex items-center gap-[20px] bg-white border border-[#E0E8FF] shadow-[0_8px_32px_rgba(90,114,237,0.08)] rounded-[20px] p-[20px]">
             <div className="pr-[20px] border-r border-[#E0E8FF]">
               <div className="flex gap-[3px] mb-[6px] justify-center">
                 {[...Array(5)].map((_, i) => (
@@ -338,7 +427,7 @@ export default function Home() {
               ].map((item, idx) => (
                 <div key={idx} className="flex gap-[12px] items-start mb-[18px]">
                   <div className="w-[36px] h-[36px] rounded-full bg-white/10 flex items-center justify-center shrink-0">
-                    <svg className="w-[16px] h-[16px] text-[#C7D4FF]" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">{item.icon}</svg>
+                    <svg width="20" height="20" style={{ flexShrink: 0 }} className="text-[#C7D4FF]" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">{item.icon}</svg>
                   </div>
                   <p className="font-body text-[14px] text-[#C7D4FF] leading-[1.4] mt-[6px]">{item.text}</p>
                 </div>
