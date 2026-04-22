@@ -1,75 +1,70 @@
-import Image from 'next/image';
-import Link from 'next/link';
-import { products as mockProducts, Product } from '../../data/products';
-import { supabase } from '../../utils/supabase/client';
+import Link from 'next/link'
+import { products as mockProducts, Product } from '../../data/products'
+import { supabase } from '../../utils/supabase/client'
+import ProductCard from './ProductCard'
 
 export default async function FeaturedProducts() {
-  let featured: Product[] = [];
+  let featured: Product[] = []
 
   if (supabase) {
-    const { data, error } = await supabase.from('products').select('*').eq('isFeatured', true).limit(5);
+    const { data, error } = await supabase.from('products').select('*').eq('isFeatured', true).limit(5)
     if (!error && data && data.length > 0) {
-      featured = data as Product[];
+      featured = data as Product[]
     } else {
-      featured = mockProducts.filter(p => p.isFeatured).slice(0, 5);
+      featured = mockProducts.filter(p => p.isFeatured).slice(0, 5)
     }
   } else {
-    featured = mockProducts.filter(p => p.isFeatured).slice(0, 5);
+    featured = mockProducts.filter(p => p.isFeatured).slice(0, 5)
   }
 
   return (
-    <section className="bg-white py-20 px-6 relative z-10 border-t border-gray-100">
+    <section className="bg-white py-20 px-6 relative z-10">
       <div className="max-w-6xl mx-auto">
-        <div className="text-center mb-16">
-          <h2 className="font-display font-black text-4xl md:text-5xl text-navy-deep tracking-tight">Productos Destacados</h2>
-          <p className="font-body text-gray-500 mt-4 max-w-xl mx-auto text-lg">
-            Descubre los equipos más buscados y elegidos por nuestros clientes en este momento.
-          </p>
+
+        {/* Section header */}
+        <div className="flex items-end justify-between mb-12">
+          <div>
+            <p className="font-body text-[11px] font-bold text-accent uppercase tracking-[0.2em] mb-3">
+              Lo más buscado
+            </p>
+            <h2 className="font-display font-black text-[36px] md:text-[44px] text-navy leading-tight tracking-tight">
+              Productos<br className="hidden sm:block" /> destacados
+            </h2>
+          </div>
+          <Link
+            href="/catalogo"
+            className="font-body font-bold text-sm text-accent hover:text-accent-mid transition-colors duration-200 flex items-center gap-1.5 mb-1"
+          >
+            Ver todos
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+              <path d="M5 12h14M12 5l7 7-7 7" />
+            </svg>
+          </Link>
         </div>
-        
-        <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-4 md:gap-6">
-          {featured.map((product) => (
-            <div 
+
+        {/* Product grid */}
+        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4 md:gap-5">
+          {featured.map((product, i) => (
+            <ProductCard
               key={product.id}
-              className="bg-white rounded-2xl overflow-hidden border border-gray-100 shadow-[0_4px_15px_-4px_rgba(0,0,0,0.05)] transition-all duration-[400ms] group flex flex-col hover:shadow-[0_8px_25px_rgb(0,0,0,0.08)] hover:border-accent hover:-translate-y-1"
-            >
-              <div className="relative w-full h-32 md:h-40 bg-gray-50 flex items-center justify-center p-3">
-                <Image
-                  src={product.imageUrl}
-                  alt={product.name}
-                  fill
-                  className="object-contain group-hover:scale-110 transition-transform duration-500 rounded-t-xl p-3"
-                />
-              </div>
-              
-              <div className="p-4 flex flex-col flex-1">
-                <span className="text-[10px] font-bold text-accent tracking-wider uppercase mb-1">
-                  {product.brand}
-                </span>
-                <h3 className="font-display font-black text-sm md:text-base text-navy-deep mb-1 line-clamp-2">
-                  {product.name}
-                </h3>
-                
-                <div className="mt-auto pt-3 flex flex-col md:flex-row md:items-center justify-between gap-2">
-                  <span className="font-display font-black text-lg md:text-xl text-navy-deep">
-                    ${product.price.toLocaleString('es-AR')}
-                  </span>
-                  <Link 
-                    href={`/catalogo/${product.id}`}
-                    className="bg-navy-deep text-white px-3 py-1.5 rounded-full font-body font-bold text-xs hover:bg-accent transition-colors duration-300 text-center"
-                  >
-                    Ver
-                  </Link>
-                </div>
-              </div>
-            </div>
+              id={product.id}
+              name={product.name}
+              brand={product.brand}
+              category={product.category}
+              price={product.price}
+              discountPrice={product.discountPrice}
+              imageUrl={product.imageUrl}
+              badge={product.isFeatured ? (i === 0 ? 'Nuevo' : i < 3 ? 'Popular' : null) : null}
+              index={i}
+            />
           ))}
         </div>
 
+        {/* CTA */}
         <div className="mt-12 text-center">
-          <Link 
+          <Link
             href="/catalogo"
-            className="inline-block bg-white text-navy font-body font-bold border-2 border-navy px-8 py-3 rounded-full hover:bg-navy hover:text-white transition-colors hover:shadow-md"
+            className="inline-flex items-center gap-2 font-body font-bold text-sm text-navy border-2 border-navy rounded-full px-8 py-3 hover:bg-navy hover:text-white transition-all duration-300 hover:shadow-md"
           >
             Ver catálogo completo →
           </Link>

@@ -1,6 +1,8 @@
 import type { Metadata } from 'next'
 import { Raleway, DM_Sans } from 'next/font/google'
 import './globals.css'
+import SmoothScrollProvider from '@/app/components/SmoothScrollProvider'
+import MobileBottomNav from '@/app/components/MobileBottomNav'
 
 const raleway = Raleway({
   subsets: ['latin'],
@@ -25,8 +27,13 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="es">
-      <body className={`${raleway.variable} ${dmSans.variable} font-body bg-blue-base text-navy antialiased`}>
-        {children}
+      <body
+        className={`${raleway.variable} ${dmSans.variable} font-body bg-blue-base text-navy antialiased overflow-x-hidden`}
+      >
+        <SmoothScrollProvider>
+          {children}
+          <MobileBottomNav />
+        </SmoothScrollProvider>
       </body>
     </html>
   )

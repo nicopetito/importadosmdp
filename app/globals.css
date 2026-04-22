@@ -11,6 +11,114 @@ body {
   padding: 0;
 }
 
-.reviews-scroll::-webkit-scrollbar {
-  display: none;
+/* ── CSS Custom Properties ─────────────────────────────────────────── */
+:root {
+  --gradient-hero:    linear-gradient(135deg, #050916 0%, #1A2580 60%, #3D52C4 100%);
+  --gradient-accent:  linear-gradient(90deg, #5A72ED, #8B9CF0);
+  --gradient-button:  linear-gradient(135deg, #3D52C4, #5A72ED);
+  --orb-1-color:      rgba(90, 114, 237, 0.40);
+  --orb-2-color:      rgba(61,  82, 196, 0.28);
+  --orb-3-color:      rgba(107,127, 238, 0.22);
+  --safe-area-inset-bottom: env(safe-area-inset-bottom, 0px);
+}
+
+/* ── Glassmorphism Utilities ───────────────────────────────────────── */
+.glass {
+  background: rgba(255, 255, 255, 0.10);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.20);
+}
+
+.glass-light {
+  background: rgba(255, 255, 255, 0.65);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.45);
+}
+
+/* ── Grid SVG Pattern (for hero overlay) ──────────────────────────── */
+.grid-pattern {
+  background-image:
+    linear-gradient(rgba(90, 114, 237, 0.07) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(90, 114, 237, 0.07) 1px, transparent 1px);
+  background-size: 60px 60px;
+}
+
+/* ── Scrollbar ─────────────────────────────────────────────────────── */
+::-webkit-scrollbar { width: 5px; }
+::-webkit-scrollbar-track { background: #F0F4FF; }
+::-webkit-scrollbar-thumb { background: #C7D4FF; border-radius: 3px; }
+::-webkit-scrollbar-thumb:hover { background: #5A72ED; }
+
+.reviews-scroll::-webkit-scrollbar { display: none; }
+
+.scrollbar-hide::-webkit-scrollbar { display: none; }
+.scrollbar-hide { -ms-overflow-style: none; scrollbar-width: none; }
+
+/* ── Safe Area (iPhone notch/home indicator) ───────────────────────── */
+.pb-safe { padding-bottom: var(--safe-area-inset-bottom); }
+
+/* ── Floating Label Form Fields ────────────────────────────────────── */
+.float-label-group {
+  position: relative;
+}
+
+.float-label-group input,
+.float-label-group textarea,
+.float-label-group select {
+  padding-top: 22px;
+  padding-bottom: 8px;
+}
+
+.float-label-group label {
+  position: absolute;
+  left: 14px;
+  top: 15px;
+  font-size: 13px;
+  color: #6B7280;
+  pointer-events: none;
+  transition: all 150ms ease;
+  line-height: 1;
+}
+
+.float-label-group input:focus ~ label,
+.float-label-group input:not(:placeholder-shown) ~ label,
+.float-label-group textarea:focus ~ label,
+.float-label-group textarea:not(:placeholder-shown) ~ label {
+  top: 6px;
+  font-size: 10px;
+  color: #5A72ED;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  font-weight: 600;
+}
+
+/* Select floating label — controlled via data attribute */
+.float-label-group select.has-value ~ label,
+.float-label-group select:focus ~ label {
+  top: 6px;
+  font-size: 10px;
+  color: #5A72ED;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  font-weight: 600;
+}
+
+/* ── WhatsApp Pulse Animation ──────────────────────────────────────── */
+@keyframes wa-pulse {
+  0%, 100% { box-shadow: 0 0 0 0   rgba(37, 211, 102, 0.45); }
+  50%       { box-shadow: 0 0 0 10px rgba(37, 211, 102, 0); }
+}
+
+.whatsapp-pulse {
+  animation: wa-pulse 2.2s ease-in-out infinite;
+}
+
+/* ── Gradient text utility ─────────────────────────────────────────── */
+.text-gradient-accent {
+  background: var(--gradient-accent);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
 }
