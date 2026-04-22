@@ -5,7 +5,10 @@ Una plataforma web de catálogo moderno construida con Next.js 15, React, y cone
 ## 🚀 Características
 
 - **Diseño Premium**: Interfaz moderna, minimalista enfocada en la exhibición por galería (colores institucionales *Navy* y *Accent* claro).
+- **Animaciones Avanzadas**: Efectos de scroll parallax, elementos levitantes y micro-interacciones fluidas implementadas con **Framer Motion**.
+- **Hero Multidispositivo**: Mockups dinámicos integrados en la página principal con físicas de levitación y badges reactivos.
 - **Catálogo Dinámico**: Filtrado integrado por Marca y Categoría en tiempo real.
+- **Sección de Contacto y Reseñas**: Formulario de consultas, integración con Google Maps y carrusel de testimonios nativo adaptativo.
 - **Conectividad a WhatsApp**: Cada producto redirige orgánicamente hacia el cliente a un chat de ventas pre-cargado con el modelo consultado.
 - **Backend Integrado**: Conexión a `Supabase` para evitar usar bases de datos complejas. Simplemente cargas los productos y la web se actualiza sola.
 
@@ -13,6 +16,7 @@ Una plataforma web de catálogo moderno construida con Next.js 15, React, y cone
 - **Next.js 15.2** (App Router)
 - **React 19**
 - **Tailwind CSS** (Estilos y visuales)
+- **Framer Motion** (Animaciones UI/UX y Parallax)
 - **Supabase** (Base de datos PostgreSQL y API genérica backend)
 
 ---
@@ -68,7 +72,9 @@ Sitio será accesible en [http://localhost:3000](http://localhost:3000).
 ## 🗂️ Estructura del Código
 
 - `/app/catalogo`: Carpeta con la grilla de productos, el filtrado y página individual de modelos.
-- `/app/components`: Todos los componentes reutilizables (Botones, NavBar, Tarjetas rápidas y Productos destacados).
+- `/app/contacto`: Página institucional con formulario de soporte integrado, tarjeta de ubicación (MapEmbed) y enlaces directos.
+- `/app/resenas`: Carrousel y componentes de pruebas sociales y calificaciones.
+- `/app/components`: Todos los componentes reutilizables (Botones, NavBar, Tarjetas rápidas, Hero animado y Productos destacados).
 - `/data`: Contiene el listado de archivos "mock" (Pruebas). La web lee de aquí *solo si* detecta que las variables de Supabase están rotas o desconectadas, asegurando que ante una eventualidad el sitio web no se caiga ni colapse.
 - `/utils/supabase`: Aquí yace el cliente de inicialización con la nube backend.
 
