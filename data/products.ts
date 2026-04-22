@@ -1,5 +1,5 @@
-export type Category = 'Celulares' | 'Notebooks' | 'Accesorios' | 'Audio';
-export type Brand = 'Apple' | 'Samsung' | 'Sony' | 'JBL' | 'Asus';
+export type Category = 'Celulares' | 'Notebooks' | 'Accesorios' | 'Audio' | 'Auriculares';
+export type Brand = 'Apple' | 'Samsung' | 'Sony' | 'JBL' | 'Asus' | 'Xiaomi' | 'Lenovo';
 
 export interface Product {
   id: string;
@@ -39,7 +39,7 @@ export const products: Product[] = [
     isFeatured: true,
   },
   {
-    id: 'samsung-s24-ultra',
+    id: 'samsung-galaxy-s24-ultra',
     name: 'Samsung Galaxy S24 Ultra',
     description: 'Inteligencia artificial que cambia las reglas del juego.',
     detailedDescription: 'Galaxy S24 Ultra con el nuevo procesador Snapdragon 8 Gen 3 y una increíble integración con Galaxy AI. Diseño en titanio, pantalla plana y el S-Pen incluido.',
@@ -60,7 +60,7 @@ export const products: Product[] = [
     isFeatured: true,
   },
   {
-    id: 'macbook-pro-m3',
+    id: 'macbook-pro-14-m3',
     name: 'MacBook Pro 14" M3',
     description: 'La laptop más avanzada con la revolucionaria familia de chips M3.',
     detailedDescription: 'Una capacidad asombrosa con los chips M3, M3 Pro y M3 Max. Liquid Retina XDR asombrosa, y batería de hasta 22 horas para potenciar tu ritmo de trabajo.',
@@ -79,7 +79,7 @@ export const products: Product[] = [
     isFeatured: true,
   },
   {
-    id: 'airpods-pro-2',
+    id: 'airpods-pro-2da-gen',
     name: 'AirPods Pro (2da gen)',
     description: 'Cancelación activa de ruido el doble de potente.',
     detailedDescription: 'Audio espacial personalizado con seguimiento dinámico de la cabeza y una enorme calidad de sonido gracias al nuevo chip H2. Hasta 6 horas de reproducción.',
@@ -118,7 +118,7 @@ export const products: Product[] = [
     isFeatured: true,
   },
   {
-    id: 'ipad-pro-m2',
+    id: 'ipad-pro-11-m2',
     name: 'iPad Pro 11" M2',
     description: 'Rendimiento deslumbrante con el chip M2.',
     detailedDescription: 'El iPad Pro con chip M2 ofrece el máximo rendimiento en un diseño increíblemente portátil.',
@@ -131,22 +131,21 @@ export const products: Product[] = [
     inStock: true,
   },
   {
-    id: 'apple-watch-ultra',
-    name: 'Apple Watch Ultra',
-    description: 'Reloj deportivo premium para los más exigentes.',
-    detailedDescription: 'Caja de titanio de 49 mm, GPS de precisión de doble frecuencia, hasta 36 horas de batería.',
-    price: 800000,
+    id: 'apple-watch-series-9',
+    name: 'Apple Watch Series 9',
+    description: 'El reloj inteligente más avanzado de Apple.',
+    detailedDescription: 'Apple Watch Series 9 con chip S9 SiP, doble toque, pantalla más brillante y nuevas funciones de salud. Diseño elegante y rendimiento excepcional.',
+    price: 780000,
     category: 'Accesorios',
     brand: 'Apple',
     imageUrl: '/imagenes/modeloDos.jpeg',
     images: ['/imagenes/modeloDos.jpeg'],
-    specs: { 'Tamaño': '49 mm', 'Material': 'Titanio' },
+    specs: { 'Tamaño': '45 mm', 'Chip': 'S9 SiP', 'Pantalla': 'Always-On Retina' },
     inStock: true,
-    hasDiscount: true,
-    discountPrice: 750000,
+    isFeatured: true,
   },
   {
-    id: 'sony-wh1000xm5',
+    id: 'sony-wh-1000xm5',
     name: 'Sony WH-1000XM5',
     description: 'La mejor cancelación de ruido de la industria.',
     detailedDescription: 'Auriculares inalámbricos con Noise Cancelling líder del sector, calidad de sonido excepcional y comodidad inigualable.',
@@ -160,7 +159,7 @@ export const products: Product[] = [
     isFeatured: true,
   },
   {
-    id: 'macbook-air-m2',
+    id: 'macbook-air-13-m2',
     name: 'MacBook Air 13" M2',
     description: 'Súper ligera. Súper chip.',
     detailedDescription: 'Rediseñada en torno al chip M2 de próxima generación, la MacBook Air es sorprendentemente delgada y ofrece una velocidad y eficiencia energética excepcionales.',
@@ -186,5 +185,77 @@ export const products: Product[] = [
     inStock: true,
     hasDiscount: true,
     discountPrice: 700000,
-  }
+  },
+  {
+    id: 'xiaomi-redmi-note-13-pro',
+    name: 'Xiaomi Redmi Note 13 Pro',
+    description: 'Cámara de 200MP y carga turbo de 67W.',
+    detailedDescription: 'El Xiaomi Redmi Note 13 Pro ofrece una experiencia premium con su cámara principal de 200MP, pantalla AMOLED de 120Hz y carga rápida de 67W. Rendimiento excepcional a un precio accesible.',
+    price: 480000,
+    category: 'Celulares',
+    brand: 'Xiaomi',
+    imageUrl: '/imagenes/modeloUno.jpeg',
+    images: ['/imagenes/modeloUno.jpeg'],
+    specs: {
+      'Pantalla': '6.67" AMOLED 120Hz',
+      'Procesador': 'Snapdragon 7s Gen 2',
+      'Cámara': '200MP + 8MP + 2MP',
+      'Batería': '5100 mAh',
+    },
+    inStock: true,
+  },
+  {
+    id: 'thinkpad-e16-i7',
+    name: 'ThinkPad E16 i7',
+    description: 'Laptop profesional con rendimiento excepcional.',
+    detailedDescription: 'La Lenovo ThinkPad E16 con procesador Intel Core i7 de 13ra generación ofrece el equilibrio perfecto entre portabilidad y rendimiento profesional. Teclado legendario y seguridad empresarial.',
+    price: 890000,
+    category: 'Notebooks',
+    brand: 'Lenovo',
+    imageUrl: '/imagenes/compu.jpeg',
+    images: ['/imagenes/compu.jpeg'],
+    specs: {
+      'Pantalla': '16" FHD IPS',
+      'Procesador': 'Intel Core i7-13700H',
+      'RAM': '16GB DDR5',
+      'Almacenamiento': '512GB SSD NVMe',
+    },
+    inStock: true,
+  },
+  {
+    id: 'jbl-tune-770nc',
+    name: 'JBL Tune 770NC',
+    description: 'Auriculares con cancelación de ruido adaptativa.',
+    detailedDescription: 'Los JBL Tune 770NC ofrecen cancelación de ruido adaptativa, sonido JBL Pure Bass y hasta 44 horas de reproducción. Diseño plegable y cómodo para uso prolongado.',
+    price: 115000,
+    category: 'Auriculares',
+    brand: 'JBL',
+    imageUrl: '/imagenes/modeloTres.jpeg',
+    images: ['/imagenes/modeloTres.jpeg'],
+    specs: {
+      'Tipo': 'Over-ear',
+      'Conectividad': 'Bluetooth 5.3',
+      'Batería': 'Hasta 44 hrs',
+      'ANC': 'Cancelación adaptativa',
+    },
+    inStock: true,
+  },
+  {
+    id: 'galaxy-watch-6-classic',
+    name: 'Galaxy Watch 6 Classic',
+    description: 'El smartwatch con bisel giratorio clásico.',
+    detailedDescription: 'El Samsung Galaxy Watch 6 Classic combina el icónico bisel giratorio con un potente sensor BioActive para monitoreo avanzado de salud. Pantalla Super AMOLED y Wear OS.',
+    price: 420000,
+    category: 'Accesorios',
+    brand: 'Samsung',
+    imageUrl: '/imagenes/modeloDos.jpeg',
+    images: ['/imagenes/modeloDos.jpeg'],
+    specs: {
+      'Pantalla': '1.47" Super AMOLED',
+      'Procesador': 'Exynos W930',
+      'Batería': '425 mAh',
+      'Resistencia': 'IP68 + 5ATM',
+    },
+    inStock: true,
+  },
 ];
