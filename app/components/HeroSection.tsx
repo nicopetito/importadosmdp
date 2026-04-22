@@ -101,11 +101,19 @@ export default function HeroSection() {
             </div>
             <span className="w-px h-4 bg-white/20" />
             <div className="flex items-center gap-1.5">
-              <span className="text-yellow-400 text-sm">★</span>
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor" className="text-yellow-400 flex-shrink-0">
+                <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
+              </svg>
               <span className="font-body text-xs font-medium text-white/80">4.9 · +500 reseñas</span>
             </div>
             <span className="w-px h-4 bg-white/20" />
-            <span className="font-body text-xs font-medium text-white/80">⚡ &lt;3hs respuesta</span>
+            <div className="flex items-center gap-1.5">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" className="text-white/70 flex-shrink-0">
+                <circle cx="12" cy="12" r="10" />
+                <polyline points="12 6 12 12 16 14" />
+              </svg>
+              <span className="font-body text-xs font-medium text-white/80">&lt;3hs respuesta</span>
+            </div>
           </motion.div>
         </div>
 
@@ -175,8 +183,8 @@ export default function HeroSection() {
 
       </div>
 
-      {/* Bottom fade to light section */}
-      <div className="absolute bottom-0 inset-x-0 h-24 bg-gradient-to-t from-[#F0F4FF] to-transparent pointer-events-none" />
+      {/* Bottom fade */}
+      <div className="absolute bottom-0 inset-x-0 h-20 bg-gradient-to-t from-[#050916]/80 to-transparent pointer-events-none" />
     </section>
   )
 }

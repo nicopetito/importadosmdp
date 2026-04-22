@@ -10,6 +10,7 @@ const reviews = [
     date: 'Enero 2026',
     quote: 'Compré un iPhone 15 y llegó en menos de 3 horas. La atención fue increíble, muy profesionales y respondieron todas mis dudas.',
     rating: 5,
+    avatarColor: '#5A72ED',
   },
   {
     id: 2,
@@ -18,6 +19,7 @@ const reviews = [
     date: 'Diciembre 2025',
     quote: 'Excelente relación precio-calidad. El MacBook que compré estaba impecable y el precio fue mucho mejor que en otras tiendas.',
     rating: 5,
+    avatarColor: '#7C3AED',
   },
   {
     id: 3,
@@ -26,6 +28,7 @@ const reviews = [
     date: 'Diciembre 2025',
     quote: 'Muy buena atención por WhatsApp. Me ayudaron a elegir los AirPods correctos y todo llegó perfecto. Recomiendo 100%.',
     rating: 5,
+    avatarColor: '#0EA5E9',
   },
   {
     id: 4,
@@ -34,6 +37,7 @@ const reviews = [
     date: 'Noviembre 2025',
     quote: 'Enviaron el Galaxy S24 a CABA sin problemas. Todo muy bien embalado y rápido. Volveré a comprar seguro.',
     rating: 5,
+    avatarColor: '#10B981',
   },
   {
     id: 5,
@@ -42,12 +46,20 @@ const reviews = [
     date: 'Noviembre 2025',
     quote: 'Compré el JBL Flip 6 y quedé muy contenta. El precio era el más competitivo que encontré. Muy recomendable.',
     rating: 5,
+    avatarColor: '#F59E0B',
   },
 ]
 
-function ReviewCard({ author, location, date, quote, rating }: typeof reviews[0]) {
+function ReviewCard({ author, location, date, quote, rating, avatarColor }: typeof reviews[0]) {
+  const initials = author.split(' ').map(w => w[0]).join('').slice(0, 2)
+
   return (
-    <div className="w-[290px] md:w-[320px] flex-shrink-0 bg-white rounded-2xl border border-blue-subtle shadow-sm p-6 flex flex-col gap-3">
+    <div className="w-[290px] md:w-[320px] flex-shrink-0 bg-white rounded-2xl border border-[#E8EEFF] shadow-[0_2px_12px_rgba(26,37,128,0.07)] p-6 flex flex-col gap-3 relative overflow-hidden hover:shadow-[0_4px_24px_rgba(90,114,237,0.14)] hover:border-[#C7D2FE] transition-all duration-300">
+      {/* Decorative quote mark */}
+      <span className="absolute top-3 right-4 font-display font-black text-[72px] leading-none text-[#1A2580]/5 select-none pointer-events-none">
+        &ldquo;
+      </span>
+
       {/* Stars */}
       <div className="flex gap-0.5">
         {Array.from({ length: rating }).map((_, i) => (
@@ -56,28 +68,35 @@ function ReviewCard({ author, location, date, quote, rating }: typeof reviews[0]
       </div>
 
       {/* Quote */}
-      <p className="font-body text-[13px] text-[#4A5568] italic leading-relaxed line-clamp-3">
+      <p className="font-body text-[13px] text-[#4A5568] leading-relaxed line-clamp-3">
         &ldquo;{quote}&rdquo;
       </p>
 
       {/* Author */}
-      <div className="border-t border-[#F0F4FF] pt-3 mt-auto flex items-center justify-between">
-        <div>
-          <p className="font-body font-bold text-[13px] text-navy">{author}</p>
-          <p className="font-body text-[11px] text-[#9CA3AF]">{location}</p>
+      <div className="border-t border-[#F0F4FF] pt-3 mt-auto flex items-center justify-between gap-3">
+        <div className="flex items-center gap-2.5">
+          <div
+            className="w-8 h-8 rounded-full flex items-center justify-center text-white font-display font-bold text-[11px] flex-shrink-0"
+            style={{ background: avatarColor }}
+          >
+            {initials}
+          </div>
+          <div>
+            <p className="font-body font-bold text-[12px] text-navy leading-tight">{author}</p>
+            <p className="font-body text-[11px] text-[#9CA3AF] leading-tight">{location}</p>
+          </div>
         </div>
-        <span className="font-body text-[11px] text-[#9CA3AF]">{date}</span>
+        <span className="font-body text-[11px] text-[#9CA3AF] flex-shrink-0">{date}</span>
       </div>
     </div>
   )
 }
 
 const row1 = reviews
-const row2 = [...reviews].reverse()
 
 export default function TestimonialsSection() {
   return (
-    <section className="bg-white py-20 overflow-hidden">
+    <section className="py-20 overflow-hidden" style={{ background: 'linear-gradient(180deg, #F7F9FF 0%, #FFFFFF 100%)' }}>
       {/* Header */}
       <div className="max-w-6xl mx-auto px-6 mb-12 flex flex-col md:flex-row md:items-end justify-between gap-6">
         <div>
@@ -90,7 +109,7 @@ export default function TestimonialsSection() {
         </div>
 
         {/* Google rating card */}
-        <div className="flex items-center gap-4 bg-blue-base rounded-2xl px-5 py-4 border border-blue-subtle self-start md:self-auto">
+        <div className="flex items-center gap-4 bg-white rounded-2xl px-5 py-4 border border-[#E8EEFF] shadow-[0_2px_16px_rgba(26,37,128,0.08)] self-start md:self-auto">
           <div>
             <div className="flex items-center gap-1 mb-1">
               {[1,2,3,4,5].map(i => (
@@ -100,20 +119,17 @@ export default function TestimonialsSection() {
             <p className="font-display font-black text-navy text-lg leading-none">4.9 / 5.0</p>
             <p className="font-body text-[11px] text-[#6B7280] mt-0.5">+500 ventas · Google</p>
           </div>
-          <div className="w-px h-10 bg-blue-subtle" />
+          <div className="w-px h-10 bg-[#E8EEFF]" />
           <div className="font-body text-[11px] text-[#6B7280] max-w-[100px] leading-snug">
             Calificación promedio de clientes reales
           </div>
         </div>
       </div>
 
-      {/* Desktop: 2 rows marquee */}
-      <div className="hidden md:flex flex-col gap-4">
+      {/* Desktop: 1 row marquee */}
+      <div className="hidden md:block">
         <MarqueeRow gap={16} pauseOnHover>
           {row1.map(r => <ReviewCard key={r.id} {...r} />)}
-        </MarqueeRow>
-        <MarqueeRow gap={16} reverse pauseOnHover>
-          {row2.map(r => <ReviewCard key={r.id} {...r} />)}
         </MarqueeRow>
       </div>
 

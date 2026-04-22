@@ -130,7 +130,9 @@ export default function Navbar() {
 
   return (
     <>
-      <header className="sticky top-0 z-50 h-[64px] flex items-center glass-light shadow-sm">
+      <header className="relative sticky top-0 z-50 h-[64px] flex items-center glass-light shadow-sm">
+        {/* Gradient bottom border */}
+        <div className="absolute bottom-0 left-0 right-0 h-[1px] bg-gradient-to-r from-transparent via-accent/40 to-transparent" />
         <div className="w-full max-w-6xl mx-auto px-6 flex items-center justify-between">
           {/* Logo */}
           <Link href="/" className="font-display font-extrabold text-[18px] text-navy tracking-tight">
