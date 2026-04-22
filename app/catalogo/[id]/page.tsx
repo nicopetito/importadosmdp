@@ -1,9 +1,11 @@
 'use client';
 
+import { useState, useEffect } from 'react';
 import { useParams, useRouter } from 'next/navigation';
 import Image from 'next/image';
 import Link from 'next/link';
-import { products } from '../../../data/products';
+import { products as mockProducts, Product } from '../../../data/products';
+import { supabase } from '../../../utils/supabase/client';
 import Navbar from '../../components/Navbar';
 import Footer from '../../components/Footer';
 
@@ -11,7 +13,40 @@ export default function ProductDetailPage() {
   const { id } = useParams() as { id: string };
   const router = useRouter();
 
-  const product = products.find(p => p.id === id);
+  const [product, setProduct] = useState<Product | null>(null);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    async function fetchProduct() {
+      if (supabase) {
+        const { data, error } = await supabase.from('products').select('*').eq('id', id).single();
+        if (!error && data) {
+          setProduct(data as Product);
+          setLoading(false);
+          return;
+        }
+      }
+      
+      // Fallback a los mock products
+      const found = mockProducts.find(p => p.id === id);
+      setProduct(found || null);
+      setLoading(false);
+    }
+    
+    fetchProduct();
+  }, [id]);
+
+  if (loading) {
+    return (
+      <>
+        <Navbar />
+        <main className="min-h-screen bg-white pt-24 pb-20">
+          <div className="font-display text-2xl text-navy animate-pulse">Cargando producto...</div>
+        </main>
+        <Footer />
+      </>
+    );
+  }
 
   if (!product) {
     return (
@@ -37,7 +72,7 @@ export default function ProductDetailPage() {
   return (
     <>
       <Navbar />
-      <main className="min-h-screen bg-gray-50 pt-24 pb-20">
+      <main className="min-h-screen bg-white pt-24 pb-20">
         <div className="max-w-6xl mx-auto px-6">
           
           <button 
@@ -72,7 +107,7 @@ export default function ProductDetailPage() {
                     {product.name}
                   </h1>
                   <p className="font-display font-extrabold text-3xl text-navy">
-                    ${product.price}
+                    ${product.price.toLocaleString('es-AR')}
                   </p>
                 </div>
 

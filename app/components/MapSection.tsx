@@ -46,25 +46,25 @@ function MapSkeleton() {
 
 export default function MapSection() {
   return (
-    <section className="bg-navy py-20 px-6">
+    <section className="bg-blue-light py-20 px-6">
       <div className="max-w-5xl mx-auto grid grid-cols-1 md:grid-cols-[40%_60%] gap-10 items-center">
 
         {/* ── Info (40%) ── */}
         <div>
-          <p className="font-body text-[12px] text-blue-border uppercase tracking-[0.15em] mb-4">
+          <p className="font-body text-[12px] text-accent font-bold uppercase tracking-[0.15em] mb-4">
             Encontranos
           </p>
-          <h2 className="font-display font-bold text-[28px] text-white mb-6 leading-snug">
+          <h2 className="font-display font-black text-[32px] md:text-[40px] text-navy-deep mb-6 leading-[1.1] tracking-tight">
             Estamos en el corazón de MDP
           </h2>
 
           <ul className="space-y-4 mb-8">
             {infoItems.map((item, i) => (
-              <li key={i} className="flex items-start gap-3">
-                <span className="w-9 h-9 flex-shrink-0 flex items-center justify-center rounded-full bg-white/10">
+              <li key={i} className="flex items-start gap-4">
+                <span className="w-10 h-10 flex-shrink-0 flex items-center justify-center rounded-full bg-white shadow-sm border border-gray-100">
                   {item.icon}
                 </span>
-                <span className="font-body text-[14px] text-blue-border leading-snug pt-1.5">
+                <span className="font-body text-[15px] font-medium text-gray-600 leading-snug pt-2">
                   {item.text}
                 </span>
               </li>
@@ -76,7 +76,7 @@ export default function MapSection() {
             target="_blank"
             rel="noopener noreferrer"
             className="inline-block font-display font-semibold text-sm text-accent
-                       border-[1.5px] border-accent rounded-full px-6 py-3
+                       border-[1.5px] border-accent rounded-full px-8 py-3.5
                        transition-colors duration-200 hover:bg-accent hover:text-white"
           >
             Cómo llegar →

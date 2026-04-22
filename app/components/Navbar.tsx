@@ -7,7 +7,7 @@ export default function Navbar() {
   const [open, setOpen] = useState(false)
 
   return (
-    <header className="sticky top-0 z-50 h-[60px] flex items-center bg-blue-base/80 backdrop-blur-md border-b border-blue-border">
+    <header className="sticky top-0 z-50 h-[60px] flex items-center bg-white/70 backdrop-blur-xl border-b border-gray-200/50 shadow-sm">
       <div className="w-full max-w-5xl mx-auto px-6 flex items-center justify-between">
         <Link href="/" className="font-display font-extrabold text-xl text-navy tracking-tight">
           importados<span className="text-accent">mdp</span>

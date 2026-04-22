@@ -69,9 +69,9 @@ export default function QuickAccessCards() {
           <Link
             key={card.href}
             href={card.href}
-            className="group flex flex-col bg-blue-base border border-blue-border rounded-[20px] p-8
-                       transition-all duration-[250ms] ease-out cursor-pointer
-                       hover:bg-blue-light hover:border-accent hover:-translate-y-1.5"
+            className="group flex flex-col bg-gradient-to-br from-white to-[#F8FAFF] border border-gray-100 rounded-[20px] p-8
+                       shadow-[0_4px_20px_-4px_rgba(0,0,0,0.05)] transition-all duration-[400ms] ease-out cursor-pointer
+                       hover:shadow-[0_8px_30px_rgb(0,0,0,0.08)] hover:border-accent/40 hover:-translate-y-2"
           >
             {/* Stat grande */}
             <span className="font-display font-extrabold text-5xl text-accent leading-none">
