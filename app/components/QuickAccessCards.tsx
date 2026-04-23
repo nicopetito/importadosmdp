@@ -1,7 +1,7 @@
 'use client'
 
 import Link from 'next/link'
-import { motion } from 'framer-motion'
+import { motion, type Variants } from 'framer-motion'
 import AnimatedCounter from './AnimatedCounter'
 
 function IconGrid() {
@@ -64,13 +64,13 @@ const cards = [
     statLabel: 'tiempo de respuesta',
     icon: <IconChat />,
     title: 'Hablemos',
-    description: 'Atención personalizada por WhatsApp e Instagram. Sin esperas.',
+    description: 'Consultanos por WhatsApp o Instagram antes de visitarnos. Sin esperas.',
     linkLabel: 'Contactanos →',
     accentColor: 'from-[#0EA5E9] to-[#38BDF8]',
   },
 ]
 
-const cardVariants = {
+const cardVariants: Variants = {
   hidden: { opacity: 0, y: 28 },
   visible: (i: number) => ({
     opacity: 1,

@@ -5,6 +5,7 @@ import Image from 'next/image'
 import Link from 'next/link'
 import { motion, useScroll, useTransform } from 'framer-motion'
 import GradientOrbs from './GradientOrbs'
+import AnimatedCounter from './AnimatedCounter'
 
 export default function HeroSection() {
   const containerRef = useRef<HTMLDivElement>(null)
@@ -63,8 +64,7 @@ export default function HeroSection() {
             transition={{ duration: 0.6, delay: 0.2 }}
             className="font-body font-light text-white/65 text-lg max-w-[440px] mb-10 leading-relaxed"
           >
-            Celulares, notebooks, auriculares y accesorios con garantía real.
-            Enviamos a todo el país.
+            Explorá nuestro catálogo y consultanos por WhatsApp o visitanos en la tienda.
           </motion.p>
 
           {/* CTAs */}
@@ -84,7 +84,7 @@ export default function HeroSection() {
               href="/contacto"
               className="font-body font-bold text-sm text-white/90 glass rounded-full px-7 py-3.5 hover:bg-white/20 transition-all duration-300"
             >
-              Consultar ahora
+              Cómo llegar
             </Link>
           </motion.div>
 
@@ -112,7 +112,34 @@ export default function HeroSection() {
                 <circle cx="12" cy="12" r="10" />
                 <polyline points="12 6 12 12 16 14" />
               </svg>
-              <span className="font-body text-xs font-medium text-white/80">&lt;3hs respuesta</span>
+              <span className="font-body text-xs font-medium text-white/80">Atención personalizada</span>
+            </div>
+          </motion.div>
+
+          {/* Stats Row */}
+          <motion.div
+            initial={{ opacity: 0, y: 16 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.55, duration: 0.5 }}
+            className="flex items-center gap-8 md:gap-12 mt-10"
+          >
+            <div className="flex flex-col">
+              <AnimatedCounter value={500} prefix="+" className="font-display font-black text-[28px] text-white leading-none" />
+              <span className="font-body text-[11px] text-white/50 mt-1 uppercase tracking-wider">ventas realizadas</span>
+            </div>
+            
+            <div className="w-px h-8 bg-white/20" />
+            
+            <div className="flex flex-col">
+              <AnimatedCounter value={4.9} suffix=" ★" className="font-display font-black text-[28px] text-white leading-none" />
+              <span className="font-body text-[11px] text-white/50 mt-1 uppercase tracking-wider">calificación promedio</span>
+            </div>
+            
+            <div className="w-px h-8 bg-white/20" />
+            
+            <div className="flex flex-col">
+              <AnimatedCounter value={60} prefix="+" className="font-display font-black text-[28px] text-white leading-none" />
+              <span className="font-body text-[11px] text-white/50 mt-1 uppercase tracking-wider">productos disponibles</span>
             </div>
           </motion.div>
         </div>

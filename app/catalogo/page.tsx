@@ -1,13 +1,15 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, useEffect, Suspense } from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
+import { useSearchParams, useRouter, usePathname } from 'next/navigation'
 import { motion, AnimatePresence } from 'framer-motion'
 import { useInView } from 'react-intersection-observer'
 import Navbar from '@/app/components/Navbar'
 import Footer from '@/app/components/Footer'
 import GradientOrbs from '@/app/components/GradientOrbs'
+import PullToRefresh from '@/app/components/PullToRefresh'
 
 const productos = [
   { id:1, brand:'Apple', category:'Celulares', name:'iPhone 15 Pro Max', price:1350000, slug:'iphone-15-pro-max', badge:'Nuevo', bgColor:'linear-gradient(135deg,#EEF1FD,#DDE3FA)', image:'https://images.unsplash.com/photo-1510557880182-3d4d3cba35a5?w=300&q=80' },
@@ -24,6 +26,13 @@ const productos = [
   { id:12, brand:'Samsung', category:'Accesorios', name:'Galaxy Watch 6 Classic', price:420000, slug:'galaxy-watch-6-classic', badge:null, bgColor:'linear-gradient(135deg,#F5EEFB,#EDE0F8)', image:'https://images.unsplash.com/photo-1508685096489-7aacd43bd3b1?w=300&q=80' },
 ]
 
+const categoryGradients: Record<string, string> = {
+  'Celulares': '#EEF1FD',
+  'Notebooks': '#EDF7F2',
+  'Auriculares': '#FDF5EE',
+  'Accesorios': '#F5EEFB',
+}
+
 const filtros = [
   { label: 'Todos',       emoji: '🛍️' },
   { label: 'Celulares',   emoji: '📱' },
@@ -32,7 +41,26 @@ const filtros = [
   { label: 'Accesorios',  emoji: '⌚' },
 ]
 
-function AnimatedCard({ producto, index }: { producto: typeof productos[0]; index: number }) {
+function highlight(text: string, query: string) {
+  if (!query.trim()) return <>{text}</>
+  const regex = new RegExp(`(${query.trim()})`, 'gi')
+  const parts = text.split(regex)
+  return (
+    <>
+      {parts.map((part, i) =>
+        regex.test(part) ? (
+          <mark key={i} className="bg-yellow-200 text-navy rounded-sm px-0.5">
+            {part}
+          </mark>
+        ) : (
+          <span key={i}>{part}</span>
+        )
+      )}
+    </>
+  )
+}
+
+function AnimatedCard({ producto, index, busqueda }: { producto: typeof productos[0]; index: number; busqueda: string }) {
   const { ref, inView } = useInView({ threshold: 0.1, triggerOnce: true })
 
   return (
@@ -67,10 +95,10 @@ function AnimatedCard({ producto, index }: { producto: typeof productos[0]; inde
         </div>
         <div className="p-4">
           <p className="font-body text-[10px] font-bold text-accent uppercase tracking-wider mb-1">
-            {producto.brand} · {producto.category}
+            {highlight(producto.brand, busqueda)} · {producto.category}
           </p>
           <h3 className="font-display font-black text-[13px] text-navy leading-snug line-clamp-2 mb-3 min-h-[34px]">
-            {producto.name}
+            {highlight(producto.name, busqueda)}
           </h3>
           <div className="flex items-center justify-between">
             <p className="font-display font-black text-base text-navy">
@@ -85,21 +113,124 @@ function AnimatedCard({ producto, index }: { producto: typeof productos[0]; inde
   )
 }
 
-export default function CatalogoPage() {
-  const [filtroActivo, setFiltroActivo] = useState('Todos')
-  const [busqueda, setBusqueda] = useState('')
+function AnimatedListCard({ producto, busqueda }: { producto: any; busqueda: string }) {
+  const categoryBg = categoryGradients[producto.category] ?? '#F0F4FF'
+  
+  return (
+    <motion.div whileHover={{ x: 4 }} transition={{ duration: 0.2 }}>
+      <Link
+        href={`/catalogo/${producto.slug}`}
+        className="flex items-center gap-4 bg-white border-b border-blue-subtle py-4 px-4 hover:bg-blue-base transition-colors duration-200"
+      >
+        <div 
+          className="w-24 h-24 rounded-[12px] flex items-center justify-center p-3 flex-shrink-0 relative overflow-hidden"
+          style={{ background: categoryBg }}
+        >
+          <Image
+            src={producto.image}
+            alt={producto.name}
+            fill
+            className="object-contain p-3"
+          />
+        </div>
+        <div className="flex-1 min-w-0">
+          <p className="font-body text-[11px] font-bold text-accent uppercase tracking-wider mb-1 truncate">
+            {highlight(producto.brand, busqueda)} · {producto.category}
+          </p>
+          <h3 className="font-display font-bold text-navy text-[15px] leading-tight mb-2 truncate">
+            {highlight(producto.name, busqueda)}
+          </h3>
+          <p className="font-display font-black text-navy text-lg">
+            <span className="text-[11px] font-body font-normal text-[#6B7280]">ARS </span>
+            ${producto.price.toLocaleString('es-AR')}
+          </p>
+        </div>
+        <div className="flex-shrink-0 text-navy/40 pl-4">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+            <polyline points="9 18 15 12 9 6"></polyline>
+          </svg>
+        </div>
+      </Link>
+    </motion.div>
+  )
+}
+
+function ProductSkeleton() {
+  return (
+    <div className="bg-white border border-blue-subtle rounded-[18px] overflow-hidden">
+      <div className="h-[170px] w-full bg-blue-subtle/50 animate-pulse"></div>
+      <div className="p-4 flex flex-col gap-3">
+        <div className="h-3 w-1/3 bg-blue-subtle/50 animate-pulse rounded-full"></div>
+        <div className="h-4 w-3/4 bg-blue-subtle/50 animate-pulse rounded-full"></div>
+        <div className="flex items-center justify-between mt-2">
+          <div className="h-5 w-1/2 bg-blue-subtle/50 animate-pulse rounded-full"></div>
+          <div className="w-8 h-8 rounded-full bg-blue-subtle/50 animate-pulse"></div>
+        </div>
+      </div>
+    </div>
+  )
+}
+
+function CatalogoContenido() {
+  const searchParams = useSearchParams()
+  const router = useRouter()
+  const pathname = usePathname()
+  
+  const q = searchParams.get('q') || ''
+  const filtroActivo = searchParams.get('categoria') || 'Todos'
+
+  const [busquedaLocal, setBusquedaLocal] = useState(q)
+  const [vista, setVista] = useState<'grilla' | 'lista'>('grilla')
+  const [isLoading, setIsLoading] = useState(true)
+  const [refreshCount, setRefreshCount] = useState(0)
+
+  const handleRefresh = async () => {
+    await new Promise(r => setTimeout(r, 800))
+    setRefreshCount(prev => prev + 1)
+  }
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      const params = new URLSearchParams(searchParams.toString())
+      if (busquedaLocal === '') {
+        params.delete('q')
+      } else {
+        params.set('q', busquedaLocal)
+      }
+      if (searchParams.get('q') !== (busquedaLocal || null)) {
+        router.push(`${pathname}?${params.toString()}`, { scroll: false })
+      }
+    }, 300)
+    return () => clearTimeout(timer)
+  }, [busquedaLocal, searchParams, pathname, router])
+
+  useEffect(() => {
+    const timer = setTimeout(() => setIsLoading(false), 600)
+    return () => clearTimeout(timer)
+  }, [])
+
+  const handleCategoriaChange = (valor: string) => {
+    const params = new URLSearchParams(searchParams.toString())
+    if (valor === 'Todos') {
+      params.delete('categoria')
+    } else {
+      params.set('categoria', valor)
+    }
+    router.push(`${pathname}?${params.toString()}`, { scroll: false })
+  }
 
   const productosFiltrados = productos.filter(p => {
     const matchCategoria = filtroActivo === 'Todos' || p.category === filtroActivo
-    const matchBusqueda = busqueda === '' ||
-      p.name.toLowerCase().includes(busqueda.toLowerCase()) ||
-      p.brand.toLowerCase().includes(busqueda.toLowerCase())
+    const matchBusqueda = q === '' ||
+      p.name.toLowerCase().includes(q.toLowerCase()) ||
+      p.brand.toLowerCase().includes(q.toLowerCase())
     return matchCategoria && matchBusqueda
   })
 
   return (
-    <div className="min-h-screen bg-blue-base overflow-x-hidden">
-      <Navbar />
+    <PullToRefresh onRefresh={handleRefresh}>
+      <div className="min-h-screen bg-blue-base overflow-x-hidden">
+        <Navbar />
 
       {/* Dark header */}
       <header className="relative overflow-hidden px-6 py-12 md:px-16 md:pt-16 md:pb-14" style={{ background: 'linear-gradient(135deg, #050916 0%, #1A2580 100%)' }}>
@@ -126,7 +257,7 @@ export default function CatalogoPage() {
               {filtros.map(f => (
                 <button
                   key={f.label}
-                  onClick={() => setFiltroActivo(f.label)}
+                  onClick={() => handleCategoriaChange(f.label)}
                   className={`relative font-body font-medium text-sm rounded-full px-5 py-2.5 transition-all duration-200 flex items-center gap-1.5 ${
                     filtroActivo === f.label
                       ? 'text-white'
@@ -147,18 +278,51 @@ export default function CatalogoPage() {
             </div>
           </div>
 
-          {/* Search */}
-          <div className="relative w-full sm:max-w-[320px] sm:ml-auto">
-            <svg className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-[#9CA3AF]" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" viewBox="0 0 24 24">
-              <circle cx="11" cy="11" r="8" /><line x1="21" y1="21" x2="16.65" y2="16.65" />
-            </svg>
-            <input
-              type="text"
-              placeholder="Buscar producto..."
-              value={busqueda}
-              onChange={e => setBusqueda(e.target.value)}
-              className="w-full h-[42px] bg-blue-base border border-blue-border rounded-full pl-10 pr-4 font-body text-sm text-navy focus:border-accent focus:outline-none focus:bg-white transition-all placeholder:text-[#9CA3AF]"
-            />
+          {/* Search and view toggle */}
+          <div className="flex items-center gap-3 w-full sm:w-auto sm:ml-auto">
+            {/* Search */}
+            <div className="relative w-full sm:w-[260px] md:w-[320px]">
+              <svg className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-[#9CA3AF]" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" viewBox="0 0 24 24">
+                <circle cx="11" cy="11" r="8" /><line x1="21" y1="21" x2="16.65" y2="16.65" />
+              </svg>
+              <input
+                type="text"
+                placeholder="Buscar producto..."
+                value={busquedaLocal}
+                onChange={e => setBusquedaLocal(e.target.value)}
+                className="w-full h-[42px] bg-blue-base border border-blue-border rounded-full pl-10 pr-4 font-body text-sm text-navy focus:border-accent focus:outline-none focus:bg-white transition-all placeholder:text-[#9CA3AF]"
+              />
+            </div>
+            
+            {/* View toggles */}
+            <div className="flex items-center gap-1.5 flex-shrink-0">
+              <button
+                onClick={() => setVista('grilla')}
+                className={`w-9 h-9 rounded-[8px] flex items-center justify-center transition-colors duration-200 ${vista === 'grilla' ? 'bg-navy text-white' : 'bg-blue-base border border-blue-border text-navy hover:bg-blue-subtle hover:border-accent/40'}`}
+                aria-label="Vista grilla"
+              >
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                  <rect x="3" y="3" width="7" height="7"></rect>
+                  <rect x="14" y="3" width="7" height="7"></rect>
+                  <rect x="14" y="14" width="7" height="7"></rect>
+                  <rect x="3" y="14" width="7" height="7"></rect>
+                </svg>
+              </button>
+              <button
+                onClick={() => setVista('lista')}
+                className={`w-9 h-9 rounded-[8px] flex items-center justify-center transition-colors duration-200 ${vista === 'lista' ? 'bg-navy text-white' : 'bg-blue-base border border-blue-border text-navy hover:bg-blue-subtle hover:border-accent/40'}`}
+                aria-label="Vista lista"
+              >
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                  <line x1="8" y1="6" x2="21" y2="6"></line>
+                  <line x1="8" y1="12" x2="21" y2="12"></line>
+                  <line x1="8" y1="18" x2="21" y2="18"></line>
+                  <line x1="3" y1="6" x2="3.01" y2="6"></line>
+                  <line x1="3" y1="12" x2="3.01" y2="12"></line>
+                  <line x1="3" y1="18" x2="3.01" y2="18"></line>
+                </svg>
+              </button>
+            </div>
           </div>
         </div>
       </div>
@@ -174,17 +338,45 @@ export default function CatalogoPage() {
           </div>
 
           <AnimatePresence mode="wait">
-            {productosFiltrados.length > 0 ? (
+            {isLoading ? (
               <motion.div
-                key={filtroActivo + busqueda}
+                key="loading"
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 exit={{ opacity: 0 }}
                 transition={{ duration: 0.2 }}
-                className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-5"
+                className={vista === 'grilla' ? "grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-5" : "flex flex-col"}
+              >
+                {Array.from({ length: productosFiltrados.length || 8 }).map((_, i) => (
+                  vista === 'grilla' ? (
+                    <ProductSkeleton key={i} />
+                  ) : (
+                    <div key={i} className="flex gap-4 p-4 border-b border-blue-subtle bg-white">
+                      <div className="w-24 h-24 bg-blue-subtle/50 rounded-[12px] animate-pulse flex-shrink-0" />
+                      <div className="flex-1 py-2">
+                        <div className="w-1/3 h-3 bg-blue-subtle/50 rounded-full animate-pulse mb-3" />
+                        <div className="w-3/4 h-4 bg-blue-subtle/50 rounded-full animate-pulse mb-3" />
+                        <div className="w-1/4 h-5 bg-blue-subtle/50 rounded-full animate-pulse" />
+                      </div>
+                    </div>
+                  )
+                ))}
+              </motion.div>
+            ) : productosFiltrados.length > 0 ? (
+              <motion.div
+                key={filtroActivo + q + vista}
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                transition={{ duration: 0.2 }}
+                className={vista === 'grilla' ? "grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-5" : "flex flex-col bg-white rounded-[16px] border border-blue-border overflow-hidden"}
               >
                 {productosFiltrados.map((producto, i) => (
-                  <AnimatedCard key={producto.id} producto={producto} index={i} />
+                  vista === 'grilla' ? (
+                    <AnimatedCard key={producto.id} producto={producto} index={i} busqueda={q} />
+                  ) : (
+                    <AnimatedListCard key={producto.id} producto={producto} busqueda={q} />
+                  )
                 ))}
               </motion.div>
             ) : (
@@ -197,10 +389,14 @@ export default function CatalogoPage() {
                 <span className="text-7xl opacity-25">🔍</span>
                 <h3 className="font-display font-bold text-xl text-navy">Sin resultados</h3>
                 <p className="font-body text-[#6B7280] text-sm text-center max-w-[280px]">
-                  No encontramos productos para &ldquo;{busqueda}&rdquo;. Probá con otra búsqueda.
+                  No encontramos productos para &ldquo;{q}&rdquo;. Probá con otra búsqueda.
                 </p>
                 <button
-                  onClick={() => { setFiltroActivo('Todos'); setBusqueda('') }}
+                  onClick={() => {
+                    setBusquedaLocal('')
+                    const params = new URLSearchParams()
+                    router.push(`${pathname}?${params.toString()}`, { scroll: false })
+                  }}
                   className="mt-2 bg-accent text-white rounded-full px-6 py-2.5 text-sm font-bold font-body hover:bg-accent-mid transition-colors"
                 >
                   Ver todos
@@ -212,6 +408,19 @@ export default function CatalogoPage() {
       </section>
 
       <Footer />
-    </div>
+      </div>
+    </PullToRefresh>
+  )
+}
+
+export default function CatalogoPage() {
+  return (
+    <Suspense fallback={
+      <div className="min-h-screen bg-blue-base flex items-center justify-center">
+        <div className="w-8 h-8 rounded-full bg-accent animate-ping" />
+      </div>
+    }>
+      <CatalogoContenido />
+    </Suspense>
   )
 }

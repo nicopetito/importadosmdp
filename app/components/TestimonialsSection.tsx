@@ -8,7 +8,7 @@ const reviews = [
     author: 'Luciana M.',
     location: 'Mar del Plata',
     date: 'Enero 2026',
-    quote: 'Compré un iPhone 15 y llegó en menos de 3 horas. La atención fue increíble, muy profesionales y respondieron todas mis dudas.',
+    quote: 'Pasé por la tienda a buscar un iPhone 15. La atención fue increíble, muy profesionales y me sacaron todas las dudas antes de comprar.',
     rating: 5,
     avatarColor: '#5A72ED',
   },
@@ -17,7 +17,7 @@ const reviews = [
     author: 'Martín R.',
     location: 'Mar del Plata',
     date: 'Diciembre 2025',
-    quote: 'Excelente relación precio-calidad. El MacBook que compré estaba impecable y el precio fue mucho mejor que en otras tiendas.',
+    quote: 'Excelente relación precio-calidad. Me acerqué al local por una MacBook, estaba todo impecable y el precio fue el mejor de la ciudad.',
     rating: 5,
     avatarColor: '#7C3AED',
   },
@@ -26,16 +26,16 @@ const reviews = [
     author: 'Valentina S.',
     location: 'Mar del Plata',
     date: 'Diciembre 2025',
-    quote: 'Muy buena atención por WhatsApp. Me ayudaron a elegir los AirPods correctos y todo llegó perfecto. Recomiendo 100%.',
+    quote: 'Muy buena atención por WhatsApp. Me asesoraron para elegir los AirPods y cuando fui al local ya los tenían separados. Recomiendo 100%.',
     rating: 5,
     avatarColor: '#0EA5E9',
   },
   {
     id: 4,
     author: 'Diego P.',
-    location: 'Buenos Aires',
+    location: 'Miramar',
     date: 'Noviembre 2025',
-    quote: 'Enviaron el Galaxy S24 a CABA sin problemas. Todo muy bien embalado y rápido. Volveré a comprar seguro.',
+    quote: 'Fui desde Miramar a buscar mi Galaxy S24. Todo súper transparente, abrís la caja original sellada en el mostrador. Volveré a comprar seguro.',
     rating: 5,
     avatarColor: '#10B981',
   },
@@ -44,9 +44,45 @@ const reviews = [
     author: 'Camila F.',
     location: 'Mar del Plata',
     date: 'Noviembre 2025',
-    quote: 'Compré el JBL Flip 6 y quedé muy contenta. El precio era el más competitivo que encontré. Muy recomendable.',
+    quote: 'Fui al local por un JBL Flip 6 y quedé muy contenta. El lugar es súper lindo y los precios son los más competitivos de la zona. Recomendable.',
     rating: 5,
     avatarColor: '#F59E0B',
+  },
+  {
+    id: 6,
+    author: 'Ramiro V.',
+    location: 'Mar del Plata',
+    date: 'Octubre 2025',
+    quote: 'Fui a la tienda sin saber bien qué quería y me asesoraron perfectamente. Me fui con un Samsung S24 y no podría estar más contento.',
+    rating: 5,
+    avatarColor: '#10B981',
+  },
+  {
+    id: 7,
+    author: 'Florencia T.',
+    location: 'Mar del Plata',
+    date: 'Septiembre 2025',
+    quote: 'El local está genial, la atención presencial marca la diferencia. Te asesoran con paciencia y los productos son 100% originales con garantía.',
+    rating: 5,
+    avatarColor: '#F59E0B',
+  },
+  {
+    id: 8,
+    author: 'Nicolás B.',
+    location: 'Mar del Plata',
+    date: 'Agosto 2025',
+    quote: 'Tercera vez que paso por el local. Siempre te atienden bárbaro, los equipos son originales sellados y tienen el mejor precio de MDP.',
+    rating: 5,
+    avatarColor: '#EF4444',
+  },
+  {
+    id: 9,
+    author: 'Agustina R.',
+    location: 'Mar del Plata',
+    date: 'Julio 2025',
+    quote: 'Compré unos AirPods y me los llevé con la caja sellada en mano. Ir al local te da esa tranquilidad extra. La compra fue un 10.',
+    rating: 5,
+    avatarColor: '#8B5CF6',
   },
 ]
 
@@ -92,7 +128,8 @@ function ReviewCard({ author, location, date, quote, rating, avatarColor }: type
   )
 }
 
-const row1 = reviews
+const row1 = reviews.slice(0, 5)
+const row2 = reviews.slice(5)
 
 export default function TestimonialsSection() {
   return (
@@ -126,19 +163,11 @@ export default function TestimonialsSection() {
         </div>
       </div>
 
-      {/* Desktop: 1 row marquee */}
-      <div className="hidden md:block">
-        <MarqueeRow gap={16} pauseOnHover>
-          {row1.map(r => <ReviewCard key={r.id} {...r} />)}
-        </MarqueeRow>
-      </div>
-
-      {/* Mobile: 1 row */}
-      <div className="md:hidden">
-        <MarqueeRow gap={12} pauseOnHover>
-          {row1.map(r => <ReviewCard key={r.id} {...r} />)}
-        </MarqueeRow>
-      </div>
+      {/* Marquee row */}
+      <MarqueeRow gap={16} pauseOnHover speed="55s">
+        {reviews.map(r => <ReviewCard key={r.id} {...r} />)}
+      </MarqueeRow>
     </section>
   )
 }
+

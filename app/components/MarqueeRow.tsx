@@ -8,6 +8,7 @@ interface MarqueeRowProps {
   pauseOnHover?: boolean
   className?: string
   gap?: number
+  speed?: string
 }
 
 export default function MarqueeRow({
@@ -16,6 +17,7 @@ export default function MarqueeRow({
   pauseOnHover = true,
   className = '',
   gap = 16,
+  speed,
 }: MarqueeRowProps) {
   const doubled = [...children, ...children]
 
@@ -28,7 +30,7 @@ export default function MarqueeRow({
         className={`flex ${pauseOnHover ? 'hover:[animation-play-state:paused]' : ''} ${
           reverse ? 'animate-marquee-reverse' : 'animate-marquee'
         }`}
-        style={{ gap: `${gap}px`, width: 'max-content' }}
+        style={{ gap: `${gap}px`, width: 'max-content', ...(speed ? { animationDuration: speed } : {}) }}
       >
         {doubled.map((child, i) => (
           <div key={i} className="flex-shrink-0">

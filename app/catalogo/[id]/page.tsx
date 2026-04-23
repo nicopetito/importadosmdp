@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import { useParams, useRouter } from 'next/navigation'
 import Image from 'next/image'
 import Link from 'next/link'
@@ -133,6 +133,49 @@ export default function ProductDetailPage() {
   const [selectedImage, setSelectedImage] = useState(0)
   const [imgError, setImgError] = useState(false)
   const [zoomed, setZoomed] = useState(false)
+  const [isHovering, setIsHovering] = useState(false)
+  const [mousePos, setMousePos] = useState({ x: 0, y: 0 })
+  const [isDesktop, setIsDesktop] = useState(false)
+  const imgContainerRef = useRef<HTMLDivElement>(null)
+  const touchStartX = useRef<number>(0)
+  const touchEndX = useRef<number>(0)
+
+  useEffect(() => {
+    const checkDesktop = () => setIsDesktop(window.innerWidth >= 768)
+    checkDesktop()
+    window.addEventListener('resize', checkDesktop)
+    return () => window.removeEventListener('resize', checkDesktop)
+  }, [])
+
+  const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
+    if (!isDesktop || !imgContainerRef.current) return
+    const rect = imgContainerRef.current.getBoundingClientRect()
+    setMousePos({
+      x: e.clientX - rect.left,
+      y: e.clientY - rect.top
+    })
+  }
+
+  const handleTouchStart = (e: React.TouchEvent) => {
+    touchStartX.current = e.touches[0].clientX
+  }
+
+  const handleTouchEnd = (e: React.TouchEvent) => {
+    touchEndX.current = e.changedTouches[0].clientX
+    handleSwipe()
+  }
+
+  const handleSwipe = () => {
+    if (!product?.images || product.images.length <= 1) return
+    const diff = touchStartX.current - touchEndX.current
+    const length = product.images.length
+
+    if (diff > 50) {
+      setSelectedImage((prev) => (prev === length - 1 ? 0 : prev + 1))
+    } else if (diff < -50) {
+      setSelectedImage((prev) => (prev === 0 ? length - 1 : prev - 1))
+    }
+  }
 
   useEffect(() => {
     async function fetchProduct() {
@@ -205,12 +248,22 @@ export default function ProductDetailPage() {
           <div>
             {/* Imagen principal — full-width en mobile */}
             <motion.div
+              ref={imgContainerRef}
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
-              className="relative w-full overflow-hidden md:rounded-[24px] cursor-zoom-in group"
+              className="relative w-full overflow-hidden md:rounded-[24px] group cursor-zoom-in"
               style={{ background: categoryBg, aspectRatio: '1/1' }}
-              onClick={() => !imgError && setZoomed(true)}
+              onClick={() => {
+                if (!imgError && !isDesktop) setZoomed(true)
+              }}
+              onMouseEnter={() => {
+                if (isDesktop && !imgError) setIsHovering(true)
+              }}
+              onMouseLeave={() => setIsHovering(false)}
+              onMouseMove={handleMouseMove}
+              onTouchStart={handleTouchStart}
+              onTouchEnd={handleTouchEnd}
             >
               <AnimatePresence mode="wait">
                 {!imgError ? (
@@ -226,7 +279,7 @@ export default function ProductDetailPage() {
                       src={currentImageSrc}
                       alt={product.name}
                       fill
-                      className="object-contain p-8 md:p-10 group-hover:scale-105 transition-transform duration-700"
+                      className={`object-contain p-8 md:p-10 transition-transform duration-700 ${!isDesktop ? 'group-hover:scale-105' : ''}`}
                       priority
                       onError={() => setImgError(true)}
                     />
@@ -238,8 +291,25 @@ export default function ProductDetailPage() {
                 )}
               </AnimatePresence>
 
-              {/* Zoom hint */}
-              {!imgError && (
+              {/* Desktop Magnifying Glass */}
+              {isDesktop && isHovering && !imgError && (
+                <div
+                  className="absolute pointer-events-none rounded-full border-2 border-accent shadow-[0_8px_32px_rgba(0,0,0,0.25)] z-20 bg-white"
+                  style={{
+                    width: 180,
+                    height: 180,
+                    left: mousePos.x - 90,
+                    top: mousePos.y - 90,
+                    backgroundImage: `url(${currentImageSrc})`,
+                    backgroundRepeat: 'no-repeat',
+                    backgroundSize: '250%',
+                    backgroundPosition: `${(mousePos.x / (imgContainerRef.current?.offsetWidth || 1)) * 100}% ${(mousePos.y / (imgContainerRef.current?.offsetHeight || 1)) * 100}%`
+                  }}
+                />
+              )}
+
+              {/* Zoom hint (Mobile only now since desktop has the crosshair and magnifier) */}
+              {!imgError && !isDesktop && (
                 <div className="absolute bottom-4 right-4 opacity-0 group-hover:opacity-100 transition-opacity duration-200 bg-black/25 text-white text-[11px] font-body rounded-full px-3 py-1.5 flex items-center gap-1.5">
                   <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round">
                     <circle cx="11" cy="11" r="8" /><line x1="21" y1="21" x2="16.65" y2="16.65" />
@@ -258,7 +328,30 @@ export default function ProductDetailPage() {
                   </span>
                 </div>
               )}
+
+              {/* Out of stock overlay */}
+              {!product.inStock && !imgError && (
+                <div className="absolute inset-0 bg-white/60 backdrop-blur-[2px] z-20 flex items-center justify-center pointer-events-none">
+                  <span className="bg-red-500 text-white font-display font-bold text-sm md:text-base px-6 py-2.5 rounded-full shadow-lg">
+                    Sin stock
+                  </span>
+                </div>
+              )}
             </motion.div>
+
+            {/* Dots indicators (Mobile only) */}
+            {product.images && product.images.length > 1 && (
+              <div className="flex items-center justify-center gap-1.5 mt-3 md:hidden">
+                {product.images.map((_, i) => (
+                  <motion.div
+                    key={i}
+                    layout
+                    className={`h-1.5 rounded-full ${i === selectedImage ? 'w-4 bg-accent' : 'w-1.5 bg-blue-subtle'}`}
+                    transition={{ type: 'spring', stiffness: 300, damping: 30 }}
+                  />
+                ))}
+              </div>
+            )}
 
             {/* Thumbnails */}
             {product.images && product.images.length > 1 && (
@@ -338,6 +431,11 @@ export default function ProductDetailPage() {
                   {item.label}
                 </span>
               ))}
+              {product.hasDiscount && (
+                <span className="inline-flex items-center gap-1.5 bg-[#FDF3E3] border border-[#FDF3E3] text-[#92400E] text-[12px] font-body font-medium px-3 py-1.5 rounded-full">
+                  🔥 Oferta limitada
+                </span>
+              )}
             </motion.div>
 
             <hr className="border-t border-blue-subtle mb-6" />
@@ -369,16 +467,25 @@ export default function ProductDetailPage() {
 
             {/* WhatsApp CTA — desktop */}
             <div className="hidden md:block">
-              <a
-                href={whatsappLink}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="w-full flex items-center justify-center gap-2.5 text-white font-display font-bold text-base rounded-[14px] py-4 transition-all duration-300 whatsapp-pulse hover:brightness-110"
-                style={{ background: '#25D366' }}
-              >
-                {WA_SVG}
-                Consultar por WhatsApp
-              </a>
+              {product.inStock ? (
+                <a
+                  href={whatsappLink}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="w-full flex items-center justify-center gap-2.5 text-white font-display font-bold text-base rounded-[14px] py-4 transition-all duration-300 whatsapp-pulse hover:brightness-110"
+                  style={{ background: '#25D366' }}
+                >
+                  {WA_SVG}
+                  Consultar por WhatsApp
+                </a>
+              ) : (
+                <div
+                  className="w-full flex items-center justify-center gap-2.5 text-white font-display font-bold text-base rounded-[14px] py-4"
+                  style={{ background: '#9CA3AF' }}
+                >
+                  Sin stock por el momento
+                </div>
+              )}
               <p className="font-body text-[12px] text-[#9CA3AF] text-center mt-2.5">
                 Atención personalizada · Menos de 3 horas de respuesta
               </p>
@@ -396,20 +503,21 @@ export default function ProductDetailPage() {
               Ver todo →
             </Link>
           </div>
-          <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 md:gap-5">
+          <div className="flex lg:grid lg:grid-cols-4 gap-4 md:gap-5 overflow-x-auto snap-x snap-mandatory scrollbar-hide pb-2">
             {relatedProducts.map((p, i) => (
-              <ProductCard
-                key={p.id}
-                id={p.id}
-                name={p.name}
-                brand={p.brand}
-                category={p.category}
-                price={p.price}
-                discountPrice={p.discountPrice}
-                imageUrl={p.imageUrl}
-                badge={p.isFeatured ? 'Destacado' : null}
-                index={i}
-              />
+              <div key={p.id} className="snap-start flex-shrink-0 w-[70vw] sm:w-[45vw] lg:w-auto">
+                <ProductCard
+                  id={p.id}
+                  name={p.name}
+                  brand={p.brand}
+                  category={p.category}
+                  price={p.price}
+                  discountPrice={p.discountPrice}
+                  imageUrl={p.imageUrl}
+                  badge={p.isFeatured ? 'Destacado' : null}
+                  index={i}
+                />
+              </div>
             ))}
           </div>
         </div>
@@ -438,16 +546,25 @@ export default function ProductDetailPage() {
             )}
           </div>
           {/* WhatsApp button */}
-          <a
-            href={whatsappLink}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="flex-shrink-0 flex items-center gap-2 text-white font-display font-bold text-[14px] rounded-xl px-5 py-3.5 whatsapp-pulse"
-            style={{ background: '#25D366' }}
-          >
-            {WA_SVG}
-            Consultar
-          </a>
+          {product.inStock ? (
+            <a
+              href={whatsappLink}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex-shrink-0 flex items-center gap-2 text-white font-display font-bold text-[14px] rounded-xl px-5 py-3.5 whatsapp-pulse"
+              style={{ background: '#25D366' }}
+            >
+              {WA_SVG}
+              Consultar
+            </a>
+          ) : (
+            <div
+              className="flex-shrink-0 flex items-center justify-center gap-2 text-white font-display font-bold text-[13px] rounded-xl px-4 py-3.5"
+              style={{ background: '#9CA3AF' }}
+            >
+              Sin stock por el momento
+            </div>
+          )}
         </div>
       </div>
     </div>

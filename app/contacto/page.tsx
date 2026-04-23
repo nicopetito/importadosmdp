@@ -51,7 +51,7 @@ export default function ContactoPage() {
             Hablemos.
           </h1>
           <p className="font-body text-[16px] font-light text-white/60 max-w-[480px] leading-relaxed">
-            Escribinos por WhatsApp o Instagram. Respondemos en menos de 3 horas.
+            Escribinos antes de venir o para consultar disponibilidad. Respondemos en menos de 3 horas.
           </p>
         </div>
       </header>

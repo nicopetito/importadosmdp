@@ -61,6 +61,7 @@ export default function ProductCard({
       onMouseLeave={handleMouseLeave}
       style={{ rotateX: springRotateX, rotateY: springRotateY, transformStyle: 'preserve-3d', perspective: 1000 }}
       whileHover={{ y: -10 }}
+      whileTap={{ scale: 0.97 }}
       initial={{ opacity: 0, y: 28 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ delay: index * 0.07, duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
@@ -124,15 +125,17 @@ export default function ProductCard({
               ${displayPrice.toLocaleString('es-AR')}
             </p>
           </div>
-          <Link
-            href={`/catalogo/${id}`}
-            className="flex-shrink-0 w-8 h-8 rounded-full bg-navy flex items-center justify-center hover:bg-accent transition-colors duration-200 shadow-sm"
-            aria-label={`Ver ${name}`}
-          >
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-              <path d="M5 12h14M12 5l7 7-7 7" />
-            </svg>
-          </Link>
+          <motion.div whileTap={{ scale: 0.90 }}>
+            <Link
+              href={`/catalogo/${id}`}
+              className="flex-shrink-0 w-8 h-8 rounded-full bg-navy flex items-center justify-center hover:bg-accent transition-colors duration-200 shadow-sm"
+              aria-label={`Ver ${name}`}
+            >
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                <path d="M5 12h14M12 5l7 7-7 7" />
+              </svg>
+            </Link>
+          </motion.div>
         </div>
       </div>
     </motion.div>

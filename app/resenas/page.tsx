@@ -49,6 +49,89 @@ function ReviewCard({ resena, index }: { resena: typeof resenas[0]; index: numbe
   )
 }
 
+const ratingBars = [
+  { stars: 5, pct: 92, color: '#1A2580' },
+  { stars: 4, pct: 6,  color: '#5A72ED' },
+  { stars: 3, pct: 2,  color: '#C7D4FF' },
+]
+
+const stats = [
+  { value: '4.9 / 5.0', label: 'calificación promedio', hasStars: true },
+  { value: '+500', label: 'ventas verificadas', hasStars: false },
+  { value: '100%', label: 'productos originales', hasStars: false },
+]
+
+function RatingBar({ stars, pct, color, delay }: { stars: number; pct: number; color: string; delay: number }) {
+  const { ref, inView } = useInView({ triggerOnce: true, threshold: 0.3 })
+  return (
+    <div ref={ref} className="flex items-center gap-3">
+      <span className="font-display font-bold text-sm text-navy w-7 text-right shrink-0">{stars}★</span>
+      <div className="flex-1 h-2.5 bg-blue-base rounded-full overflow-hidden">
+        <motion.div
+          className="h-full rounded-full"
+          style={{ backgroundColor: color }}
+          initial={{ width: 0 }}
+          animate={inView ? { width: `${pct}%` } : { width: 0 }}
+          transition={{ duration: 1, delay, ease: [0.22, 1, 0.36, 1] }}
+        />
+      </div>
+      <span className="font-body text-xs text-[#6B7280] w-9 text-right shrink-0">{pct}%</span>
+    </div>
+  )
+}
+
+function SocialProof() {
+  const { ref, inView } = useInView({ triggerOnce: true, threshold: 0.15 })
+
+  return (
+    <div ref={ref} className="mb-14">
+      {/* Stat cards */}
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-8">
+        {stats.map((s, i) => (
+          <motion.div
+            key={s.label}
+            className="bg-white border border-blue-subtle rounded-2xl p-7 text-center"
+            initial={{ opacity: 0, y: 20 }}
+            animate={inView ? { opacity: 1, y: 0 } : {}}
+            transition={{ duration: 0.5, delay: i * 0.1, ease: [0.22, 1, 0.36, 1] }}
+          >
+            <p className="font-display font-extrabold text-[40px] md:text-[46px] text-navy leading-none">
+              {s.value}
+            </p>
+            {s.hasStars && (
+              <div className="flex justify-center gap-1 mt-2.5">
+                {[1,2,3,4,5].map(i => (
+                  <span key={i} className="text-yellow-400 text-lg">★</span>
+                ))}
+              </div>
+            )}
+            <p className="font-body text-xs text-[#6B7280] mt-2 uppercase tracking-widest font-medium">
+              {s.label}
+            </p>
+          </motion.div>
+        ))}
+      </div>
+
+      {/* Rating distribution */}
+      <motion.div
+        className="bg-white border border-blue-subtle rounded-2xl p-7 md:p-9 max-w-lg mx-auto"
+        initial={{ opacity: 0, y: 16 }}
+        animate={inView ? { opacity: 1, y: 0 } : {}}
+        transition={{ duration: 0.5, delay: 0.35, ease: [0.22, 1, 0.36, 1] }}
+      >
+        <h3 className="font-display font-bold text-base text-navy mb-5 text-center">
+          Distribución de calificaciones
+        </h3>
+        <div className="flex flex-col gap-3">
+          {ratingBars.map((b, i) => (
+            <RatingBar key={b.stars} stars={b.stars} pct={b.pct} color={b.color} delay={0.45 + i * 0.12} />
+          ))}
+        </div>
+      </motion.div>
+    </div>
+  )
+}
+
 export default function ResenasPage() {
   return (
     <>
@@ -83,6 +166,9 @@ export default function ResenasPage() {
               <span className="font-body text-sm text-[#6B7280]">+500 reseñas · Google</span>
             </div>
           </motion.div>
+
+          {/* ═══ SOCIAL PROOF ═══ */}
+          <SocialProof />
 
           {/* Reviews grid */}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-5">

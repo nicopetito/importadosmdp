@@ -1,7 +1,17 @@
+'use client'
+
 import Link from 'next/link'
+import { useState } from 'react'
+import Toast from './Toast'
 
 export default function Footer() {
   const year = new Date().getFullYear()
+  const [showToast, setShowToast] = useState(false)
+
+  const handleCopy = () => {
+    navigator.clipboard.writeText('+5492235000000')
+    setShowToast(true)
+  }
 
   return (
     <footer className="bg-navy-deep px-6 pt-16 pb-8">
@@ -87,17 +97,31 @@ export default function Footer() {
             <h4 className="font-display font-bold text-white text-xs uppercase tracking-widest mb-6">
               Contacto
             </h4>
-            <div className="flex flex-col gap-3">
+            <div className="flex flex-col gap-3 items-start">
               <p className="font-body text-sm text-white/55">Jujuy 1811, Mar del Plata</p>
               <p className="font-body text-sm text-white/55">Lunes a Sábado, 10 a 20hs</p>
-              <a
-                href="https://wa.me/5492235000000"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="font-body text-sm text-white/55 hover:text-[#25D366] transition-colors duration-200"
-              >
-                WhatsApp
-              </a>
+              <p className="font-body text-sm text-white/55">Compra presencial en tienda</p>
+              <div className="flex items-center gap-2">
+                <a
+                  href="https://wa.me/5492235000000"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="font-body text-sm text-white/55 hover:text-[#25D366] transition-colors duration-200"
+                >
+                  WhatsApp
+                </a>
+                <button
+                  onClick={handleCopy}
+                  className="text-white/40 hover:text-white transition-colors"
+                  aria-label="Copiar número"
+                  title="Copiar número de WhatsApp"
+                >
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                    <rect x="9" y="9" width="13" height="13" rx="2" ry="2" />
+                    <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1" />
+                  </svg>
+                </button>
+              </div>
               <a
                 href="https://instagram.com/importadosmdp_"
                 target="_blank"
@@ -111,7 +135,7 @@ export default function Footer() {
         </div>
 
         {/* Bottom bar */}
-        <div className="border-t border-white/10 pt-6 flex flex-col sm:flex-row justify-between items-center gap-3">
+        <div className="border-t border-white/10 pt-6 flex flex-col sm:flex-row justify-between items-center gap-3 relative">
           <p className="font-body text-xs text-white/30">
             © {year} ImportadosMDP · Todos los derechos reservados
           </p>
@@ -120,6 +144,7 @@ export default function Footer() {
           </p>
         </div>
       </div>
+      <Toast message="¡Número copiado!" visible={showToast} onHide={() => setShowToast(false)} />
     </footer>
   )
 }

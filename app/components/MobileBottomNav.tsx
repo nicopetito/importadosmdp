@@ -2,6 +2,9 @@
 
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
+import { motion } from 'framer-motion'
+
+const MotionLink = motion(Link as any)
 
 const tabs = [
   {
@@ -23,6 +26,15 @@ const tabs = [
         <rect x="14" y="3" width="7" height="7" />
         <rect x="3" y="14" width="7" height="7" />
         <rect x="14" y="14" width="7" height="7" />
+      </svg>
+    ),
+  },
+  {
+    href: '/resenas',
+    label: 'Reseñas',
+    icon: (
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+        <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" />
       </svg>
     ),
   },
@@ -50,33 +62,36 @@ const tabs = [
 export default function MobileBottomNav() {
   const pathname = usePathname()
 
+  if (pathname.startsWith('/admin')) return null
+
   return (
     <nav className="fixed bottom-0 inset-x-0 md:hidden z-50 bg-white/92 backdrop-blur-md border-t border-[#E0E8FF] shadow-[0_-4px_24px_rgba(0,0,0,0.06)] pb-safe">
       <div className="flex items-center justify-around h-[60px] px-2">
         {tabs.map((tab) => {
           const isActive = !tab.external && (tab.href === '/' ? pathname === '/' : pathname.startsWith(tab.href))
-          const isWhatsApp = tab.external
-
+          
           if (tab.external) {
             return (
-              <a
+              <motion.a
+                whileTap={{ scale: 0.85 }}
                 key={tab.href}
                 href={tab.href}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex flex-col items-center gap-0.5 px-3 py-1 text-[#25D366] transition-all duration-150"
+                className="flex flex-col items-center gap-0.5 px-3 py-1 text-[#25D366] transition-all duration-200"
               >
                 {tab.icon}
-                <span className="text-[10px] font-body font-medium">{tab.label}</span>
-              </a>
+                <span className="text-[10px] font-body font-medium transition-colors duration-200">{tab.label}</span>
+              </motion.a>
             )
           }
 
           return (
-            <Link
+            <MotionLink
+              whileTap={{ scale: 0.85 }}
               key={tab.href}
               href={tab.href}
-              className={`relative flex flex-col items-center gap-0.5 px-3 py-1 transition-all duration-150 ${
+              className={`relative flex flex-col items-center gap-0.5 px-3 py-1 transition-all duration-200 ${
                 isActive ? 'text-accent' : 'text-[#6B7280]'
               }`}
             >
@@ -84,8 +99,8 @@ export default function MobileBottomNav() {
                 <span className="absolute -top-px left-1/2 -translate-x-1/2 w-6 h-[2px] rounded-full bg-gradient-to-r from-accent to-blue-soft" />
               )}
               {tab.icon}
-              <span className="text-[10px] font-body font-medium">{tab.label}</span>
-            </Link>
+              <span className="text-[10px] font-body font-medium transition-colors duration-200">{tab.label}</span>
+            </MotionLink>
           )
         })}
       </div>
