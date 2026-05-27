@@ -9,6 +9,18 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
+        background: '#F8F8F6',
+        'on-background': '#1b1b1d',
+        surface: '#fcf8fb',
+        'on-surface': '#1b1b1d',
+        'surface-container-low': '#f6f3f5',
+        'surface-container-lowest': '#ffffff',
+        'primary-container': '#0071e3',
+        primary: '#0071e3',
+        secondary: '#5e5e63',
+        outline: '#717785',
+        'outline-variant': '#c1c6d6',
+        'inverse-surface': '#1a1b1e',
         navy:          '#1A2580',
         'navy-deep':   '#0D1445',
         accent:        '#5A72ED',
@@ -21,8 +33,10 @@ const config: Config = {
         'blue-subtle': '#E0E8FF',
       },
       fontFamily: {
+        sans: ['var(--font-sans)', 'sans-serif'],
         display: ['var(--font-display)', 'sans-serif'],
-        body:    ['var(--font-body)',    'sans-serif'],
+        mono: ['var(--font-mono)', 'monospace'],
+        body: ['var(--font-body)', 'sans-serif'],
       },
       animation: {
         'float':            'float 4s ease-in-out infinite',

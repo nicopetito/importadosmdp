@@ -54,14 +54,14 @@ export default function HowItWorks() {
   const { ref, inView } = useInView({ triggerOnce: true, threshold: 0.2 })
 
   return (
-    <section className="bg-white py-20 px-6 overflow-hidden">
+    <section className="bg-white py-24 px-6 overflow-hidden border-t border-outline-variant/10">
       <div className="max-w-6xl mx-auto" ref={ref}>
         {/* Header */}
-        <div className="text-center mb-16">
-          <p className="font-body text-[11px] font-bold text-accent uppercase tracking-[0.2em] mb-3">
+        <div className="text-center mb-20">
+          <p className="font-sans text-[10px] font-bold text-secondary uppercase tracking-[0.2em] mb-3">
             Simple y transparente
           </p>
-          <h2 className="font-display font-black text-[36px] md:text-[44px] text-navy leading-tight">
+          <h2 className="font-sans text-[36px] md:text-[44px] text-on-surface font-bold leading-none tracking-tight">
             ¿Cómo funciona?
           </h2>
         </div>
@@ -71,7 +71,7 @@ export default function HowItWorks() {
           {/* Animated Dashed Line (Desktop only) */}
           <div className="hidden md:block absolute top-7 left-[16.66%] w-[66.66%] h-[2px] z-0">
             <motion.div
-              className="h-full border-t-[2px] border-dashed border-[#C7D4FF]"
+              className="h-full border-t-[2px] border-dashed border-outline-variant/30"
               initial={{ width: 0 }}
               animate={inView ? { width: '100%' } : { width: 0 }}
               transition={{ duration: 1, delay: 0.4, ease: "easeOut" }}
@@ -88,20 +88,20 @@ export default function HowItWorks() {
                 className="flex flex-col items-center text-center px-4"
               >
                 {/* Number Circle */}
-                <div className="w-14 h-14 rounded-full bg-gradient-to-br from-accent-mid to-accent flex items-center justify-center font-display font-black text-xl text-white shadow-md mb-6 relative">
+                <div className="w-14 h-14 rounded-full bg-inverse-surface flex items-center justify-center font-sans font-black text-xl text-white shadow-md mb-6 relative">
                   {step.num}
                 </div>
 
                 {/* Icon */}
-                <div className="text-accent mb-4 bg-blue-base p-3.5 rounded-full border border-blue-subtle shadow-sm">
+                <div className="text-primary mb-4 bg-surface p-3.5 rounded-full border border-outline-variant/30 shadow-sm">
                   {step.icon}
                 </div>
 
                 {/* Text */}
-                <h3 className="font-display font-bold text-lg text-navy mb-3">
+                <h3 className="font-sans font-bold text-lg text-on-surface mb-3">
                   {step.title}
                 </h3>
-                <p className="font-body text-sm text-[#4A5568] leading-relaxed max-w-[280px]">
+                <p className="font-sans text-sm text-secondary leading-relaxed max-w-[280px]">
                   {step.desc}
                 </p>
               </motion.div>

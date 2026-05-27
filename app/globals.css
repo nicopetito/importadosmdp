@@ -13,43 +13,50 @@ body {
 
 /* ── CSS Custom Properties ─────────────────────────────────────────── */
 :root {
-  --gradient-hero:    linear-gradient(135deg, #050916 0%, #1A2580 60%, #3D52C4 100%);
-  --gradient-accent:  linear-gradient(90deg, #5A72ED, #8B9CF0);
-  --gradient-button:  linear-gradient(135deg, #3D52C4, #5A72ED);
-  --orb-1-color:      rgba(90, 114, 237, 0.40);
-  --orb-2-color:      rgba(61,  82, 196, 0.28);
-  --orb-3-color:      rgba(107,127, 238, 0.22);
+  --gradient-hero:    linear-gradient(135deg, #050505 0%, #1C1C1E 100%);
+  --gradient-accent:  linear-gradient(90deg, #0071E3, #abc7ff);
+  --gradient-button:  linear-gradient(135deg, #1b1b1d, #303032);
+  --orb-1-color:      rgba(0, 113, 227, 0.15);
+  --orb-2-color:      rgba(0, 92, 187, 0.10);
+  --orb-3-color:      rgba(171, 199, 255, 0.08);
   --safe-area-inset-bottom: env(safe-area-inset-bottom, 0px);
 }
 
-/* ── Glassmorphism Utilities ───────────────────────────────────────── */
+/* ── Glassmorphism & Layout Utilities ──────────────────────────────── */
+.glass-card {
+  background: rgba(255, 255, 255, 0.8);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(229, 229, 231, 0.5);
+}
+
 .glass {
-  background: rgba(255, 255, 255, 0.10);
+  background: rgba(255, 255, 255, 0.05);
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
-  border: 1px solid rgba(255, 255, 255, 0.20);
+  border: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 .glass-light {
-  background: rgba(255, 255, 255, 0.65);
+  background: rgba(255, 255, 255, 0.7);
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
-  border: 1px solid rgba(255, 255, 255, 0.45);
+  border: 1px solid rgba(0, 0, 0, 0.03);
 }
 
-/* ── Grid SVG Pattern (for hero overlay) ──────────────────────────── */
-.grid-pattern {
-  background-image:
-    linear-gradient(rgba(90, 114, 237, 0.07) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(90, 114, 237, 0.07) 1px, transparent 1px);
-  background-size: 60px 60px;
+.cinematic-shadow {
+  box-shadow: 0 30px 60px -12px rgba(50, 50, 93, 0.08), 0 18px 36px -18px rgba(0, 0, 0, 0.1);
+}
+
+.editorial-shadow {
+  box-shadow: 0 20px 40px -10px rgba(0, 0, 0, 0.03);
 }
 
 /* ── Scrollbar ─────────────────────────────────────────────────────── */
 ::-webkit-scrollbar { width: 5px; }
-::-webkit-scrollbar-track { background: #F0F4FF; }
-::-webkit-scrollbar-thumb { background: #C7D4FF; border-radius: 3px; }
-::-webkit-scrollbar-thumb:hover { background: #5A72ED; }
+::-webkit-scrollbar-track { background: #f6f3f5; }
+::-webkit-scrollbar-thumb { background: #c1c6d6; border-radius: 3px; }
+::-webkit-scrollbar-thumb:hover { background: #717785; }
 
 .reviews-scroll::-webkit-scrollbar { display: none; }
 

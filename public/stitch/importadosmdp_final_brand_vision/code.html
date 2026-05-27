@@ -1,0 +1,417 @@
+<!DOCTYPE html>
+
+<html class="scroll-smooth" lang="es"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>ImportadosMDP | Tecnología Premium en Mar del Plata</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "surface-container-low": "#F8F8F6",
+                        "surface-container": "#f0edef",
+                        "surface-bright": "#fcf8fb",
+                        "surface-variant": "#e4e2e4",
+                        "secondary-fixed": "#e3e2e7",
+                        "on-primary": "#ffffff",
+                        "inverse-primary": "#abc7ff",
+                        "surface-tint": "#005cbb",
+                        "secondary-fixed-dim": "#c7c6cb",
+                        "on-primary-fixed-variant": "#00458f",
+                        "primary-container": "#0071e3",
+                        "on-error": "#ffffff",
+                        "surface-container-lowest": "#ffffff",
+                        "on-tertiary": "#ffffff",
+                        "on-secondary-container": "#626267",
+                        "on-secondary-fixed-variant": "#46464b",
+                        "tertiary-fixed-dim": "#3de273",
+                        "on-error-container": "#93000a",
+                        "on-tertiary-fixed-variant": "#005322",
+                        "surface-container-high": "#eae7ea",
+                        "primary-fixed": "#d7e2ff",
+                        "outline": "#717785",
+                        "on-secondary-fixed": "#1a1b1f",
+                        "on-primary-fixed": "#001b3f",
+                        "background": "#F8F8F6",
+                        "on-secondary": "#ffffff",
+                        "tertiary-container": "#00863b",
+                        "secondary": "#5e5e63",
+                        "primary-fixed-dim": "#abc7ff",
+                        "on-tertiary-container": "#f2ffef",
+                        "inverse-surface": "#303032",
+                        "on-tertiary-fixed": "#002109",
+                        "inverse-on-surface": "#f3f0f2",
+                        "error": "#ba1a1a",
+                        "tertiary-fixed": "#66ff8e",
+                        "surface-dim": "#dcd9dc",
+                        "primary": "#0059b5",
+                        "surface": "#fcf8fb",
+                        "on-primary-container": "#fcfbff",
+                        "tertiary": "#006a2d",
+                        "error-container": "#ffdad6",
+                        "surface-container-highest": "#e4e2e4",
+                        "secondary-container": "#e0dfe4",
+                        "on-surface-variant": "#414753",
+                        "on-background": "#1b1b1d",
+                        "outline-variant": "#c1c6d6",
+                        "on-surface": "#1b1b1d"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "stack-md": "16px",
+                        "stack-lg": "32px",
+                        "margin-mobile": "20px",
+                        "margin-desktop": "40px",
+                        "stack-xs": "4px",
+                        "stack-sm": "8px",
+                        "stack-xl": "64px",
+                        "gutter": "24px",
+                        "container-max": "1200px"
+                    },
+                    "fontFamily": {
+                        "label-sm": ["Inter"],
+                        "label-md": ["Inter"],
+                        "display-lg-mobile": ["Inter"],
+                        "body-md": ["Inter"],
+                        "headline-xl": ["Inter"],
+                        "headline-lg": ["Inter"],
+                        "display-lg": ["Inter"],
+                        "body-lg": ["Inter"],
+                        "headline-md": ["Inter"]
+                    },
+                    "fontSize": {
+                        "label-sm": ["12px", {"lineHeight": "1.4", "letterSpacing": "0.02em", "fontWeight": "600"}],
+                        "label-md": ["14px", {"lineHeight": "1.4", "letterSpacing": "0.01em", "fontWeight": "500"}],
+                        "display-lg-mobile": ["40px", {"lineHeight": "1.1", "letterSpacing": "-0.01em", "fontWeight": "700"}],
+                        "body-md": ["17px", {"lineHeight": "1.5", "fontWeight": "400"}],
+                        "headline-xl": ["40px", {"lineHeight": "1.2", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+                        "headline-lg": ["32px", {"lineHeight": "1.25", "fontWeight": "600"}],
+                        "display-lg": ["56px", {"lineHeight": "1.1", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                        "body-lg": ["19px", {"lineHeight": "1.5", "fontWeight": "400"}],
+                        "headline-md": ["24px", {"lineHeight": "1.3", "fontWeight": "600"}]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        .glass-card {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+        }
+        .text-balance {
+            text-wrap: balance;
+        }
+        .no-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        .no-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+    </style>
+</head>
+<body class="bg-background text-on-surface font-body-md overflow-x-hidden">
+<!-- Refined Navigation Bar -->
+<header class="fixed top-0 w-full z-50 bg-white/60 backdrop-blur-xl border-b border-black/[0.03]">
+<div class="flex justify-between items-center h-16 px-margin-mobile md:px-margin-desktop max-w-container-max mx-auto">
+<div class="font-headline-md text-[20px] font-extrabold tracking-tighter text-on-surface flex items-center gap-1">
+            IMPORTADOS<span class="text-primary-container">MDP</span>
+</div>
+<nav class="hidden md:flex items-center gap-10">
+<a class="font-label-sm text-on-surface hover:text-primary-container transition-colors" href="#">Inicio</a>
+<a class="font-label-sm text-on-surface/60 hover:text-primary-container transition-colors" href="#">Catálogo</a>
+<a class="font-label-sm text-on-surface/60 hover:text-primary-container transition-colors" href="#">Reseñas</a>
+<a class="font-label-sm text-on-surface/60 hover:text-primary-container transition-colors" href="#">Contacto</a>
+</nav>
+<div class="flex items-center gap-6">
+<span class="material-symbols-outlined text-[22px] cursor-pointer hover:text-primary-container transition-all">shopping_cart</span>
+<button class="px-6 py-2 bg-primary-container text-on-primary font-label-sm rounded-full hover:bg-primary-container/90 transition-all shadow-lg shadow-primary-container/20">
+                WhatsApp
+            </button>
+</div>
+</div>
+</header>
+<main>
+<!-- Cinematic Hero Section -->
+<section class="relative min-h-[90vh] flex items-center overflow-hidden bg-[#050505] text-white pt-16">
+<!-- New Hero Image Background -->
+<div class="absolute inset-0 z-0">
+<img alt="Cinematic luxury tech" class="w-full h-full object-cover opacity-80 md:opacity-100 object-center" src="https://lh3.googleusercontent.com/aida/ADBb0ugMxgJLadDZc0qZGyt_lvZvmq6NT8iF3lhcFVqfl2uf22Dzflx78yTaFeJDUw8wUglGQCkr0qASzQLQeWKYbPgPK_YoYS0QqtnMyi3Kt_s15O9oGcxmKJAEHvsS3drRXsrvDc3o5llRGJn0X567F2vefxUy18wdm6E-Wzq5_RVNaEoCYB6Cxp_j6OS1R5Z0OQqBLJ0FdxNMMJFtWNKIdFG_islLig7XyXWrqWwpMSuq-9ECPifU4e0vuMs"/>
+<div class="absolute inset-0 bg-gradient-to-t from-[#050505] via-transparent to-[#050505]/30"></div>
+<div class="absolute inset-0 bg-gradient-to-r from-[#050505]/40 via-transparent to-[#050505]/40"></div>
+</div>
+<div class="max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop relative z-10 w-full">
+<div class="flex flex-col items-center text-center">
+<div class="flex items-center gap-3 mb-8">
+<span class="px-3 py-1 bg-primary-container/20 backdrop-blur-md text-primary-container text-[10px] font-bold uppercase tracking-[0.2em] rounded-full border border-primary-container/30">Disponible hoy</span>
+<span class="px-3 py-1 bg-white/10 backdrop-blur-sm text-[10px] font-bold uppercase tracking-[0.2em] rounded-full border border-white/10">Retiro inmediato</span>
+</div>
+<h1 class="font-display-lg text-[56px] md:text-[88px] leading-[0.9] tracking-tighter mb-8 font-extrabold italic uppercase">
+                    TECH <br/>CURADA.
+                </h1>
+<p class="font-body-lg text-white/70 mb-12 max-w-xl leading-relaxed text-balance">
+                    Apple y Samsung originales. Garantía real y entrega inmediata.
+                </p>
+<div class="flex flex-wrap gap-5">
+<a class="px-10 py-4 bg-white text-black font-label-md rounded-full hover:bg-white/90 transition-all shadow-2xl shadow-white/10" href="#catalogo">
+                        Ver Catálogo
+                    </a>
+<a class="px-10 py-4 glass-card text-white border border-white/20 font-label-md rounded-full hover:bg-white/10 transition-all" href="#">
+                        Consultar Stock
+                    </a>
+</div>
+</div>
+</div>
+<!-- Smooth Atmospheric Transition -->
+<div class="absolute bottom-0 left-0 w-full h-48 bg-gradient-to-t from-[#F8F8F6] to-transparent"></div>
+</section>
+<!-- Editorial Category Section -->
+<section class="py-stack-xl bg-surface-container-low relative z-20">
+<div class="max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop">
+<div class="flex justify-between items-end mb-12">
+<div>
+<h2 class="font-headline-lg text-[32px] font-bold tracking-tight">Colecciones</h2>
+<p class="text-secondary/60 text-sm mt-2">Curaduría exclusiva por categoría.</p>
+</div>
+<a class="text-primary-container font-label-sm uppercase tracking-widest hover:opacity-70 transition-all border-b border-primary-container/20 pb-1" href="#">Explorar todo</a>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-12 gap-8">
+<!-- Large Panel -->
+<div class="md:col-span-8 relative group overflow-hidden rounded-[2.5rem] cursor-pointer h-[500px]">
+<img alt="Smartphones" class="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-1000" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAr8RDP0M2Qgz21z-j2D6yIotSIDu6Vpkj2O6_CrhPR7ItLD0uduhW6Gz9rOP-ZJx_FgcZUxhkDv6H-ooqq02zu7knjlakd0rSLu5rw4DYJk9hFlK-0YjLxEl06C8Go6xoz2StxJibX7EzJrBqylNGV3OwGpJZRgIZRHaKmtcwTZ4A9hxHs2O4cN8PcT512g8M-azwK4KzcYq2zfaEwMKBp3jvMsuWn01lSeEjxTZywl5xJ411KZ3EB43jMz9SKYHMq9rtZp3MyBlk"/>
+<div class="absolute inset-0 bg-black/30 group-hover:bg-black/20 transition-colors"></div>
+<div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent"></div>
+<div class="absolute bottom-12 left-12">
+<span class="text-white text-[36px] font-bold tracking-tighter block mb-1">iPhone &amp; Samsung</span>
+<span class="text-white/70 font-label-sm uppercase tracking-[0.2em]">Lo último en movilidad</span>
+</div>
+</div>
+<!-- Side Panels -->
+<div class="md:col-span-4 flex flex-col gap-8">
+<div class="h-[234px] relative group overflow-hidden rounded-[2.5rem] cursor-pointer">
+<img alt="Laptops" class="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-1000" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCkSMZvgmemxlr7utDNiAqofm1dd8AS6UPzbmL8xgeoIGOodn3fHfIWVsS9ykllHt8jG9YD2E0XsRa6vpICdL2RLI4YCrPKgyGFRCgu6_d8dZM_pU_sCUcnFtyh43xHzFtkyfbrwVfWiju4OiSvspPQe21epTX2SSzkqLfc2EIz2ynpe9VRdhuXn96rlLBJY1VihTs9-I6Epn8IenUF1pL-10Iu0WUdk80yf_PiNiNp-qgTaR-7QnSBEFDDoJF0GjPqTpU0cIM17zA"/>
+<div class="absolute inset-0 bg-black/40 group-hover:bg-black/20 transition-all"></div>
+<div class="absolute bottom-8 left-10">
+<span class="text-white text-[24px] font-bold tracking-tight">MacBook</span>
+<span class="text-white/60 text-xs block uppercase tracking-widest mt-1">Productividad Pro</span>
+</div>
+</div>
+<div class="h-[234px] relative group overflow-hidden rounded-[2.5rem] cursor-pointer">
+<img alt="Audio" class="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-1000" src="https://lh3.googleusercontent.com/aida-public/AB6AXuC_jym4QPdiGCbhAh93Xbi-_8gN2TlOCaXl6QfD4IOPI36Kbucpbifd5TRU0JYjM2_OP9ONTpQwaCZD7AnRzERhsdVXe9Y7suNDW97LmvcFQLGKg_Qa7jQxVQJzHGnawrYnj1GOVC1ITJNPoR29j7XS8Gs7kGMNq-JA0p76mzrZwHKRwXApz97bFbiOKiLgjHo5MaXCLboUGuYUhRI9tvEwaeA4FrGhkWHN1wBBru7MVWZQD7dX8DTDJr4UOUFiGbNJA7_jO137Uw"/>
+<div class="absolute inset-0 bg-black/40 group-hover:bg-black/20 transition-all"></div>
+<div class="absolute bottom-8 left-10">
+<span class="text-white text-[24px] font-bold tracking-tight">Audio &amp; Accs</span>
+<span class="text-white/60 text-xs block uppercase tracking-widest mt-1">Sonido Inmersivo</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Luxury Product Grid -->
+<section class="py-stack-xl bg-white" id="catalogo">
+<div class="max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop">
+<div class="mb-16">
+<h2 class="font-headline-lg text-[32px] font-bold tracking-tight mb-4">Selección Destacada</h2>
+<div class="w-12 h-1 bg-primary-container rounded-full"></div>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-12">
+<!-- Product Card 1 -->
+<div class="group">
+<div class="aspect-[4/5] overflow-hidden rounded-[2.5rem] bg-surface-container-low mb-8 relative transition-all duration-700 hover:shadow-3xl hover:shadow-black/[0.05] border border-black/[0.02]">
+<img alt="iPhone 15 Pro" class="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-105" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCBucxkAxsmBVAYlXJMdZExObu6NJbr6PzstTLMvEl_8EMFc-5ZV6hqfzYjadnLgJ0BYF7YKhkGmbU6YQBh3GcVm5-wukO_nk9fOgRMp7ROXtywTLYo_f6UbkGjgp6Rtxw_Z1MNS46p2MHVbys2QH2NR3q4k5481b-zrwS8IjEqJDIpjIoz6HJq1hpkOASKjuJtmVmWNOtCEX7YtYTZ4E7Y18OmR_5u6OUzuCzJvQUPdgC0apj6rav_iNzK-HxsKk51DB0MzBW46hg"/>
+<span class="absolute top-8 left-8 px-4 py-1.5 bg-black text-white text-[10px] font-bold uppercase tracking-widest rounded-full">New Arrival</span>
+</div>
+<div class="px-2">
+<h3 class="text-[22px] font-bold tracking-tight mb-2">iPhone 15 Pro</h3>
+<div class="flex justify-between items-center mt-6">
+<div class="flex flex-col">
+<span class="text-xs text-secondary/50 uppercase font-bold tracking-widest mb-1">Precio</span>
+<span class="text-[26px] font-extrabold tracking-tighter text-on-surface">$1.350 <span class="text-xs font-medium text-secondary">USD</span></span>
+</div>
+<button class="w-12 h-12 bg-on-surface text-white rounded-full flex items-center justify-center hover:bg-primary-container transition-all group-hover:scale-110 shadow-xl shadow-black/10">
+<span class="material-symbols-outlined text-[20px]">east</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Product Card 2 -->
+<div class="group">
+<div class="aspect-[4/5] overflow-hidden rounded-[2.5rem] bg-surface-container-low mb-8 relative transition-all duration-700 hover:shadow-3xl hover:shadow-black/[0.05] border border-black/[0.02]">
+<img alt="MacBook Air M2" class="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-105" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCzUbiJJNsWnWg4-Fn6WPsy7w20KLzYyhE5x_T9p7Rlo8nyTUgMkPkvQX0YMbJC8y3dvou3UM2vkYAMc8L3R1ReR1NUjTJ8VIQdbaBh9o1q7gQqRUG7DlpU81BpJwloyAPfi7_4533fVXAabVRtSbWt_vPENaahNPJPSSjV_dIEoQswciVRp_hRpTTgQCnFNqVx9PqpDUCg5nD6ds8jLWMipImKWzxsq8cek8G8QvcgsMXdYtwuHOpfd-3UXV_wJVOTUnV4Y_Z7bKc"/>
+<span class="absolute top-8 left-8 px-4 py-1.5 bg-primary-container text-white text-[10px] font-bold uppercase tracking-widest rounded-full">Top Seller</span>
+</div>
+<div class="px-2">
+<h3 class="text-[22px] font-bold tracking-tight mb-2">MacBook Air M2</h3>
+<div class="flex justify-between items-center mt-6">
+<div class="flex flex-col">
+<span class="text-xs text-secondary/50 uppercase font-bold tracking-widest mb-1">Precio</span>
+<span class="text-[26px] font-extrabold tracking-tighter text-on-surface">$1.150 <span class="text-xs font-medium text-secondary">USD</span></span>
+</div>
+<button class="w-12 h-12 bg-on-surface text-white rounded-full flex items-center justify-center hover:bg-primary-container transition-all group-hover:scale-110 shadow-xl shadow-black/10">
+<span class="material-symbols-outlined text-[20px]">east</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Product Card 3 -->
+<div class="group">
+<div class="aspect-[4/5] overflow-hidden rounded-[2.5rem] bg-surface-container-low mb-8 relative transition-all duration-700 hover:shadow-3xl hover:shadow-black/[0.05] border border-black/[0.02]">
+<img alt="AirPods Pro 2" class="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-105" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAxhTQDgCtpVNEuMK5G88b3KXsjArIaHMpbXW4n-OWF8HxS4DNl-7Ag-3JQJ4uEvFg0Hxv9-7iw1MBzEYRBl708VN0TIBPID9mITGTTOK7EavtuRQlcrqFC-GUkKZNAs2k_jYsjA_IjpxRX6myOjIebIQnxfOSrn3_1aVeMet8hALJWcSFSUxcoLlOfG_w1JTmWBNoaRCKrc9FdETrF91h2c64JqGN2MW88bEt1LKCZQkPMe10_Lar7xuM2IsPFrZL1bw2drJIrqpE"/>
+</div>
+<div class="px-2">
+<h3 class="text-[22px] font-bold tracking-tight mb-2">AirPods Pro 2</h3>
+<div class="flex justify-between items-center mt-6">
+<div class="flex flex-col">
+<span class="text-xs text-secondary/50 uppercase font-bold tracking-widest mb-1">Precio</span>
+<span class="text-[26px] font-extrabold tracking-tighter text-on-surface">$299 <span class="text-xs font-medium text-secondary">USD</span></span>
+</div>
+<button class="w-12 h-12 bg-on-surface text-white rounded-full flex items-center justify-center hover:bg-primary-container transition-all group-hover:scale-110 shadow-xl shadow-black/10">
+<span class="material-symbols-outlined text-[20px]">east</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Value Propositions -->
+<section class="py-24 bg-surface-container-low">
+<div class="max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop">
+<div class="grid md:grid-cols-4 gap-12">
+<div class="space-y-4">
+<span class="material-symbols-outlined text-primary-container text-3xl">verified_user</span>
+<h4 class="font-bold text-lg">Garantía Real</h4>
+<p class="text-secondary text-sm leading-relaxed">Soporte local y garantía oficial de fábrica para tu tranquilidad total.</p>
+</div>
+<div class="space-y-4">
+<span class="material-symbols-outlined text-primary-container text-3xl">local_shipping</span>
+<h4 class="font-bold text-lg">Entrega Inmediata</h4>
+<p class="text-secondary text-sm leading-relaxed">Stock físico real en Mar del Plata. Lo querés hoy, lo tenés hoy.</p>
+</div>
+<div class="space-y-4">
+<span class="material-symbols-outlined text-primary-container text-3xl">payments</span>
+<h4 class="font-bold text-lg">Mejor Precio</h4>
+<p class="text-secondary text-sm leading-relaxed">Precios competitivos sin intermediarios. Cotización transparente.</p>
+</div>
+<div class="space-y-4">
+<span class="material-symbols-outlined text-primary-container text-3xl">chat</span>
+<h4 class="font-bold text-lg">Asesoría VIP</h4>
+<p class="text-secondary text-sm leading-relaxed">Atención personalizada post-venta para configurar tus equipos.</p>
+</div>
+</div>
+</div>
+</section>
+<!-- Location Section -->
+<section class="py-stack-xl bg-white">
+<div class="max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop grid md:grid-cols-2 gap-20 items-center">
+<div class="order-2 md:order-1 h-[500px] rounded-[3rem] overflow-hidden shadow-2xl border border-black/[0.05]">
+<iframe frameborder="0" height="100%" marginheight="0" marginwidth="0" scrolling="no" src="https://maps.google.com/maps?q=Jujuy%201811,%20Mar%20del%20Plata&amp;t=&amp;z=15&amp;ie=UTF8&amp;iwloc=&amp;output=embed" width="100%"></iframe>
+</div>
+<div class="order-1 md:order-2">
+<span class="text-primary-container font-label-sm uppercase tracking-[0.4em] mb-6 block font-bold">Showroom</span>
+<h2 class="font-headline-lg text-[42px] font-bold tracking-tight mb-8 italic">Visitanos en MDP.</h2>
+<p class="text-body-md text-secondary mb-12 leading-relaxed">
+                    Experimentá la excelencia tecnológica en nuestra tienda física. Atención exclusiva y personalizada para encontrar tu próximo equipo.
+                </p>
+<div class="space-y-8">
+<div class="flex items-center gap-6">
+<div class="w-12 h-12 rounded-2xl bg-surface-container-low flex items-center justify-center">
+<span class="material-symbols-outlined text-primary-container">location_on</span>
+</div>
+<div>
+<p class="font-bold text-lg">Jujuy 1811</p>
+<p class="text-secondary text-sm">Mar del Plata, Argentina</p>
+</div>
+</div>
+<div class="flex items-center gap-6">
+<div class="w-12 h-12 rounded-2xl bg-surface-container-low flex items-center justify-center">
+<span class="material-symbols-outlined text-primary-container">schedule</span>
+</div>
+<div>
+<p class="font-bold text-lg">Horarios Premium</p>
+<p class="text-secondary text-sm">Lunes a Sábados: 10:00 - 19:00 hs</p>
+</div>
+</div>
+</div>
+<a class="mt-14 inline-flex items-center gap-3 text-primary-container font-bold hover:gap-6 transition-all group" href="#">
+                    Obtener direcciones <span class="material-symbols-outlined group-hover:translate-x-1 transition-transform">east</span>
+</a>
+</div>
+</div>
+</section>
+</main>
+<!-- Luxury Minimal Footer -->
+<footer class="bg-[#050505] text-white pt-24 pb-12 border-t border-white/[0.03]">
+<div class="max-w-container-max mx-auto px-margin-desktop grid grid-cols-1 md:grid-cols-4 gap-16 mb-20">
+<div class="col-span-1 md:col-span-1">
+<div class="font-bold text-2xl tracking-tighter mb-8">IMPORTADOS<span class="text-primary-container">MDP</span></div>
+<p class="text-white/40 text-sm leading-relaxed max-w-xs">La curaduría de tecnología más exclusiva de la costa atlántica. Productos originales con garantía real.</p>
+</div>
+<div>
+<h6 class="font-bold text-[10px] uppercase tracking-[0.3em] text-white/30 mb-8">Navegación</h6>
+<ul class="space-y-5 text-sm text-white/50">
+<li><a class="hover:text-primary-container transition-colors" href="#">iPhone</a></li>
+<li><a class="hover:text-primary-container transition-colors" href="#">MacBook</a></li>
+<li><a class="hover:text-primary-container transition-colors" href="#">Audio Pro</a></li>
+<li><a class="hover:text-primary-container transition-colors" href="#">Accesorios</a></li>
+</ul>
+</div>
+<div>
+<h6 class="font-bold text-[10px] uppercase tracking-[0.3em] text-white/30 mb-8">Soporte</h6>
+<ul class="space-y-5 text-sm text-white/50">
+<li><a class="hover:text-primary-container transition-colors" href="#">Garantía</a></li>
+<li><a class="hover:text-primary-container transition-colors" href="#">Envíos locales</a></li>
+<li><a class="hover:text-primary-container transition-colors" href="#">Términos y Condiciones</a></li>
+<li><a class="hover:text-primary-container transition-colors" href="#">Preguntas Frecuentes</a></li>
+</ul>
+</div>
+<div>
+<h6 class="font-bold text-[10px] uppercase tracking-[0.3em] text-white/30 mb-8">Newsletter Privado</h6>
+<p class="text-white/40 text-sm mb-6">Recibí alertas de stock exclusivo antes que nadie.</p>
+<div class="relative">
+<input class="w-full bg-white/[0.03] border border-white/10 rounded-full px-6 py-3 text-sm outline-none focus:border-primary-container focus:bg-white/[0.05] transition-all" placeholder="Tu email" type="email"/>
+<button class="absolute right-2 top-1.5 bg-white text-black w-10 h-10 rounded-full flex items-center justify-center hover:bg-primary-container hover:text-white transition-all shadow-lg">
+<span class="material-symbols-outlined text-[18px]">east</span>
+</button>
+</div>
+</div>
+</div>
+<div class="max-w-container-max mx-auto px-margin-desktop pt-12 border-t border-white/[0.03] flex flex-col md:flex-row justify-between items-center gap-6">
+<p class="text-white/20 text-[10px] uppercase tracking-[0.4em]">© 2024 ImportadosMDP. Excellence in Technology.</p>
+<div class="flex gap-8 text-white/20">
+<a class="hover:text-white transition-colors" href="#"><i class="fab fa-instagram"></i></a>
+<a class="hover:text-white transition-colors" href="#"><i class="fab fa-facebook"></i></a>
+</div>
+</div>
+</footer>
+<!-- Bottom Nav (Mobile Only) -->
+<nav class="fixed bottom-0 w-full z-50 md:hidden bg-black/60 backdrop-blur-2xl border-t border-white/5">
+<div class="flex justify-around items-center h-20 pb-safe px-4">
+<a class="flex flex-col items-center justify-center text-white" href="#">
+<span class="material-symbols-outlined text-[24px]">home</span>
+</a>
+<a class="flex flex-col items-center justify-center text-white/40" href="#">
+<span class="material-symbols-outlined text-[24px]">grid_view</span>
+</a>
+<a class="flex flex-col items-center justify-center text-white/40" href="#">
+<span class="material-symbols-outlined text-[24px]">shopping_bag</span>
+</a>
+<a class="flex flex-col items-center justify-center text-white/40" href="#">
+<span class="material-symbols-outlined text-[24px]">person</span>
+</a>
+</div>
+</nav>
+</body></html>

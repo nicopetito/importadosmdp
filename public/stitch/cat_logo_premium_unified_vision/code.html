@@ -1,0 +1,445 @@
+<!DOCTYPE html>
+
+<html class="light" lang="es"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "on-primary-fixed": "#001b3f",
+                    "primary-container": "#0071e3",
+                    "surface-tint": "#005cbb",
+                    "on-primary": "#ffffff",
+                    "on-surface-variant": "#414753",
+                    "surface-container-highest": "#e4e2e4",
+                    "surface-bright": "#fcf8fb",
+                    "surface-container-high": "#eae7ea",
+                    "on-tertiary-fixed-variant": "#005322",
+                    "tertiary-container": "#00863b",
+                    "on-secondary": "#ffffff",
+                    "secondary-container": "#e0dfe4",
+                    "tertiary-fixed": "#66ff8e",
+                    "error-container": "#ffdad6",
+                    "outline-variant": "#c1c6d6",
+                    "on-tertiary-container": "#f2ffef",
+                    "on-secondary-fixed": "#1a1b1f",
+                    "secondary-fixed": "#e3e2e7",
+                    "on-secondary-container": "#626267",
+                    "outline": "#717785",
+                    "inverse-surface": "#1a1b1e",
+                    "tertiary": "#006a2d",
+                    "on-surface": "#1b1b1d",
+                    "on-primary-container": "#fcfbff",
+                    "surface-container-lowest": "#ffffff",
+                    "secondary-fixed-dim": "#c7c6cb",
+                    "surface-container": "#f0edef",
+                    "secondary": "#5e5e63",
+                    "on-secondary-fixed-variant": "#46464b",
+                    "inverse-primary": "#abc7ff",
+                    "surface-container-low": "#f6f3f5",
+                    "surface": "#fcf8fb",
+                    "primary": "#0059b5",
+                    "on-tertiary": "#ffffff",
+                    "on-primary-fixed-variant": "#00458f",
+                    "primary-fixed-dim": "#abc7ff",
+                    "on-error": "#ffffff",
+                    "primary-fixed": "#d7e2ff",
+                    "on-tertiary-fixed": "#002109",
+                    "on-error-container": "#93000a",
+                    "inverse-on-surface": "#f3f0f2",
+                    "error": "#ba1a1a",
+                    "tertiary-fixed-dim": "#3de273",
+                    "background": "#f8f7f4",
+                    "surface-dim": "#dcd9dc",
+                    "on-background": "#1b1b1d",
+                    "surface-variant": "#e4e2e4"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "stack-xl": "64px",
+                    "stack-sm": "8px",
+                    "stack-xs": "4px",
+                    "stack-lg": "32px",
+                    "gutter": "24px",
+                    "margin-mobile": "20px",
+                    "container-max": "1200px",
+                    "margin-desktop": "40px",
+                    "stack-md": "16px"
+            },
+            "fontFamily": {
+                    "body-lg": ["Inter"],
+                    "headline-md": ["Inter"],
+                    "display-lg-mobile": ["Inter"],
+                    "label-sm": ["Inter"],
+                    "label-md": ["Inter"],
+                    "headline-lg": ["Inter"],
+                    "headline-xl": ["Inter"],
+                    "display-lg": ["Inter"],
+                    "body-md": ["Inter"]
+            },
+            "fontSize": {
+                    "body-lg": ["19px", {"lineHeight": "1.5", "fontWeight": "400"}],
+                    "headline-md": ["24px", {"lineHeight": "1.3", "fontWeight": "600"}],
+                    "display-lg-mobile": ["40px", {"lineHeight": "1.1", "letterSpacing": "-0.01em", "fontWeight": "700"}],
+                    "label-sm": ["12px", {"lineHeight": "1.4", "letterSpacing": "0.02em", "fontWeight": "600"}],
+                    "label-md": ["14px", {"lineHeight": "1.4", "letterSpacing": "0.01em", "fontWeight": "500"}],
+                    "headline-lg": ["32px", {"lineHeight": "1.25", "fontWeight": "600"}],
+                    "headline-xl": ["40px", {"lineHeight": "1.2", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+                    "display-lg": ["56px", {"lineHeight": "1.1", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                    "body-md": ["17px", {"lineHeight": "1.5", "fontWeight": "400"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+            display: inline-block;
+            line-height: 1;
+            text-transform: none;
+            letter-spacing: normal;
+            word-wrap: normal;
+            white-space: nowrap;
+            direction: ltr;
+        }
+        .hide-scrollbar::-webkit-scrollbar { display: none; }
+        .hide-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+        .glass-card {
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(16px);
+            border: 1px solid rgba(229, 229, 231, 0.5);
+        }
+        .hero-gradient {
+            background: linear-gradient(135deg, #1a1b1e 0%, #2c2d31 100%);
+        }
+    </style>
+</head>
+<body class="bg-background text-on-surface font-body-md selection:bg-primary-container selection:text-on-primary-container">
+<!-- TopNavBar -->
+<header class="sticky top-0 w-full z-50 bg-white/70 backdrop-blur-xl border-b border-outline-variant/30">
+<nav class="flex justify-between items-center h-20 px-margin-mobile md:px-margin-desktop max-w-container-max mx-auto">
+<div class="font-headline-md text-headline-md font-bold tracking-tight text-inverse-surface">ImportadosMDP</div>
+<div class="hidden md:flex items-center space-x-stack-lg">
+<a class="font-label-md text-label-md text-inverse-surface font-bold border-b-2 border-inverse-surface pb-1" href="#">Catálogo</a>
+<a class="font-label-md text-label-md text-secondary hover:text-inverse-surface transition-colors" href="#">Reseñas</a>
+<a class="font-label-md text-label-md text-secondary hover:text-inverse-surface transition-colors" href="#">Contacto</a>
+</div>
+<div class="flex items-center space-x-stack-md">
+<button class="hidden md:flex items-center bg-inverse-surface text-on-primary px-6 py-2.5 rounded-full font-label-md hover:opacity-90 transition-all active:scale-95 shadow-lg shadow-inverse-surface/10">
+                Consultar por WhatsApp
+            </button>
+<div class="relative cursor-pointer text-inverse-surface hover:opacity-70 transition-all">
+<span class="material-symbols-outlined text-headline-md">shopping_bag</span>
+<span class="absolute -top-1 -right-1 bg-inverse-surface text-white text-[10px] w-4 h-4 flex items-center justify-center rounded-full border-2 border-white">2</span>
+</div>
+</div>
+</nav>
+</header>
+<main class="max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop py-stack-lg">
+<!-- Cinematic Header Section -->
+<div class="hero-gradient rounded-[2.5rem] p-stack-xl md:p-24 mb-stack-xl text-white relative overflow-hidden flex flex-col justify-center min-h-[400px]">
+<div class="absolute inset-0 opacity-20 pointer-events-none">
+<div class="absolute top-0 right-0 w-[500px] h-[500px] bg-primary-container blur-[120px] rounded-full -translate-y-1/2 translate-x-1/2"></div>
+<div class="absolute bottom-0 left-0 w-[400px] h-[400px] bg-tertiary-container blur-[100px] rounded-full translate-y-1/2 -translate-x-1/2"></div>
+</div>
+<div class="relative z-10">
+<span class="inline-block px-4 py-1.5 rounded-full bg-white/10 backdrop-blur-md text-label-sm font-bold tracking-widest uppercase mb-6 border border-white/10">Catálogo 2024</span>
+<h1 class="font-display-lg text-display-lg-mobile md:text-display-lg mb-4 tracking-tight">Colección curada.</h1>
+<p class="text-white/70 font-body-lg max-w-xl text-lg md:text-xl leading-relaxed">Tecnología seleccionada para durar. Explorá lo último en innovación original con garantía oficial.</p>
+</div>
+</div>
+<!-- Filter & Search Section -->
+<div class="sticky top-24 z-40 mb-stack-xl">
+<div class="glass-card rounded-3xl p-3 shadow-xl shadow-black/5 flex flex-col md:flex-row gap-4 items-center justify-between border border-white/50">
+<!-- Search -->
+<div class="relative w-full md:w-80 group">
+<span class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-outline group-focus-within:text-inverse-surface transition-colors">search</span>
+<input class="w-full bg-white/50 border-none rounded-2xl py-3.5 pl-12 pr-4 focus:ring-1 focus:ring-inverse-surface/10 font-body-md transition-all text-on-surface placeholder:text-secondary/60" placeholder="Buscar tecnología..." type="text"/>
+</div>
+<!-- Categories (Tactile Pills) -->
+<div class="flex gap-2 overflow-x-auto w-full md:w-auto hide-scrollbar pb-1 md:pb-0 px-2">
+<button class="category-btn active px-6 py-2.5 rounded-2xl bg-inverse-surface text-white font-label-md transition-all whitespace-nowrap shadow-md">Todos</button>
+<button class="category-btn px-6 py-2.5 rounded-2xl bg-white text-secondary hover:text-inverse-surface font-label-md transition-all whitespace-nowrap border border-outline-variant/30">iPhone</button>
+<button class="category-btn px-6 py-2.5 rounded-2xl bg-white text-secondary hover:text-inverse-surface font-label-md transition-all whitespace-nowrap border border-outline-variant/30">MacBook</button>
+<button class="category-btn px-6 py-2.5 rounded-2xl bg-white text-secondary hover:text-inverse-surface font-label-md transition-all whitespace-nowrap border border-outline-variant/30">Watch</button>
+<button class="category-btn px-6 py-2.5 rounded-2xl bg-white text-secondary hover:text-inverse-surface font-label-md transition-all whitespace-nowrap border border-outline-variant/30">iPad</button>
+</div>
+<!-- Sort -->
+<div class="hidden lg:flex items-center gap-3 pr-4 border-l border-outline-variant/30 pl-4">
+<span class="text-label-sm text-secondary font-bold tracking-widest uppercase">Ordenar</span>
+<select class="bg-transparent border-none font-label-md text-inverse-surface focus:ring-0 cursor-pointer p-0 pr-6 font-bold">
+<option>Recientes</option>
+<option>Precio: Min</option>
+<option>Precio: Max</option>
+</select>
+</div>
+</div>
+</div>
+<!-- Product Grid -->
+<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 mb-stack-xl">
+<!-- Card 1 -->
+<div class="group bg-white rounded-[2rem] overflow-hidden border border-outline-variant/20 hover:shadow-2xl transition-all duration-700 flex flex-col transform hover:-translate-y-1">
+<div class="relative aspect-[4/5] overflow-hidden bg-[#F2F2F2]">
+<img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-1000" data-alt="iPhone 15 Pro Max Product Shot" src="https://lh3.googleusercontent.com/aida-public/AB6AXuA9Dx4E3a-OqQeImSVAVojZw72dRxBq6RBbgF6GZuaN1zUC-3qd4xrVNgCeXVMDMju2RiX1Nvs7Q9Bql4LlJjTHiMPir9Ka6hdCqhZHD2PfYgqfImKDrXwNC_UHv5gurmjrK3woOMJe4qkO6jcmF7v27eG93mSj8W4asgKTktt0On1hlBK_w-VdwzVDFdbrh8dE4GiSDKFSZdqjQ7ZzqPJLES35X8ru2hI15DNL5Qtyo9tAvEl-pDvU3xU3RBhHBhSj0ZqlgD2Rf6c"/>
+<div class="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent"></div>
+<div class="absolute top-6 left-6 flex flex-col gap-2">
+<span class="bg-white/90 backdrop-blur-md text-inverse-surface px-4 py-1.5 rounded-full text-label-sm font-bold shadow-sm flex items-center gap-2">
+<span class="w-2 h-2 bg-tertiary-container rounded-full animate-pulse"></span>
+                        DISPONIBLE
+                    </span>
+</div>
+<button class="absolute top-6 right-6 bg-white/90 backdrop-blur-md p-3 rounded-full text-inverse-surface hover:bg-inverse-surface hover:text-white transition-all shadow-sm">
+<span class="material-symbols-outlined text-[20px]">favorite</span>
+</button>
+</div>
+<div class="p-8 flex flex-col flex-grow bg-white">
+<span class="text-label-sm text-secondary font-bold tracking-[0.2em] uppercase mb-2">Apple</span>
+<h3 class="font-headline-lg text-headline-lg text-on-surface mb-6 leading-tight group-hover:text-primary-container transition-colors">iPhone 15 Pro Max 256GB</h3>
+<div class="mt-auto flex items-center justify-between">
+<div class="flex flex-col">
+<span class="text-label-sm text-secondary line-through opacity-60">U$D 1.349</span>
+<span class="text-headline-md font-bold text-inverse-surface">U$D 1.199</span>
+</div>
+<a class="flex items-center justify-center gap-3 bg-inverse-surface text-white px-8 py-4 rounded-2xl font-label-md hover:shadow-xl hover:shadow-inverse-surface/20 transition-all active:scale-[0.98]" href="#">
+<span class="material-symbols-outlined text-[20px] text-[#25D366]">chat</span>
+                        Consultar
+                    </a>
+</div>
+</div>
+</div>
+<!-- Card 2 -->
+<div class="group bg-white rounded-[2rem] overflow-hidden border border-outline-variant/20 hover:shadow-2xl transition-all duration-700 flex flex-col transform hover:-translate-y-1">
+<div class="relative aspect-[4/5] overflow-hidden bg-[#E8E8E8]">
+<img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-1000" data-alt="MacBook Pro" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBXwWc3eT7PY6xlkaRz_LYaXZqhGxSLy06cqC4jMzuFT-j1qfECKZcg_H55tK2ibhCcSGVhTss4Fua0WgJ2q1dQ6DJEoO5rjugSdJJHs14wvivxKO-pKaksZVwYOMNnl8Fpg5WI_7-nNVuogYSKRpuapb0r178DFd-feL1wYEV8orxElhgBemhp5I3zU0byrLfDl-W_D6oBQp8oda1XRIDmg74Pdu8KErtkEh8PHau7GCTMF4oXUXqEOq7jy-Ef322SMEfaFdlWqKA"/>
+<div class="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent"></div>
+<div class="absolute top-6 left-6">
+<span class="bg-white/90 backdrop-blur-md text-inverse-surface px-4 py-1.5 rounded-full text-label-sm font-bold shadow-sm flex items-center gap-2">
+<span class="w-2 h-2 bg-tertiary-container rounded-full animate-pulse"></span>
+                        DISPONIBLE
+                    </span>
+</div>
+</div>
+<div class="p-8 flex flex-col flex-grow">
+<span class="text-label-sm text-secondary font-bold tracking-[0.2em] uppercase mb-2">Apple</span>
+<h3 class="font-headline-lg text-headline-lg text-on-surface mb-6 leading-tight group-hover:text-primary-container transition-colors">MacBook Pro 14" M3 Chip</h3>
+<div class="mt-auto flex items-center justify-between">
+<span class="text-headline-md font-bold text-inverse-surface">U$D 1.849</span>
+<a class="flex items-center justify-center gap-3 bg-inverse-surface text-white px-8 py-4 rounded-2xl font-label-md hover:shadow-xl hover:shadow-inverse-surface/20 transition-all active:scale-[0.98]" href="#">
+<span class="material-symbols-outlined text-[20px] text-[#25D366]">chat</span>
+                        Consultar
+                    </a>
+</div>
+</div>
+</div>
+<!-- Card 3 -->
+<div class="group bg-white rounded-[2rem] overflow-hidden border border-outline-variant/20 hover:shadow-2xl transition-all duration-700 flex flex-col transform hover:-translate-y-1">
+<div class="relative aspect-[4/5] overflow-hidden bg-[#1A1B1E]">
+<img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-1000 opacity-90" data-alt="Galaxy S24 Ultra" src="https://lh3.googleusercontent.com/aida-public/AB6AXuA1lCXrzt-SXgwRroWRKdqIBJZCjhmvzlbu6cFLPsfrimbikL-zYHnSwxQDF-7YLVqIWivjXxU7ZUxF7K0iAK0J2NonUnZmFkd5d5j6j9O8a6A87KKS_fjFVQNHQbftoRdkZu_RYzSAwq3cQtzZz9EFefeG9ed5IxKKCwdO6n77um2YAA8t0D-7oLARWBvzv5WNQeTIVmXUMzFt7jQ4S5PJ2xJatNQsIAdQMuTFrgio3MbjBdw0sSe6WihLIjkLWvnOD-diMBD4S6E"/>
+<div class="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent"></div>
+<div class="absolute top-6 left-6">
+<span class="bg-white/90 backdrop-blur-md text-inverse-surface px-4 py-1.5 rounded-full text-label-sm font-bold shadow-sm flex items-center gap-2">
+<span class="w-2 h-2 bg-tertiary-container rounded-full animate-pulse"></span>
+                        DISPONIBLE
+                    </span>
+</div>
+</div>
+<div class="p-8 flex flex-col flex-grow">
+<span class="text-label-sm text-secondary font-bold tracking-[0.2em] uppercase mb-2">Samsung</span>
+<h3 class="font-headline-lg text-headline-lg text-on-surface mb-6 leading-tight group-hover:text-primary-container transition-colors">Galaxy S24 Ultra 512GB</h3>
+<div class="mt-auto flex items-center justify-between">
+<div class="flex flex-col">
+<span class="text-label-sm text-secondary line-through opacity-60">U$D 1.199</span>
+<span class="text-headline-md font-bold text-inverse-surface">U$D 1.099</span>
+</div>
+<a class="flex items-center justify-center gap-3 bg-inverse-surface text-white px-8 py-4 rounded-2xl font-label-md hover:shadow-xl hover:shadow-inverse-surface/20 transition-all active:scale-[0.98]" href="#">
+<span class="material-symbols-outlined text-[20px] text-[#25D366]">chat</span>
+                        Consultar
+                    </a>
+</div>
+</div>
+</div>
+<!-- Card 4 -->
+<div class="group bg-white rounded-[2rem] overflow-hidden border border-outline-variant/20 hover:shadow-2xl transition-all duration-700 flex flex-col transform hover:-translate-y-1">
+<div class="relative aspect-[4/5] overflow-hidden bg-[#F8F7F4]">
+<img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-1000" data-alt="Apple Watch Series 9" src="https://lh3.googleusercontent.com/aida-public/AB6AXuApUhadWRb8WBKYwniIDGjjVSvwNl-px9xPW9UJCMHsTmlPGRIItCDeNwATGjGZcVoTDT3r8Farm7oZC9ndjxeu5FExAq40ZMpuIjDO9C7YrFfX5IB2qCfIAIjQL5XA8chtwho67kD4ZKm1EKjKltL5opi8fopmzpDjtYSkoqyiMcuANPFTXpqclk1zeE2Dhmsg8dWnV0E3taNBITo-BbMnpUs5dZqQKjC2Tptf0Kji9itofb4NQZqw80jKWJMVmkXXJY3es58JjNg"/>
+<div class="absolute inset-0 bg-gradient-to-t from-black/10 to-transparent"></div>
+<div class="absolute top-6 left-6">
+<span class="bg-white/90 backdrop-blur-md text-inverse-surface px-4 py-1.5 rounded-full text-label-sm font-bold shadow-sm flex items-center gap-2">
+<span class="w-2 h-2 bg-tertiary-container rounded-full animate-pulse"></span>
+                        DISPONIBLE
+                    </span>
+</div>
+</div>
+<div class="p-8 flex flex-col flex-grow">
+<span class="text-label-sm text-secondary font-bold tracking-[0.2em] uppercase mb-2">Apple</span>
+<h3 class="font-headline-lg text-headline-lg text-on-surface mb-6 leading-tight group-hover:text-primary-container transition-colors">Apple Watch Series 9</h3>
+<div class="mt-auto flex items-center justify-between">
+<span class="text-headline-md font-bold text-inverse-surface">U$D 449</span>
+<a class="flex items-center justify-center gap-3 bg-inverse-surface text-white px-8 py-4 rounded-2xl font-label-md hover:shadow-xl hover:shadow-inverse-surface/20 transition-all active:scale-[0.98]" href="#">
+<span class="material-symbols-outlined text-[20px] text-[#25D366]">chat</span>
+                        Consultar
+                    </a>
+</div>
+</div>
+</div>
+<!-- Card 5 -->
+<div class="group bg-white rounded-[2rem] overflow-hidden border border-outline-variant/20 hover:shadow-2xl transition-all duration-700 flex flex-col transform hover:-translate-y-1">
+<div class="relative aspect-[4/5] overflow-hidden bg-[#FFFFFF]">
+<img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-1000" data-alt="iPad Pro M4" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCmkvKDlFa1Jna1ahzknTDZQtT55o7Ee-1PL4t8tHTlK6rfpxYjcCRPwpBQ4TJusHawNWEdmysX95uepsnXCZxTgVXdbWzbLYsXB0ypGDjiSWOy4_8meyCqhERSt1Q3X-1YCnfFHWVTWpgJ546ziaoQSbRpmbjHZqjbMWxFECQV2L27NeldzANNJ5tEQzidCy6yW1psjHsOb6Ebodgky2J8oq_xBARLKAfBwvKQ6VT8zxxNxK8dbuo6rGzsKp1hDX_-mcAbQE_VkXk"/>
+<div class="absolute inset-0 bg-gradient-to-t from-black/10 to-transparent"></div>
+<div class="absolute top-6 left-6">
+<span class="bg-white/90 backdrop-blur-md text-inverse-surface px-4 py-1.5 rounded-full text-label-sm font-bold shadow-sm flex items-center gap-2">
+<span class="w-2 h-2 bg-tertiary-container rounded-full animate-pulse"></span>
+                        DISPONIBLE
+                    </span>
+</div>
+</div>
+<div class="p-8 flex flex-col flex-grow">
+<span class="text-label-sm text-secondary font-bold tracking-[0.2em] uppercase mb-2">Apple</span>
+<h3 class="font-headline-lg text-headline-lg text-on-surface mb-6 leading-tight group-hover:text-primary-container transition-colors">iPad Pro 11" M4 256GB</h3>
+<div class="mt-auto flex items-center justify-between">
+<span class="text-headline-md font-bold text-inverse-surface">U$D 999</span>
+<a class="flex items-center justify-center gap-3 bg-inverse-surface text-white px-8 py-4 rounded-2xl font-label-md hover:shadow-xl hover:shadow-inverse-surface/20 transition-all active:scale-[0.98]" href="#">
+<span class="material-symbols-outlined text-[20px] text-[#25D366]">chat</span>
+                        Consultar
+                    </a>
+</div>
+</div>
+</div>
+<!-- Card 6 -->
+<div class="group bg-white rounded-[2rem] overflow-hidden border border-outline-variant/20 hover:shadow-2xl transition-all duration-700 flex flex-col transform hover:-translate-y-1">
+<div class="relative aspect-[4/5] overflow-hidden bg-[#2C2D31]">
+<img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-1000 opacity-80" data-alt="AirPods Max" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBpa6ZGEMGr40t7ol0ba0c7z7IM1-KIXjEYw1gUTNWPdUW1NOtCi5Mh_i86RlZqqnIXoI1PQWZQooHyBcHx5j0StgG4HGVdI1qAxOF-2rYJjlTcfbnyke3y0wDsJHfAoyb6YA_UcZqJ9OhCRE9Bj9PjVh6LnW11xTrV6mRYWr3TGsT2q9wt9yB13kB8HqQM78vARftay6CnnTmDdDGu3T1-QylJsjM5rWmYV4f_4RgutoRf7WndxrH7tcZmFjFi9d7HNdoyLuDPUPM"/>
+<div class="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent"></div>
+<div class="absolute top-6 left-6">
+<span class="bg-white/90 backdrop-blur-md text-inverse-surface px-4 py-1.5 rounded-full text-label-sm font-bold shadow-sm flex items-center gap-2">
+<span class="w-2 h-2 bg-tertiary-container rounded-full animate-pulse"></span>
+                        DISPONIBLE
+                    </span>
+</div>
+</div>
+<div class="p-8 flex flex-col flex-grow">
+<span class="text-label-sm text-secondary font-bold tracking-[0.2em] uppercase mb-2">Apple</span>
+<h3 class="font-headline-lg text-headline-lg text-on-surface mb-6 leading-tight group-hover:text-primary-container transition-colors">AirPods Max Gray</h3>
+<div class="mt-auto flex items-center justify-between">
+<span class="text-headline-md font-bold text-inverse-surface">U$D 549</span>
+<a class="flex items-center justify-center gap-3 bg-inverse-surface text-white px-8 py-4 rounded-2xl font-label-md hover:shadow-xl hover:shadow-inverse-surface/20 transition-all active:scale-[0.98]" href="#">
+<span class="material-symbols-outlined text-[20px] text-[#25D366]">chat</span>
+                        Consultar
+                    </a>
+</div>
+</div>
+</div>
+</div>
+<!-- Pagination -->
+<div class="flex flex-col items-center gap-stack-md py-20">
+<p class="text-label-md text-secondary font-medium">Visualizando 6 de 24 productos seleccionados</p>
+<div class="w-48 h-1 bg-outline-variant/30 rounded-full overflow-hidden mt-2">
+<div class="w-1/4 h-full bg-inverse-surface rounded-full"></div>
+</div>
+<button class="mt-8 px-12 py-4 border-2 border-inverse-surface rounded-full font-label-md text-inverse-surface hover:bg-inverse-surface hover:text-white transition-all active:scale-95 font-bold uppercase tracking-widest">
+            Cargar más productos
+        </button>
+</div>
+</main>
+<!-- BottomNavBar (Mobile Only) -->
+<nav class="fixed bottom-0 w-full z-50 md:hidden bg-white/80 backdrop-blur-2xl border-t border-outline-variant/20 shadow-2xl">
+<div class="flex justify-around items-center h-16 pb-safe">
+<a class="flex flex-col items-center justify-center text-secondary opacity-60" href="#">
+<span class="material-symbols-outlined">home</span>
+<span class="font-label-sm text-[10px] font-bold">INICIO</span>
+</a>
+<a class="flex flex-col items-center justify-center text-inverse-surface" href="#">
+<span class="material-symbols-outlined font-variation-fill">grid_view</span>
+<span class="font-label-sm text-[10px] font-bold">CATÁLOGO</span>
+</a>
+<a class="flex flex-col items-center justify-center text-secondary opacity-60" href="#">
+<span class="material-symbols-outlined">favorite</span>
+<span class="font-label-sm text-[10px] font-bold">FAVORITOS</span>
+</a>
+<a class="flex flex-col items-center justify-center text-secondary opacity-60" href="#">
+<span class="material-symbols-outlined">shopping_bag</span>
+<span class="font-label-sm text-[10px] font-bold">BOLSA</span>
+</a>
+</div>
+</nav>
+<!-- Footer -->
+<footer class="bg-inverse-surface text-white pt-24 pb-32 md:pb-12">
+<div class="max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop grid grid-cols-1 md:grid-cols-12 gap-16">
+<div class="col-span-1 md:col-span-4">
+<div class="font-headline-md font-bold text-white mb-6">ImportadosMDP</div>
+<p class="text-body-md text-white/50 mb-10 leading-relaxed max-w-sm">Elevamos tu experiencia tecnológica con una curaduría de los mejores dispositivos del mundo. Calidad, garantía y atención personalizada.</p>
+<div class="flex gap-4">
+<a class="w-12 h-12 rounded-2xl bg-white/5 border border-white/10 flex items-center justify-center text-white/70 hover:bg-white hover:text-inverse-surface transition-all" href="#">
+<span class="material-symbols-outlined text-lg">public</span>
+</a>
+<a class="w-12 h-12 rounded-2xl bg-white/5 border border-white/10 flex items-center justify-center text-white/70 hover:bg-white hover:text-inverse-surface transition-all" href="#">
+<span class="material-symbols-outlined text-lg">alternate_email</span>
+</a>
+</div>
+</div>
+<div class="col-span-1 md:col-span-2">
+<h4 class="font-label-md text-white font-bold tracking-widest uppercase mb-6">Menú</h4>
+<ul class="space-y-4">
+<li><a class="text-label-md text-white/50 hover:text-white transition-colors" href="#">Catálogo</a></li>
+<li><a class="text-label-md text-white/50 hover:text-white transition-colors" href="#">Reseñas</a></li>
+<li><a class="text-label-md text-white/50 hover:text-white transition-colors" href="#">Nosotros</a></li>
+<li><a class="text-label-md text-white/50 hover:text-white transition-colors" href="#">Contacto</a></li>
+</ul>
+</div>
+<div class="col-span-1 md:col-span-2">
+<h4 class="font-label-md text-white font-bold tracking-widest uppercase mb-6">Ayuda</h4>
+<ul class="space-y-4">
+<li><a class="text-label-md text-white/50 hover:text-white transition-colors" href="#">Envíos</a></li>
+<li><a class="text-label-md text-white/50 hover:text-white transition-colors" href="#">Garantía</a></li>
+<li><a class="text-label-md text-white/50 hover:text-white transition-colors" href="#">Seguridad</a></li>
+</ul>
+</div>
+<div class="col-span-1 md:col-span-4">
+<h4 class="font-label-md text-white font-bold tracking-widest uppercase mb-6">Novedades</h4>
+<p class="text-label-md text-white/50 mb-6">Suscribite para recibir lanzamientos exclusivos.</p>
+<div class="flex gap-2">
+<input class="bg-white/5 border-white/10 rounded-2xl py-3 px-5 text-label-md flex-grow focus:ring-1 focus:ring-white/30 text-white placeholder:text-white/20" placeholder="Tu email" type="email"/>
+<button class="bg-white text-inverse-surface px-6 rounded-2xl hover:bg-white/90 transition-all font-bold">
+<span class="material-symbols-outlined">arrow_forward</span>
+</button>
+</div>
+</div>
+</div>
+<div class="max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop py-12 mt-20 border-t border-white/5 text-center">
+<p class="text-label-sm text-white/30 tracking-widest uppercase">© 2024 ImportadosMDP. Luxury Tech Retail.</p>
+</div>
+</footer>
+<!-- WhatsApp Floating Action Button -->
+<a class="fixed bottom-24 right-6 md:bottom-12 md:right-12 z-50 bg-inverse-surface text-white w-16 h-16 rounded-full flex items-center justify-center shadow-[0_20px_50px_rgba(0,0,0,0.3)] hover:scale-110 transition-transform active:scale-95 group border border-white/10" href="https://wa.me/yournumber">
+<span class="material-symbols-outlined text-3xl text-[#25D366]">chat</span>
+<span class="absolute right-full mr-6 bg-inverse-surface text-white px-6 py-3 rounded-2xl text-label-md shadow-2xl opacity-0 group-hover:opacity-100 transition-all whitespace-nowrap pointer-events-none translate-x-4 group-hover:translate-x-0 border border-white/10 font-bold">
+        Personal Concierge
+    </span>
+</a>
+<script>
+    const categoryButtons = document.querySelectorAll('.category-btn');
+    categoryButtons.forEach(btn => {
+        btn.addEventListener('click', () => {
+            categoryButtons.forEach(b => {
+                b.classList.remove('bg-inverse-surface', 'text-white', 'active', 'shadow-md');
+                b.classList.add('bg-white', 'text-secondary', 'border', 'border-outline-variant/30');
+            });
+            btn.classList.add('bg-inverse-surface', 'text-white', 'active', 'shadow-md');
+            btn.classList.remove('bg-white', 'text-secondary', 'border', 'border-outline-variant/30');
+        });
+    });
+</script>
+</body></html>

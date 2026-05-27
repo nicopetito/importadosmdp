@@ -1,21 +1,28 @@
 import type { Metadata } from 'next'
-import { Raleway, DM_Sans } from 'next/font/google'
+import { Inter, Outfit, JetBrains_Mono } from 'next/font/google'
 import './globals.css'
 import SmoothScrollProvider from '@/app/components/SmoothScrollProvider'
 import MobileBottomNav from '@/app/components/MobileBottomNav'
 import PageTransition from '@/app/components/PageTransition'
 
-const raleway = Raleway({
+const inter = Inter({
   subsets: ['latin'],
-  weight: ['400', '600', '700', '800'],
+  weight: ['400', '500', '600', '700', '800'],
+  variable: '--font-sans',
+  display: 'swap',
+})
+
+const outfit = Outfit({
+  subsets: ['latin'],
+  weight: ['400', '500', '600', '700', '800', '900'],
   variable: '--font-display',
   display: 'swap',
 })
 
-const dmSans = DM_Sans({
+const jetbrainsMono = JetBrains_Mono({
   subsets: ['latin'],
-  weight: ['300', '400', '500'],
-  variable: '--font-body',
+  weight: ['400', '500', '700'],
+  variable: '--font-mono',
   display: 'swap',
 })
 
@@ -56,7 +63,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="es">
       <body
-        className={`${raleway.variable} ${dmSans.variable} font-body bg-blue-base text-navy antialiased overflow-x-hidden`}
+        className={`${inter.variable} ${outfit.variable} ${jetbrainsMono.variable} font-sans bg-background text-on-surface antialiased overflow-x-hidden`}
       >
         <SmoothScrollProvider>
           <PageTransition>{children}</PageTransition>

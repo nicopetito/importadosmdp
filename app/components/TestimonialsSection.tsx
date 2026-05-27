@@ -90,39 +90,39 @@ function ReviewCard({ author, location, date, quote, rating, avatarColor }: type
   const initials = author.split(' ').map(w => w[0]).join('').slice(0, 2)
 
   return (
-    <div className="w-[290px] md:w-[320px] flex-shrink-0 bg-white rounded-2xl border border-[#E8EEFF] shadow-[0_2px_12px_rgba(26,37,128,0.07)] p-6 flex flex-col gap-3 relative overflow-hidden hover:shadow-[0_4px_24px_rgba(90,114,237,0.14)] hover:border-[#C7D2FE] transition-all duration-300">
+    <div className="w-[290px] md:w-[320px] flex-shrink-0 bg-white rounded-[2rem] border border-outline-variant/20 p-8 flex flex-col gap-4 relative overflow-hidden hover:shadow-2xl hover:border-outline-variant/30 transition-all duration-500 shadow-sm">
       {/* Decorative quote mark */}
-      <span className="absolute top-3 right-4 font-display font-black text-[72px] leading-none text-[#1A2580]/5 select-none pointer-events-none">
+      <span className="absolute top-3 right-6 font-sans font-black text-[80px] leading-none text-on-surface/5 select-none pointer-events-none">
         &ldquo;
       </span>
 
       {/* Stars */}
-      <div className="flex gap-0.5">
+      <div className="flex gap-0.5 text-on-surface">
         {Array.from({ length: rating }).map((_, i) => (
-          <span key={i} className="text-yellow-400 text-sm">★</span>
+          <span key={i} className="text-yellow-500 text-sm">★</span>
         ))}
       </div>
 
       {/* Quote */}
-      <p className="font-body text-[13px] text-[#4A5568] leading-relaxed line-clamp-3">
+      <p className="font-sans text-sm text-on-surface/80 leading-relaxed italic">
         &ldquo;{quote}&rdquo;
       </p>
 
       {/* Author */}
-      <div className="border-t border-[#F0F4FF] pt-3 mt-auto flex items-center justify-between gap-3">
+      <div className="border-t border-outline-variant/10 pt-4 mt-auto flex items-center justify-between gap-3">
         <div className="flex items-center gap-2.5">
           <div
-            className="w-8 h-8 rounded-full flex items-center justify-center text-white font-display font-bold text-[11px] flex-shrink-0"
-            style={{ background: avatarColor }}
+            className="w-8 h-8 rounded-full flex items-center justify-center text-white font-sans font-bold text-[11px] flex-shrink-0"
+            style={{ background: '#1b1b1d' }}
           >
             {initials}
           </div>
           <div>
-            <p className="font-body font-bold text-[12px] text-navy leading-tight">{author}</p>
-            <p className="font-body text-[11px] text-[#9CA3AF] leading-tight">{location}</p>
+            <p className="font-sans font-bold text-xs text-on-surface leading-tight">{author}</p>
+            <p className="font-sans text-[10px] text-secondary leading-tight">{location}</p>
           </div>
         </div>
-        <span className="font-body text-[11px] text-[#9CA3AF] flex-shrink-0">{date}</span>
+        <span className="font-sans text-[10px] text-secondary flex-shrink-0">{date}</span>
       </div>
     </div>
   )
@@ -133,32 +133,32 @@ const row2 = reviews.slice(5)
 
 export default function TestimonialsSection() {
   return (
-    <section className="py-20 overflow-hidden" style={{ background: 'linear-gradient(180deg, #F7F9FF 0%, #FFFFFF 100%)' }}>
+    <section className="py-24 overflow-hidden bg-[#fcf8fb] border-t border-outline-variant/10">
       {/* Header */}
-      <div className="max-w-6xl mx-auto px-6 mb-12 flex flex-col md:flex-row md:items-end justify-between gap-6">
+      <div className="max-w-6xl mx-auto px-6 mb-16 flex flex-col md:flex-row md:items-end justify-between gap-6">
         <div>
-          <p className="font-body text-[11px] font-bold text-accent uppercase tracking-[0.2em] mb-3">
-            Reseñas verificadas
+          <p className="font-sans text-[10px] font-bold text-secondary uppercase tracking-[0.2em] mb-3">
+            Comunidad MDP
           </p>
-          <h2 className="font-display font-black text-[36px] md:text-[52px] text-navy leading-tight tracking-tight uppercase">
-            Reseñas
+          <h2 className="font-sans text-[36px] md:text-[52px] text-on-surface font-bold leading-none tracking-tight">
+            Reseñas.
           </h2>
         </div>
 
         {/* Google rating card */}
-        <div className="flex items-center gap-4 bg-white rounded-2xl px-5 py-4 border border-[#E8EEFF] shadow-[0_2px_16px_rgba(26,37,128,0.08)] self-start md:self-auto">
+        <div className="flex items-center gap-4 bg-white rounded-[2rem] px-6 py-5 border border-outline-variant/20 shadow-sm self-start md:self-auto">
           <div>
-            <div className="flex items-center gap-1 mb-1">
+            <div className="flex items-center gap-1 mb-1 text-on-surface">
               {[1,2,3,4,5].map(i => (
-                <span key={i} className="text-yellow-400 text-sm">★</span>
+                <span key={i} className="text-yellow-500 text-sm">★</span>
               ))}
             </div>
-            <p className="font-display font-black text-navy text-lg leading-none">4.9 / 5.0</p>
-            <p className="font-body text-[11px] text-[#6B7280] mt-0.5">+500 ventas · Google</p>
+            <p className="font-sans font-bold text-on-surface text-lg leading-none">4.9 / 5.0</p>
+            <p className="font-sans text-[10px] text-secondary mt-1 uppercase tracking-wider font-semibold">+500 ventas · Google</p>
           </div>
-          <div className="w-px h-10 bg-[#E8EEFF]" />
-          <div className="font-body text-[11px] text-[#6B7280] max-w-[100px] leading-snug">
-            Calificación promedio de clientes reales
+          <div className="w-px h-10 bg-outline-variant/30" />
+          <div className="font-sans text-[10px] text-secondary max-w-[120px] leading-relaxed uppercase tracking-wider font-semibold">
+            Calificación de clientes reales
           </div>
         </div>
       </div>

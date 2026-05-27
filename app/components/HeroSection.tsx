@@ -1,217 +1,90 @@
 'use client'
 
-import { useRef } from 'react'
-import Image from 'next/image'
 import Link from 'next/link'
-import { motion, useScroll, useTransform } from 'framer-motion'
-import GradientOrbs from './GradientOrbs'
-import AnimatedCounter from './AnimatedCounter'
+import { motion } from 'framer-motion'
 
 export default function HeroSection() {
-  const containerRef = useRef<HTMLDivElement>(null)
-  const { scrollYProgress } = useScroll({
-    target: containerRef,
-    offset: ['start start', 'end start'],
-  })
-  const phoneY = useTransform(scrollYProgress, [0, 1], ['0px', '-70px'])
-
   return (
-    <section
-      ref={containerRef}
-      className="relative min-h-screen flex items-center bg-pure-black overflow-hidden"
-    >
-      {/* Background layers */}
-      <GradientOrbs />
-      <div className="absolute inset-0 grid-pattern opacity-60 pointer-events-none" />
+    <section className="relative min-h-[95vh] flex items-center overflow-hidden bg-[#050505] text-white pt-16">
+      {/* Background Cinematic Image & Gradients */}
+      <div className="absolute inset-0 z-0 select-none pointer-events-none">
+        <img
+          alt="Cinematic luxury tech"
+          className="w-full h-full object-cover opacity-70 md:opacity-90 object-center scale-105"
+          src="/imagenes/stitch-hero.png"
+        />
+        <div className="absolute inset-0 bg-gradient-to-t from-[#050505] via-[#050505]/40 to-[#050505]/60" />
+        <div className="absolute inset-0 bg-gradient-to-r from-[#050505]/30 via-transparent to-[#050505]/30" />
+      </div>
 
-      <div className="relative z-10 w-full max-w-6xl mx-auto px-6 lg:px-8 py-24 lg:py-0 grid lg:grid-cols-2 gap-12 lg:gap-0 items-center">
-
-        {/* ── Left Column: Text ── */}
-        <div className="flex flex-col items-start">
-          {/* Eyebrow */}
-          <motion.p
-            initial={{ opacity: 0, y: 16 }}
+      <div className="max-w-6xl mx-auto px-margin-mobile md:px-margin-desktop relative z-10 w-full py-24">
+        <div className="flex flex-col items-center text-center">
+          
+          {/* Badges */}
+          <motion.div
+            initial={{ opacity: 0, y: 15 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5 }}
-            className="font-body font-bold text-[11px] uppercase tracking-[0.22em] text-accent mb-5 flex items-center gap-2"
+            transition={{ duration: 0.6 }}
+            className="flex items-center gap-3 mb-8"
           >
-            <span className="block w-6 h-[2px] rounded-full bg-gradient-to-r from-accent to-blue-soft" />
-            Mar del Plata · Tecnología importada
-          </motion.p>
+            <span className="px-4 py-1.5 bg-primary/20 backdrop-blur-md text-primary text-[9px] font-bold font-mono uppercase tracking-[0.2em] rounded-full border border-primary/30">
+              Disponible hoy
+            </span>
+            <span className="px-4 py-1.5 bg-white/10 backdrop-blur-sm text-[9px] font-bold font-mono uppercase tracking-[0.2em] rounded-full border border-white/10 text-white/90">
+              Retiro inmediato
+            </span>
+          </motion.div>
 
-          {/* H1 */}
+          {/* Headline */}
           <motion.h1
-            initial={{ opacity: 0, y: 24 }}
+            initial={{ opacity: 0, y: 25 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.1 }}
-            className="font-display font-black text-[52px] md:text-[72px] lg:text-[82px] text-white leading-[1.0] tracking-tight mb-6"
+            transition={{ duration: 0.7, delay: 0.1 }}
+            className="font-display text-[60px] sm:text-[80px] md:text-[100px] leading-[0.85] tracking-tighter mb-8 font-black italic uppercase select-none text-white"
           >
-            Tecnología<br />
-            importada,{' '}
-            <span className="text-gradient-accent">
-              al precio
-            </span>
-            <br />
-            <span className="text-gradient-accent">
-              justo.
-            </span>
+            TECH <br />CURADA.
           </motion.h1>
 
           {/* Subtitle */}
           <motion.p
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.2 }}
-            className="font-body font-light text-white/65 text-lg max-w-[440px] mb-10 leading-relaxed"
+            transition={{ duration: 0.7, delay: 0.2 }}
+            className="font-sans text-white/70 text-base sm:text-lg md:text-xl mb-12 max-w-xl leading-relaxed text-balance font-light"
           >
-            Explorá nuestro catálogo y consultanos por WhatsApp o visitanos en la tienda.
+            Apple y Samsung originales. Garantía real y entrega inmediata.
           </motion.p>
 
           {/* CTAs */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.3 }}
-            className="flex flex-wrap gap-3 mb-12"
+            transition={{ duration: 0.7, delay: 0.3 }}
+            className="flex flex-wrap justify-center gap-4"
           >
             <Link
               href="/catalogo"
-              className="font-body font-bold text-sm text-white bg-gradient-to-r from-accent-mid to-accent rounded-full px-7 py-3.5 shadow-[0_0_28px_rgba(90,114,237,0.45)] hover:shadow-[0_0_48px_rgba(90,114,237,0.7)] transition-all duration-300 hover:scale-105"
+              className="px-10 py-4 bg-white text-black font-mono font-bold text-[10px] uppercase tracking-widest rounded-full hover:bg-white/90 transition-all active:scale-[0.98] shadow-2xl shadow-white/5"
             >
-              Ver catálogo →
+              Ver Catálogo
             </Link>
-            <Link
-              href="/contacto"
-              className="font-body font-bold text-sm text-white/90 glass rounded-full px-7 py-3.5 hover:bg-white/20 transition-all duration-300"
+            <a
+              href="https://wa.me/5492235000000"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="px-10 py-4 bg-white/5 backdrop-blur-md text-white border border-white/20 font-mono font-bold text-[10px] uppercase tracking-widest rounded-full hover:bg-white/10 transition-all active:scale-[0.98]"
             >
-              Cómo llegar
-            </Link>
+              Consultar Stock
+            </a>
           </motion.div>
 
-          {/* Trust badge */}
-          <motion.div
-            initial={{ opacity: 0, y: 16 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.45 }}
-            className="glass rounded-full px-5 py-2.5 inline-flex items-center gap-5"
-          >
-            <div className="flex items-center gap-2">
-              <span className="w-2 h-2 rounded-full bg-[#25D366] animate-pulse" />
-              <span className="font-body text-xs font-medium text-white/80">En línea ahora</span>
-            </div>
-            <span className="w-px h-4 bg-white/20" />
-            <div className="flex items-center gap-1.5">
-              <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor" className="text-yellow-400 flex-shrink-0">
-                <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
-              </svg>
-              <span className="font-body text-xs font-medium text-white/80">4.9 · +500 reseñas</span>
-            </div>
-            <span className="w-px h-4 bg-white/20" />
-            <div className="flex items-center gap-1.5">
-              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" className="text-white/70 flex-shrink-0">
-                <circle cx="12" cy="12" r="10" />
-                <polyline points="12 6 12 12 16 14" />
-              </svg>
-              <span className="font-body text-xs font-medium text-white/80">Atención personalizada</span>
-            </div>
-          </motion.div>
-
-          {/* Stats Row */}
-          <motion.div
-            initial={{ opacity: 0, y: 16 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.55, duration: 0.5 }}
-            className="flex items-center gap-8 md:gap-12 mt-10"
-          >
-            <div className="flex flex-col">
-              <AnimatedCounter value={500} prefix="+" className="font-display font-black text-[28px] text-white leading-none" />
-              <span className="font-body text-[11px] text-white/50 mt-1 uppercase tracking-wider">ventas realizadas</span>
-            </div>
-            
-            <div className="w-px h-8 bg-white/20" />
-            
-            <div className="flex flex-col">
-              <AnimatedCounter value={4.9} suffix=" ★" className="font-display font-black text-[28px] text-white leading-none" />
-              <span className="font-body text-[11px] text-white/50 mt-1 uppercase tracking-wider">calificación promedio</span>
-            </div>
-            
-            <div className="w-px h-8 bg-white/20" />
-            
-            <div className="flex flex-col">
-              <AnimatedCounter value={60} prefix="+" className="font-display font-black text-[28px] text-white leading-none" />
-              <span className="font-body text-[11px] text-white/50 mt-1 uppercase tracking-wider">productos disponibles</span>
-            </div>
-          </motion.div>
         </div>
-
-        {/* ── Right Column: Phone Mockup ── */}
-        <div className="relative flex items-center justify-center lg:justify-end">
-          {/* Glow halo */}
-          <div
-            className="absolute inset-0 rounded-[32px] pointer-events-none"
-            style={{
-              background: 'radial-gradient(ellipse at center, rgba(90,114,237,0.38) 0%, transparent 65%)',
-              filter: 'blur(32px)',
-            }}
-          />
-
-          <motion.div
-            initial={{ opacity: 0, y: 50, scale: 0.92 }}
-            animate={{ opacity: 1, y: 0, scale: 1 }}
-            transition={{ duration: 0.9, ease: [0.22, 1, 0.36, 1] }}
-            style={{ y: phoneY }}
-            className="relative"
-          >
-            <motion.div
-              animate={{ y: [0, -14, 0] }}
-              transition={{ duration: 4, repeat: Infinity, ease: 'easeInOut' }}
-            >
-              <Image
-                src="/images/mockup-triple.png"
-                alt="ImportadosMDP — Catálogo en tu teléfono"
-                width={560}
-                height={380}
-                className="relative z-10 drop-shadow-2xl max-w-full"
-                priority
-              />
-            </motion.div>
-
-            {/* Badge: En línea */}
-            <motion.div
-              initial={{ opacity: 0, scale: 0.8 }}
-              animate={{ opacity: 1, scale: 1 }}
-              transition={{ delay: 1.1, duration: 0.4, ease: 'backOut' }}
-              className="absolute top-[12%] -right-2 lg:-right-8 glass rounded-2xl px-4 py-3 flex items-center gap-2.5 shadow-xl"
-            >
-              <span className="w-2.5 h-2.5 rounded-full bg-[#25D366] animate-pulse flex-shrink-0" />
-              <div>
-                <p className="font-body font-semibold text-white text-[12px] leading-none">En línea ahora</p>
-                <p className="font-body text-white/60 text-[10px] mt-0.5">Respondemos rápido</p>
-              </div>
-            </motion.div>
-
-            {/* Badge: Rating */}
-            <motion.div
-              initial={{ opacity: 0, scale: 0.8 }}
-              animate={{ opacity: 1, scale: 1 }}
-              transition={{ delay: 1.3, duration: 0.4, ease: 'backOut' }}
-              className="absolute bottom-[15%] -left-2 lg:-left-8 glass rounded-2xl px-4 py-3 shadow-xl"
-            >
-              <div className="flex items-center gap-1 mb-0.5">
-                {[1,2,3,4,5].map(i => (
-                  <span key={i} className="text-yellow-400 text-xs">★</span>
-                ))}
-              </div>
-              <p className="font-body font-bold text-white text-[13px] leading-none">4.9 / 5.0</p>
-              <p className="font-body text-white/60 text-[10px] mt-0.5">+500 reseñas</p>
-            </motion.div>
-          </motion.div>
-        </div>
-
       </div>
 
-      {/* Bottom fade */}
-      <div className="absolute bottom-0 inset-x-0 h-20 bg-gradient-to-t from-[#050916]/80 to-transparent pointer-events-none" />
+      {/* Smooth Atmospheric Bottom Transition to light background */}
+      <div className="absolute bottom-0 left-0 w-full h-48 bg-gradient-to-t from-background to-transparent pointer-events-none z-10" />
     </section>
+
+
   )
 }

@@ -1,14 +1,17 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, useEffect, useRef, Suspense } from 'react'
 import Link from 'next/link'
+import Image from 'next/image'
 import { createPortal } from 'react-dom'
 import { motion, AnimatePresence } from 'framer-motion'
-import { usePathname } from 'next/navigation'
+import { usePathname, useRouter, useSearchParams } from 'next/navigation'
+import { products } from '@/data/products'
 
 const navLinks = [
-  { href: '/contacto', label: 'Contacto' },
+  { href: '/catalogo', label: 'Catálogo' },
   { href: '/resenas', label: 'Reseñas' },
+  { href: '/contacto', label: 'Contacto' },
 ]
 
 function MobileDrawer({ open, onClose }: { open: boolean; onClose: () => void }) {
@@ -39,7 +42,7 @@ function MobileDrawer({ open, onClose }: { open: boolean; onClose: () => void })
             {/* Close */}
             <div className="flex items-center justify-between px-6 pt-6 pb-4 border-b border-white/10">
               <span className="font-display font-extrabold text-lg text-white">
-                importados<span className="text-gradient-accent">mdp</span>
+                importados<span className="text-primary">mdp</span>
               </span>
               <button
                 onClick={onClose}
@@ -81,7 +84,7 @@ function MobileDrawer({ open, onClose }: { open: boolean; onClose: () => void })
                 <Link
                   href="/catalogo"
                   onClick={onClose}
-                  className="inline-flex items-center gap-2 bg-gradient-to-r from-accent-mid to-accent text-white font-bold font-body rounded-full px-6 py-3 text-sm shadow-[0_0_20px_rgba(90,114,237,0.35)]"
+                  className="inline-flex items-center gap-2 bg-primary text-white font-bold font-body rounded-full px-6 py-3 text-sm shadow-[0_4px_14px_rgba(0,113,227,0.35)]"
                 >
                   Ver catálogo →
                 </Link>
@@ -123,66 +126,311 @@ function MobileDrawer({ open, onClose }: { open: boolean; onClose: () => void })
   )
 }
 
+function HeaderSearch({ isMobileSearchOpen, setIsMobileSearchOpen }: {
+  isMobileSearchOpen: boolean;
+  setIsMobileSearchOpen: (val: boolean) => void;
+}) {
+  const router = useRouter()
+  const pathname = usePathname()
+  const searchParams = useSearchParams()
+  const dropdownRef = useRef<HTMLDivElement>(null)
+  
+  const [searchQuery, setSearchQuery] = useState('')
+  const [isDropdownOpen, setIsDropdownOpen] = useState(false)
+
+  // Sync search input with URL param q when on catalog page
+  useEffect(() => {
+    const qParam = searchParams.get('q') || ''
+    setSearchQuery(qParam)
+  }, [searchParams])
+
+  // Real-time catalog filtering when typing inside the catalog page
+  useEffect(() => {
+    if (pathname !== '/catalogo') return
+    const timer = setTimeout(() => {
+      const params = new URLSearchParams(searchParams.toString())
+      if (searchQuery === '') {
+        params.delete('q')
+      } else {
+        params.set('q', searchQuery)
+      }
+      router.push(`${pathname}?${params.toString()}`, { scroll: false })
+    }, 300)
+    return () => clearTimeout(timer)
+  }, [searchQuery, pathname, router, searchParams])
+
+  // Filter products based on search input query
+  const filtered = searchQuery.trim() === '' 
+    ? [] 
+    : products.filter(p =>
+        p.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
+        p.brand.toLowerCase().includes(searchQuery.toLowerCase()) ||
+        p.category.toLowerCase().includes(searchQuery.toLowerCase())
+      ).slice(0, 5)
+
+  // Click outside to close dropdown
+  useEffect(() => {
+    function handleClickOutside(event: MouseEvent) {
+      if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
+        setIsDropdownOpen(false)
+      }
+    }
+    document.addEventListener('mousedown', handleClickOutside)
+    return () => document.removeEventListener('mousedown', handleClickOutside)
+  }, [])
+
+  const handleSearchSubmit = (e: React.FormEvent) => {
+    e.preventDefault()
+    if (searchQuery.trim() !== '') {
+      setIsDropdownOpen(false)
+      router.push(`/catalogo?q=${encodeURIComponent(searchQuery)}`)
+    }
+  }
+
+  return (
+    <div ref={dropdownRef} className="relative">
+      {/* Desktop Search input */}
+      <form onSubmit={handleSearchSubmit} className="hidden md:block relative w-44 lg:w-56 group">
+        <svg className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-secondary/40 group-focus-within:text-on-surface transition-colors" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" viewBox="0 0 24 24">
+          <circle cx="11" cy="11" r="8" /><line x1="21" y1="21" x2="16.65" y2="16.65" />
+        </svg>
+        <input
+          type="text"
+          placeholder="Buscar..."
+          value={searchQuery}
+          onChange={e => {
+            setSearchQuery(e.target.value)
+            setIsDropdownOpen(true)
+          }}
+          onFocus={() => setIsDropdownOpen(true)}
+          className="w-full h-[36px] bg-black/[0.04] hover:bg-black/[0.06] focus:bg-white border border-transparent focus:border-black/[0.06] rounded-xl pl-9 pr-4 font-sans text-xs text-on-surface focus:outline-none focus:ring-1 focus:ring-primary/20 transition-all placeholder:text-secondary/50"
+        />
+      </form>
+
+      {/* Mobile Search Button */}
+      <button
+        onClick={() => setIsMobileSearchOpen(true)}
+        className="md:hidden w-9 h-9 flex items-center justify-center rounded-full hover:bg-black/[0.03] text-on-surface/80 hover:text-on-surface transition-colors"
+        aria-label="Buscar"
+      >
+        <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+          <circle cx="11" cy="11" r="8" /><line x1="21" y1="21" x2="16.65" y2="16.65" />
+        </svg>
+      </button>
+
+      {/* Desktop Suggestions Dropdown */}
+      <AnimatePresence>
+        {isDropdownOpen && searchQuery.length > 0 && (
+          <motion.div
+            initial={{ opacity: 0, y: 10 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: 10 }}
+            transition={{ duration: 0.2 }}
+            className="absolute top-11 right-0 w-80 lg:w-96 bg-white/95 backdrop-blur-md border border-black/[0.05] rounded-2xl shadow-2xl p-4 z-50 overflow-hidden flex flex-col gap-1"
+          >
+            {filtered.length > 0 ? (
+              <>
+                <span className="text-[10px] text-secondary/60 uppercase font-mono tracking-wider font-bold block mb-2 px-1">
+                  Sugerencias
+                </span>
+                <div className="flex flex-col gap-1 max-h-[320px] overflow-y-auto">
+                  {filtered.map(p => (
+                    <Link
+                      key={p.id}
+                      href={`/catalogo/${p.id}`}
+                      onClick={() => {
+                        setIsDropdownOpen(false)
+                        setSearchQuery('')
+                      }}
+                      className="flex items-center gap-3 p-2 rounded-xl hover:bg-black/[0.02] active:bg-black/[0.04] transition-colors group/item"
+                    >
+                      <div className="relative w-10 h-10 bg-[#F2F2F2] rounded-lg overflow-hidden flex-shrink-0 p-1.5">
+                        <Image src={p.imageUrl} alt={p.name} fill className="object-contain p-1" />
+                      </div>
+                      <div className="flex-1 min-w-0">
+                        <h4 className="font-sans font-bold text-xs text-on-surface group-hover/item:text-primary transition-colors truncate">{p.name}</h4>
+                        <p className="font-sans text-[9px] text-secondary/70 uppercase tracking-wider">{p.brand} · {p.category}</p>
+                      </div>
+                      <span className="font-sans font-bold text-xs text-inverse-surface">${p.price.toLocaleString('es-AR')}</span>
+                    </Link>
+                  ))}
+                </div>
+                <div className="h-px bg-black/[0.04] my-2" />
+                <Link
+                  href={`/catalogo?q=${encodeURIComponent(searchQuery)}`}
+                  onClick={() => {
+                    setIsDropdownOpen(false)
+                    setSearchQuery('')
+                  }}
+                  className="block text-center py-2 text-[10px] font-bold text-primary hover:text-primary-container transition-colors uppercase tracking-widest"
+                >
+                  Ver todos los resultados →
+                </Link>
+              </>
+            ) : (
+              <div className="py-8 text-center flex flex-col items-center gap-2">
+                <span className="text-2xl opacity-40">🔍</span>
+                <p className="text-xs text-secondary/80 font-sans">No se encontraron productos.</p>
+              </div>
+            )}
+          </motion.div>
+        )}
+      </AnimatePresence>
+
+      {/* Mobile search overlay */}
+      <AnimatePresence>
+        {isMobileSearchOpen && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="fixed inset-0 z-[80] bg-black/40 backdrop-blur-sm md:hidden"
+            onClick={() => setIsMobileSearchOpen(false)}
+          >
+            <motion.div
+              initial={{ y: -50 }}
+              animate={{ y: 0 }}
+              exit={{ y: -50 }}
+              transition={{ type: 'spring', damping: 25, stiffness: 220 }}
+              className="w-full bg-white px-5 py-4 border-b border-black/[0.05] flex flex-col gap-4 shadow-xl"
+              onClick={e => e.stopPropagation()}
+            >
+              <div className="flex items-center gap-3">
+                {/* Input */}
+                <div className="relative flex-1">
+                  <svg className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-secondary/60" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" viewBox="0 0 24 24">
+                    <circle cx="11" cy="11" r="8" /><line x1="21" y1="21" x2="16.65" y2="16.65" />
+                  </svg>
+                  <input
+                    type="text"
+                    placeholder="Buscar tecnología..."
+                    value={searchQuery}
+                    onChange={e => setSearchQuery(e.target.value)}
+                    className="w-full h-10 bg-[#F2F2F2] border-none rounded-xl pl-10 pr-4 font-sans text-sm text-on-surface focus:outline-none"
+                    autoFocus
+                  />
+                </div>
+                {/* Cancel */}
+                <button
+                  onClick={() => {
+                    setIsMobileSearchOpen(false)
+                    setSearchQuery('')
+                  }}
+                  className="text-xs font-bold text-secondary uppercase tracking-widest px-2 py-1"
+                >
+                  Cerrar
+                </button>
+              </div>
+
+              {/* Suggestions */}
+              {searchQuery.length > 0 && (
+                <div className="flex flex-col divide-y divide-black/[0.04] max-h-[60vh] overflow-y-auto">
+                  {filtered.map(p => (
+                    <Link
+                      key={p.id}
+                      href={`/catalogo/${p.id}`}
+                      onClick={() => {
+                        setIsMobileSearchOpen(false)
+                        setSearchQuery('')
+                      }}
+                      className="flex items-center gap-4 py-3 hover:bg-surface"
+                    >
+                      <div className="relative w-11 h-11 bg-[#F2F2F2] rounded-lg overflow-hidden flex-shrink-0 p-1.5">
+                        <Image src={p.imageUrl} alt={p.name} fill className="object-contain p-1" />
+                      </div>
+                      <div className="flex-1 min-w-0">
+                        <h4 className="font-sans font-bold text-xs text-on-surface truncate">{p.name}</h4>
+                        <p className="font-sans text-[9px] text-secondary/70 uppercase tracking-wider">{p.brand} · {p.category}</p>
+                      </div>
+                      <span className="font-sans font-bold text-xs text-inverse-surface">${p.price.toLocaleString('es-AR')}</span>
+                    </Link>
+                  ))}
+                  {filtered.length > 0 ? (
+                    <Link
+                      href={`/catalogo?q=${encodeURIComponent(searchQuery)}`}
+                      onClick={() => {
+                        setIsMobileSearchOpen(false)
+                        setSearchQuery('')
+                      }}
+                      className="block text-center py-3 text-xs font-bold text-primary uppercase tracking-widest"
+                    >
+                      Ver todos los resultados →
+                    </Link>
+                  ) : (
+                    <div className="py-8 text-center flex flex-col items-center gap-2">
+                      <span className="text-2xl opacity-40">🔍</span>
+                      <p className="text-xs text-secondary/80 font-sans font-semibold">No se encontraron productos.</p>
+                    </div>
+                  )}
+                </div>
+              )}
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </div>
+  )
+}
+
 export default function Navbar() {
   const [open, setOpen] = useState(false)
+  const [isMobileSearchOpen, setIsMobileSearchOpen] = useState(false)
   const pathname = usePathname()
 
   return (
     <>
-      <header className="relative sticky top-0 z-50 h-[64px] flex items-center glass-light shadow-sm">
-        {/* Gradient bottom border */}
-        <div className="absolute bottom-0 left-0 right-0 h-[1px] bg-gradient-to-r from-transparent via-accent/40 to-transparent" />
-        <div className="w-full max-w-6xl mx-auto px-6 flex items-center justify-between">
+      <header className="relative sticky top-0 z-50 h-[64px] flex items-center glass-light border-b border-black/[0.03] shadow-sm">
+        <div className="w-full max-w-6xl mx-auto px-6 flex items-center justify-between relative">
           {/* Logo */}
-          <Link href="/" className="font-display font-extrabold text-[18px] text-navy tracking-tight">
-            importados
-            <span
-              className="bg-gradient-to-r from-accent to-blue-soft bg-clip-text text-transparent"
-              style={{ WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' }}
-            >
-              mdp
-            </span>
-          </Link>
+          <div className="flex-shrink-0">
+            <Link href="/" className="font-display font-extrabold text-[18px] text-on-surface tracking-tight">
+              importados<span className="text-primary">mdp</span>
+            </Link>
+          </div>
 
           {/* Desktop nav */}
-          <nav className="hidden md:flex items-center gap-8">
+          <nav className="hidden md:flex items-center gap-8 absolute left-1/2 -translate-x-1/2">
             {navLinks.map((link) => {
-              const isActive = pathname.startsWith(link.href)
+              const isActive = pathname === link.href || (link.href !== '/' && pathname.startsWith(link.href))
               return (
                 <Link
                   key={link.href}
                   href={link.href}
                   className={`relative font-body text-sm transition-colors duration-200 group ${
-                    isActive ? 'text-accent font-medium' : 'text-navy hover:text-accent'
+                    isActive ? 'text-primary font-medium' : 'text-on-surface/70 hover:text-primary'
                   }`}
                 >
                   {link.label}
                   <span
-                    className={`absolute -bottom-1 left-0 h-[2px] rounded-full bg-gradient-to-r from-accent to-blue-soft transition-all duration-300 ${
+                    className={`absolute -bottom-1 left-0 h-[2px] rounded-full bg-primary transition-all duration-300 ${
                       isActive ? 'w-full' : 'w-0 group-hover:w-full'
                     }`}
                   />
                 </Link>
               )
             })}
-            <Link
-              href="/catalogo"
-              className="bg-gradient-to-r from-accent-mid to-accent text-white text-sm font-bold font-body rounded-full px-5 py-2 shadow-[0_0_16px_rgba(90,114,237,0.3)] hover:shadow-[0_0_28px_rgba(90,114,237,0.5)] transition-all duration-300 hover:scale-105"
-            >
-              Ver catálogo
-            </Link>
           </nav>
 
-          {/* Hamburger (mobile) */}
-          <button
-            onClick={() => setOpen(!open)}
-            className="md:hidden flex flex-col gap-[5px] p-2 focus:outline-none"
-            aria-label={open ? 'Cerrar menú' : 'Abrir menú'}
-          >
-            <span className={`block w-5 h-[2px] bg-navy rounded transition-all duration-300 ${open ? 'rotate-45 translate-y-[7px]' : ''}`} />
-            <span className={`block w-5 h-[2px] bg-navy rounded transition-all duration-300 ${open ? 'opacity-0' : ''}`} />
-            <span className={`block w-5 h-[2px] bg-navy rounded transition-all duration-300 ${open ? '-rotate-45 -translate-y-[7px]' : ''}`} />
-          </button>
+          {/* Right-side elements (Search and Hamburger) */}
+          <div className="flex items-center ml-auto gap-3">
+            <Suspense fallback={<div className="w-9 h-9 md:w-44 md:h-9 bg-black/[0.03] rounded-xl animate-pulse" />}>
+              <HeaderSearch 
+                isMobileSearchOpen={isMobileSearchOpen} 
+                setIsMobileSearchOpen={setIsMobileSearchOpen} 
+              />
+            </Suspense>
+
+            {/* Hamburger (mobile) */}
+            <button
+              onClick={() => setOpen(!open)}
+              className="md:hidden flex flex-col gap-[5px] p-2 focus:outline-none"
+              aria-label={open ? 'Cerrar menú' : 'Abrir menú'}
+            >
+              <span className={`block w-5 h-[2px] bg-on-surface rounded transition-all duration-300 ${open ? 'rotate-45 translate-y-[7px]' : ''}`} />
+              <span className={`block w-5 h-[2px] bg-on-surface rounded transition-all duration-300 ${open ? 'opacity-0' : ''}`} />
+              <span className={`block w-5 h-[2px] bg-on-surface rounded transition-all duration-300 ${open ? '-rotate-45 -translate-y-[7px]' : ''}`} />
+            </button>
+          </div>
         </div>
       </header>
 

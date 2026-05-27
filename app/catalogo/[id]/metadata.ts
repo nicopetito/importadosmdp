@@ -2,9 +2,10 @@ import { products as mockProducts } from '../../../data/products'
 import type { Metadata } from 'next'
 
 export async function generateMetadata(
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ): Promise<Metadata> {
-  const product = mockProducts.find(p => p.id === params.id)
+  const resolvedParams = await params
+  const product = mockProducts.find(p => p.id === resolvedParams.id)
   
   if (!product) return { title: 'Producto no encontrado — ImportadosMDP' }
   

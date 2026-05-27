@@ -14,10 +14,10 @@ const brands = [
 
 export default function BrandsMarquee() {
   return (
-    <section className="bg-white border-y border-blue-subtle py-8 overflow-hidden">
+    <section className="bg-background border-y border-outline-variant/20 py-8 overflow-hidden">
       <div className="text-center mb-6">
-        <p className="font-body text-[11px] font-bold text-accent uppercase tracking-[0.2em]">
-          Marcas oficiales
+        <p className="font-sans text-[10px] font-bold text-secondary uppercase tracking-[0.2em]">
+          Marcas Oficiales
         </p>
       </div>
       
@@ -26,9 +26,9 @@ export default function BrandsMarquee() {
           <Link
             key={brand}
             href={`/catalogo?q=${brand}`}
-            className="block bg-blue-base border border-blue-subtle rounded-[12px] px-6 py-3 flex items-center justify-center min-w-[120px] transition-all duration-300 hover:border-[#C7D2FE] hover:shadow-sm cursor-pointer"
+            className="block bg-surface border border-outline-variant/30 rounded-[12px] px-6 py-3 flex items-center justify-center min-w-[120px] transition-all duration-300 hover:border-outline hover:shadow-sm cursor-pointer"
           >
-            <span className="font-display font-black text-[15px] text-navy/60 hover:text-navy transition-colors duration-200">
+            <span className="font-sans font-extrabold text-sm text-on-surface/50 hover:text-on-surface transition-colors duration-200 uppercase tracking-wider">
               {brand}
             </span>
           </Link>

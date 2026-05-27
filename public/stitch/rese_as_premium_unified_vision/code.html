@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+
+<html class="light" lang="es"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Reseñas | ImportadosMDP</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 24;
+            display: inline-block;
+            vertical-align: middle;
+        }
+        .editorial-shadow {
+            box-shadow: 0 20px 40px -10px rgba(0,0,0,0.05);
+        }
+        .premium-blur {
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+        }
+        body {
+            background-color: #fcf8fb; /* Matching warm off-white palette */
+        }
+    </style>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "primary-container": "#0071e3",
+                        "surface-bright": "#fcf8fb",
+                        "tertiary": "#006a2d",
+                        "secondary-fixed-dim": "#c7c6cb",
+                        "surface-container-lowest": "#ffffff",
+                        "outline": "#717785",
+                        "primary": "#0059b5",
+                        "on-background": "#1b1b1d",
+                        "surface-variant": "#e4e2e4",
+                        "tertiary-fixed-dim": "#3de273",
+                        "surface-container": "#f0edef",
+                        "error-container": "#ffdad6",
+                        "on-tertiary-fixed-variant": "#005322",
+                        "on-error": "#ffffff",
+                        "surface-container-high": "#eae7ea",
+                        "secondary": "#5e5e63",
+                        "surface-dim": "#dcd9dc",
+                        "on-error-container": "#93000a",
+                        "on-tertiary-fixed": "#002109",
+                        "error": "#ba1a1a",
+                        "on-secondary-container": "#626267",
+                        "tertiary-container": "#00863b",
+                        "surface": "#fcf8fb",
+                        "surface-container-highest": "#e4e2e4",
+                        "outline-variant": "#c1c6d6",
+                        "surface-tint": "#005cbb",
+                        "on-tertiary": "#ffffff",
+                        "on-secondary-fixed-variant": "#46464b",
+                        "inverse-primary": "#abc7ff",
+                        "on-primary-fixed-variant": "#00458f",
+                        "on-surface": "#1b1b1d",
+                        "on-primary": "#ffffff",
+                        "secondary-container": "#e0dfe4",
+                        "on-primary-container": "#fcfbff",
+                        "surface-container-low": "#f6f3f5",
+                        "background": "#fcf8fb",
+                        "on-secondary": "#ffffff",
+                        "on-primary-fixed": "#001b3f",
+                        "tertiary-fixed": "#66ff8e",
+                        "on-surface-variant": "#414753",
+                        "primary-fixed": "#d7e2ff",
+                        "inverse-surface": "#303032",
+                        "inverse-on-surface": "#f3f0f2",
+                        "secondary-fixed": "#e3e2e7",
+                        "primary-fixed-dim": "#abc7ff",
+                        "on-secondary-fixed": "#1a1b1f",
+                        "on-tertiary-container": "#f2ffef"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "2xl": "1rem",
+                        "3xl": "1.5rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "margin-mobile": "20px",
+                        "stack-md": "16px",
+                        "container-max": "1200px",
+                        "margin-desktop": "40px",
+                        "stack-lg": "32px",
+                        "gutter": "24px",
+                        "stack-sm": "8px",
+                        "stack-xs": "4px",
+                        "stack-xl": "84px"
+                    },
+                    "fontFamily": {
+                        "body-lg": ["Inter"],
+                        "headline-xl": ["Inter"],
+                        "label-md": ["Inter"],
+                        "headline-lg": ["Inter"],
+                        "label-sm": ["Inter"],
+                        "display-lg": ["Inter"],
+                        "display-lg-mobile": ["Inter"],
+                        "headline-md": ["Inter"],
+                        "body-md": ["Inter"]
+                    },
+                    "fontSize": {
+                        "body-lg": ["19px", {"lineHeight": "1.5", "fontWeight": "400"}],
+                        "headline-xl": ["40px", {"lineHeight": "1.1", "letterSpacing": "-0.03em", "fontWeight": "600"}],
+                        "label-md": ["14px", {"lineHeight": "1.4", "letterSpacing": "0.03em", "fontWeight": "500"}],
+                        "headline-lg": ["32px", {"lineHeight": "1.2", "fontWeight": "600"}],
+                        "label-sm": ["11px", {"lineHeight": "1.4", "letterSpacing": "0.05em", "fontWeight": "600"}],
+                        "display-lg": ["64px", {"lineHeight": "1.0", "letterSpacing": "-0.04em", "fontWeight": "700"}],
+                        "display-lg-mobile": ["40px", {"lineHeight": "1.1", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                        "headline-md": ["28px", {"lineHeight": "1.2", "fontWeight": "600"}],
+                        "body-md": ["17px", {"lineHeight": "1.6", "fontWeight": "400"}]
+                    }
+                },
+            },
+        }
+    </script>
+</head>
+<body class="bg-background text-on-surface font-body-md selection:bg-primary-container/20">
+<!-- TopNavBar -->
+<nav class="sticky top-0 w-full z-50 bg-background/80 premium-blur border-b border-outline-variant/30">
+<div class="flex justify-between items-center h-20 px-margin-mobile md:px-margin-desktop max-w-container-max mx-auto">
+<div class="font-headline-md text-headline-md font-bold tracking-tighter text-on-surface">ImportadosMDP</div>
+<div class="hidden md:flex gap-10 items-center">
+<a class="font-label-md text-label-md text-secondary hover:text-on-surface transition-colors tracking-widest uppercase" href="#">Catálogo</a>
+<a class="font-label-md text-label-md text-on-surface font-bold border-b border-on-surface pb-1 tracking-widest uppercase" href="#">Reseñas</a>
+<a class="font-label-md text-label-md text-secondary hover:text-on-surface transition-colors tracking-widest uppercase" href="#">Contacto</a>
+</div>
+<div class="flex items-center gap-6">
+<button class="material-symbols-outlined text-secondary hover:text-on-surface transition-all" data-icon="search">search</button>
+<button class="material-symbols-outlined text-secondary hover:text-on-surface transition-all" data-icon="shopping_bag">shopping_bag</button>
+<button class="hidden md:block bg-inverse-surface text-inverse-on-surface px-8 py-2.5 rounded-full font-label-md text-label-md hover:opacity-90 transition-all active:scale-95 duration-150 ease-in-out uppercase tracking-widest">
+                Consultar
+            </button>
+</div>
+</div>
+</nav>
+<main class="max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop py-stack-xl">
+<!-- Hero Header -->
+<header class="mb-stack-xl text-center max-w-3xl mx-auto">
+<h1 class="font-display-lg text-display-lg-mobile md:text-display-lg mb-stack-md">Comunidad MDP</h1>
+<p class="font-body-lg text-body-lg text-secondary">Nuestra reputación se construye con cada experiencia premium entregada en toda la Argentina.</p>
+</header>
+<!-- Rating Summary Section (Editorial Cards) -->
+<section class="grid grid-cols-1 md:grid-cols-12 gap-gutter mb-stack-xl">
+<!-- Major Score Card -->
+<div class="md:col-span-4 bg-white border border-outline-variant/20 rounded-[40px] p-10 flex flex-col justify-center items-center text-center editorial-shadow">
+<span class="font-display-lg text-[80px] text-on-surface leading-none">4.9</span>
+<div class="flex gap-1.5 my-stack-md text-on-surface">
+<span class="material-symbols-outlined text-[24px]" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-[24px]" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-[24px]" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-[24px]" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-[24px]" style="font-variation-settings: 'FILL' 1;">star</span>
+</div>
+<p class="font-label-md text-label-md text-secondary uppercase tracking-widest">500+ Opiniones Verificadas</p>
+<div class="mt-stack-lg border border-tertiary/20 text-tertiary px-6 py-2.5 rounded-full font-label-sm text-label-sm flex items-center gap-2 uppercase tracking-widest">
+<span class="material-symbols-outlined text-[16px]" data-icon="verified">verified</span>
+                Ventas Exitosas
+            </div>
+</div>
+<!-- Distribution Chart Card -->
+<div class="md:col-span-5 bg-white border border-outline-variant/20 rounded-[40px] p-10 editorial-shadow">
+<h3 class="font-label-md text-label-md text-secondary uppercase tracking-widest mb-stack-lg">Desglose de Calificación</h3>
+<div class="space-y-6">
+<!-- 5 Stars -->
+<div class="flex items-center gap-6">
+<span class="font-label-sm text-label-sm w-16 uppercase tracking-widest">Excelencia</span>
+<div class="flex-1 h-1.5 bg-surface-container-low rounded-full overflow-hidden">
+<div class="h-full bg-on-surface w-[92%]"></div>
+</div>
+<span class="font-label-sm text-label-sm text-secondary w-8 text-right">92%</span>
+</div>
+<!-- 4 Stars -->
+<div class="flex items-center gap-6">
+<span class="font-label-sm text-label-sm w-16 uppercase tracking-widest">Muy Bueno</span>
+<div class="flex-1 h-1.5 bg-surface-container-low rounded-full overflow-hidden">
+<div class="h-full bg-on-surface/40 w-[6%]"></div>
+</div>
+<span class="font-label-sm text-label-sm text-secondary w-8 text-right">6%</span>
+</div>
+<!-- 3 Stars -->
+<div class="flex items-center gap-6">
+<span class="font-label-sm text-label-sm w-16 uppercase tracking-widest">Aceptable</span>
+<div class="flex-1 h-1.5 bg-surface-container-low rounded-full overflow-hidden">
+<div class="h-full bg-on-surface/20 w-[2%]"></div>
+</div>
+<span class="font-label-sm text-label-sm text-secondary w-8 text-right">2%</span>
+</div>
+</div>
+</div>
+<!-- CTA Card -->
+<div class="md:col-span-3 bg-inverse-surface text-inverse-on-surface rounded-[40px] p-10 flex flex-col justify-between editorial-shadow">
+<div>
+<h3 class="font-headline-md text-headline-md mb-4 leading-tight">Tu experiencia es el sello de nuestra calidad.</h3>
+<p class="font-body-md text-body-md opacity-70">Súmate a nuestra comunidad exclusiva.</p>
+</div>
+<button class="mt-stack-lg bg-surface-container-lowest text-inverse-surface px-8 py-4 rounded-2xl font-label-md text-label-md font-bold uppercase tracking-widest hover:opacity-90 transition-all active:scale-95">
+                Escribir Reseña
+            </button>
+</div>
+</section>
+<!-- Filters -->
+<div class="flex flex-wrap gap-4 mb-stack-xl overflow-x-auto pb-4 scrollbar-hide border-b border-outline-variant/30">
+<button class="px-8 py-3 rounded-full bg-on-surface text-surface font-label-md text-label-md uppercase tracking-widest">Todas</button>
+<button class="px-8 py-3 rounded-full border border-outline-variant text-secondary font-label-md text-label-md hover:border-on-surface hover:text-on-surface transition-colors uppercase tracking-widest">iPhone</button>
+<button class="px-8 py-3 rounded-full border border-outline-variant text-secondary font-label-md text-label-md hover:border-on-surface hover:text-on-surface transition-colors uppercase tracking-widest">MacBook</button>
+<button class="px-8 py-3 rounded-full border border-outline-variant text-secondary font-label-md text-label-md hover:border-on-surface hover:text-on-surface transition-colors uppercase tracking-widest">Watch</button>
+</div>
+<!-- Review Grid (Editorial Style) -->
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-gutter">
+<!-- Review Card 1 (Large Image) -->
+<div class="bg-white border border-outline-variant/20 rounded-[40px] overflow-hidden editorial-shadow group">
+<div class="aspect-[16/9] overflow-hidden">
+<img alt="iPhone 15 Pro Review Photo" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDT1JW5tReuz_y6_x1w0DYiv3fChSdyuLWjd6b8cdj8p1pz03XrGQiEywIGs0weUZ-r2oCqc9qqatxSiyEd2NfW0gFSHAAg3pMz3KgUgZrvvKqHha-baFs680h1GVx76bE97menLkQ50eYFCtT3tSm9nqliN2gvjY-oJ7yBgE3bebTjFxpBnV-XMjKD7mp6zu6lJypkz0S7RPZSVm_D1-KrA8dBS5QLGEk1g_xcthU_5D-X8Au8RTkFroFprAFsKSCfYY04ZPpP1mg"/>
+</div>
+<div class="p-10">
+<div class="flex justify-between items-start mb-8">
+<div class="flex items-center gap-4">
+<div class="w-14 h-14 rounded-full bg-surface-container flex items-center justify-center font-bold text-on-surface-variant text-lg">JP</div>
+<div>
+<p class="font-headline-md text-[20px]">Javier Peralta</p>
+<p class="font-label-sm text-label-sm text-secondary uppercase tracking-widest">Hace 2 días</p>
+</div>
+</div>
+<div class="flex text-on-surface">
+<span class="material-symbols-outlined text-[20px]" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-[20px]" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-[20px]" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-[20px]" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-[20px]" style="font-variation-settings: 'FILL' 1;">star</span>
+</div>
+</div>
+<p class="font-body-lg text-body-lg text-on-surface mb-8 italic">"Excelente atención. Compré un iPhone 15 Pro y llegó en el día a Mar del Plata. Todo sellado y original como prometieron."</p>
+<div class="flex items-center gap-3 text-secondary border-t border-outline-variant/30 pt-8">
+<span class="material-symbols-outlined text-[20px]" data-icon="verified_user">verified_user</span>
+<span class="font-label-sm text-label-sm uppercase tracking-widest">Compra verificada: iPhone 15 Pro</span>
+</div>
+</div>
+</div>
+<!-- Review Card 2 -->
+<div class="bg-white border border-outline-variant/20 rounded-[40px] overflow-hidden editorial-shadow group">
+<div class="aspect-[16/9] overflow-hidden">
+<img alt="AirPods Review Photo" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCiZP8ao5c11aLLQcwp2CXgEwgMYnzGA-I_ONBQgLDgoAtFTnPxYSuJwqkImYzKY93dI9M2MW42jngXNXeVWZcpH6mG-zBtS5Nn7VfhgIF5QHhlNBClOB6SN5SrN3qnadKeGMMdATbcvbRXsPkE9kTLfrNKpEGyZqB1FXWxa0bP7-2Q6UitIdw2JQ9ouUz54MtofmjorFuMAbBir2Vn_MW5ALj3Xgd-Ifqm2R9sgdpi4LNcsmwVvjSFgqQILp4KFN-oSlvogqwjpII"/>
+</div>
+<div class="p-10">
+<div class="flex justify-between items-start mb-8">
+<div class="flex items-center gap-4">
+<div class="w-14 h-14 rounded-full bg-surface-container flex items-center justify-center font-bold text-on-surface-variant text-lg">RS</div>
+<div>
+<p class="font-headline-md text-[20px]">Ricardo Soler</p>
+<p class="font-label-sm text-label-sm text-secondary uppercase tracking-widest">Hace 2 semanas</p>
+</div>
+</div>
+<div class="flex text-on-surface">
+<span class="material-symbols-outlined text-[20px]" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-[20px]" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-[20px]" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-[20px]" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-[20px]" style="font-variation-settings: 'FILL' 1;">star</span>
+</div>
+</div>
+<p class="font-body-lg text-body-lg text-on-surface mb-8 italic">"Compré los AirPods Pro 2. Son una locura la cancelación de ruido. Gracias ImportadosMDP por la gestión impecable."</p>
+<div class="flex items-center gap-3 text-secondary border-t border-outline-variant/30 pt-8">
+<span class="material-symbols-outlined text-[20px]" data-icon="verified_user">verified_user</span>
+<span class="font-label-sm text-label-sm uppercase tracking-widest">Compra verificada: AirPods Pro 2</span>
+</div>
+</div>
+</div>
+</div>
+</main>
+<!-- Footer -->
+<footer class="w-full bg-white dark:bg-inverse-surface border-t border-outline-variant/20">
+<div class="max-w-container-max mx-auto px-margin-desktop py-stack-xl grid grid-cols-1 md:grid-cols-4 gap-gutter">
+<div class="col-span-1 md:col-span-1">
+<div class="font-headline-md font-bold tracking-tighter text-on-surface dark:text-primary-fixed mb-stack-md">ImportadosMDP</div>
+<p class="font-body-md text-body-md text-secondary">Excelencia tecnológica. Servicio personalizado.</p>
+</div>
+<div>
+<h4 class="font-label-sm text-label-sm font-bold mb-stack-md uppercase tracking-widest">Explorar</h4>
+<ul class="space-y-stack-sm">
+<li><a class="font-body-md text-body-md text-secondary hover:text-on-surface transition-colors" href="#">Colecciones</a></li>
+<li><a class="font-body-md text-body-md text-secondary hover:text-on-surface transition-colors" href="#">Sobre nosotros</a></li>
+</ul>
+</div>
+<div>
+<h4 class="font-label-sm text-label-sm font-bold mb-stack-md uppercase tracking-widest">Soporte</h4>
+<ul class="space-y-stack-sm">
+<li><a class="font-body-md text-body-md text-secondary hover:text-on-surface transition-colors" href="#">Envíos Globales</a></li>
+<li><a class="font-body-md text-body-md text-secondary hover:text-on-surface transition-colors" href="#">Garantía Oficial</a></li>
+</ul>
+</div>
+<div>
+<h4 class="font-label-sm text-label-sm font-bold mb-stack-md uppercase tracking-widest">Contacto</h4>
+<p class="font-body-md text-body-md text-secondary mb-4">Mar del Plata, AR</p>
+<div class="flex gap-6">
+<span class="material-symbols-outlined text-secondary cursor-pointer hover:text-on-surface transition-colors" data-icon="photo_camera">photo_camera</span>
+<span class="material-symbols-outlined text-secondary cursor-pointer hover:text-on-surface transition-colors" data-icon="chat">chat</span>
+</div>
+</div>
+</div>
+<div class="max-w-container-max mx-auto px-margin-desktop py-stack-md border-t border-outline-variant/10 text-center">
+<p class="font-label-sm text-label-sm text-secondary uppercase tracking-[0.2em]">© 2024 ImportadosMDP — Premium Retail</p>
+</div>
+</footer>
+<!-- BottomNavBar (Mobile Only) -->
+<nav class="fixed bottom-0 w-full z-50 md:hidden bg-background/95 premium-blur border-t border-outline-variant/30">
+<div class="flex justify-around items-center h-20 pb-safe px-4">
+<div class="flex flex-col items-center justify-center text-secondary">
+<span class="material-symbols-outlined text-[24px]" data-icon="home">home</span>
+<span class="font-label-sm text-[10px] mt-1 uppercase tracking-widest">Inicio</span>
+</div>
+<div class="flex flex-col items-center justify-center text-on-surface border-t-2 border-on-surface pt-1">
+<span class="material-symbols-outlined text-[24px]" data-icon="reviews" style="font-variation-settings: 'FILL' 1;">reviews</span>
+<span class="font-label-sm text-[10px] mt-1 uppercase tracking-widest">Reseñas</span>
+</div>
+<div class="flex flex-col items-center justify-center text-secondary">
+<span class="material-symbols-outlined text-[24px]" data-icon="shopping_bag">shopping_bag</span>
+<span class="font-label-sm text-[10px] mt-1 uppercase tracking-widest">Tienda</span>
+</div>
+</div>
+</nav>
+<!-- Floating WhatsApp FAB (Premium Dark Style) -->
+<a class="fixed bottom-24 right-6 md:bottom-10 md:right-10 bg-on-surface text-surface p-5 rounded-full shadow-2xl hover:scale-105 transition-transform z-40 flex items-center justify-center group" href="#">
+<svg class="group-hover:rotate-12 transition-transform" fill="currentColor" height="24" viewbox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.38 2.27 1.019 3.287l-.582 2.128 2.182-.573c.978.58 1.911.928 3.145.929 3.178 0 5.767-2.587 5.768-5.766.001-3.187-2.575-5.771-5.764-5.771zm3.392 8.244c-.144.405-.837.774-1.17.824-.299.045-.677.063-1.092-.069-.252-.08-.575-.187-.988-.365-1.739-.751-2.874-2.502-2.961-2.617-.087-.116-.708-.94-.708-1.793s.448-1.273.607-1.446c.159-.173.346-.217.462-.217s.231.001.332.005c.109.004.258-.041.404.311.159.385.542 1.32.589 1.415.048.096.08.208.016.335-.064.127-.096.208-.192.319-.096.111-.202.248-.288.332-.096.095-.197.198-.085.39.112.192.496.814 1.065 1.322.735.656 1.352.86 1.548.953.195.093.311.077.427-.058.116-.135.496-.577.629-.77.133-.193.266-.164.448-.096.182.067 1.156.546 1.354.646.197.099.33.147.378.229.048.082.048.474-.096.879zM12 2c5.523 0 10 4.477 10 10s-4.477 10-10 10S2 17.523 2 12 6.477 2 12 2z"></path>
+</svg>
+</a>
+</body></html>

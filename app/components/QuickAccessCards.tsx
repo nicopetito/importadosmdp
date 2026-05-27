@@ -42,7 +42,7 @@ const cards = [
     title: 'Catálogo completo',
     description: 'Celulares, notebooks, auriculares y accesorios de las mejores marcas.',
     linkLabel: 'Ver productos →',
-    accentColor: 'from-[#3D52C4] to-[#5A72ED]',
+    accentColor: 'from-[#0059b5] to-[#0071e3]',
   },
   {
     href: '/resenas',
@@ -54,7 +54,7 @@ const cards = [
     title: 'Lo que dicen nuestros clientes',
     description: 'Más de 500 ventas verificadas en Mar del Plata y todo el país.',
     linkLabel: 'Leer reseñas →',
-    accentColor: 'from-[#7C3AED] to-[#A78BFA]',
+    accentColor: 'from-[#1b1b1d] to-[#5e5e63]',
   },
   {
     href: '/contacto',
@@ -66,7 +66,7 @@ const cards = [
     title: 'Hablemos',
     description: 'Consultanos por WhatsApp o Instagram antes de visitarnos. Sin esperas.',
     linkLabel: 'Contactanos →',
-    accentColor: 'from-[#0EA5E9] to-[#38BDF8]',
+    accentColor: 'from-[#0071e3] to-[#abc7ff]',
   },
 ]
 
@@ -82,29 +82,28 @@ const cardVariants: Variants = {
 export default function QuickAccessCards() {
   return (
     <section
-      className="relative py-24 px-6 overflow-hidden"
-      style={{ background: 'linear-gradient(135deg, #050916 0%, #0D1445 50%, #1A2580 100%)' }}
+      className="relative py-24 px-6 overflow-hidden bg-[#050505] border-t border-white/[0.03]"
     >
       {/* Ambient orbs */}
       <div className="pointer-events-none absolute inset-0">
-        <div className="absolute top-[-80px] left-[10%] w-[340px] h-[340px] rounded-full bg-[#3D52C4]/20 blur-[100px]" />
-        <div className="absolute bottom-[-60px] right-[8%] w-[280px] h-[280px] rounded-full bg-[#5A72ED]/15 blur-[90px]" />
+        <div className="absolute top-[-80px] left-[10%] w-[340px] h-[340px] rounded-full bg-[#0071e3]/10 blur-[100px]" />
+        <div className="absolute bottom-[-60px] right-[8%] w-[280px] h-[280px] rounded-full bg-[#0071e3]/5 blur-[90px]" />
       </div>
 
       <div className="relative max-w-5xl mx-auto">
         {/* Section header */}
         <motion.div
-          className="text-center mb-14"
+          className="text-center mb-16"
           initial={{ opacity: 0, y: 16 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.5 }}
         >
-          <p className="font-body text-[11px] font-bold text-accent uppercase tracking-[0.2em] mb-3">
+          <p className="font-sans text-[10px] font-bold text-secondary uppercase tracking-[0.2em] mb-3">
             Por qué elegirnos
           </p>
-          <h2 className="font-display font-black text-[32px] md:text-[40px] text-white leading-tight tracking-tight">
-            Todo lo que necesitás,<br className="hidden sm:block" /> en un solo lugar.
+          <h2 className="font-sans text-[32px] md:text-[40px] text-white font-bold leading-none tracking-tight">
+            Todo lo que necesitás,<br className="hidden sm:block mt-2" /> en un solo lugar.
           </h2>
         </motion.div>
 
@@ -124,7 +123,7 @@ export default function QuickAccessCards() {
                 href={card.href}
                 className="group relative flex flex-col h-full rounded-[22px] overflow-hidden border border-white/10
                            hover:border-white/25 transition-all duration-300 cursor-pointer
-                           hover:shadow-[0_8px_40px_rgba(90,114,237,0.2)]"
+                           hover:shadow-[0_8px_40px_rgba(0,113,227,0.15)]"
                 style={{ background: 'rgba(255,255,255,0.04)', backdropFilter: 'blur(12px)' }}
               >
                 {/* Top accent gradient line */}
@@ -137,9 +136,9 @@ export default function QuickAccessCards() {
                       value={card.counterValue}
                       prefix={card.counterPrefix}
                       suffix={card.counterSuffix}
-                      className="font-display font-extrabold text-5xl text-white leading-none"
+                      className="font-sans font-black text-5xl text-white leading-none"
                     />
-                    <span className="font-body font-light text-[12px] text-white/50 mt-1 block">
+                    <span className="font-sans font-semibold text-[10px] text-white/50 mt-2 block uppercase tracking-wider">
                       {card.statLabel}
                     </span>
                   </div>
@@ -152,13 +151,13 @@ export default function QuickAccessCards() {
                   </div>
 
                   {/* Text */}
-                  <h3 className="font-display font-bold text-[17px] text-white mt-4">{card.title}</h3>
-                  <p className="font-body text-[13px] text-white/60 mt-2 leading-relaxed flex-1">
+                  <h3 className="font-sans font-bold text-[17px] text-white mt-4">{card.title}</h3>
+                  <p className="font-sans text-[13px] text-white/60 mt-2 leading-relaxed flex-1">
                     {card.description}
                   </p>
 
                   {/* Link */}
-                  <span className={`font-body font-medium text-[13px] mt-5 bg-gradient-to-r ${card.accentColor} bg-clip-text text-transparent group-hover:underline decoration-[#5A72ED]`}>
+                  <span className={`font-sans font-bold text-xs uppercase tracking-wider mt-5 bg-gradient-to-r ${card.accentColor} bg-clip-text text-transparent group-hover:underline`}>
                     {card.linkLabel}
                   </span>
                 </div>

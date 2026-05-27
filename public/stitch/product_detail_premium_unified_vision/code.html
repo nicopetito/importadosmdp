@@ -1,0 +1,407 @@
+<!DOCTYPE html>
+
+<html class="light" lang="es"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "primary-container": "#0071e3",
+                    "surface-bright": "#fcf8fb",
+                    "tertiary": "#006a2d",
+                    "secondary-fixed-dim": "#c7c6cb",
+                    "surface-container-lowest": "#ffffff",
+                    "outline": "#717785",
+                    "primary": "#0059b5",
+                    "on-background": "#1b1b1d",
+                    "surface-variant": "#e4e2e4",
+                    "tertiary-fixed-dim": "#3de273",
+                    "surface-container": "#f0edef",
+                    "error-container": "#ffdad6",
+                    "on-tertiary-fixed-variant": "#005322",
+                    "on-error": "#ffffff",
+                    "surface-container-high": "#eae7ea",
+                    "secondary": "#5e5e63",
+                    "surface-dim": "#dcd9dc",
+                    "on-error-container": "#93000a",
+                    "on-tertiary-fixed": "#002109",
+                    "error": "#ba1a1a",
+                    "on-secondary-container": "#626267",
+                    "tertiary-container": "#00863b",
+                    "surface": "#fcf8fb",
+                    "surface-container-highest": "#e4e2e4",
+                    "outline-variant": "#c1c6d6",
+                    "surface-tint": "#005cbb",
+                    "on-tertiary": "#ffffff",
+                    "on-secondary-fixed-variant": "#46464b",
+                    "inverse-primary": "#abc7ff",
+                    "on-primary-fixed-variant": "#00458f",
+                    "on-surface": "#1b1b1d",
+                    "on-primary": "#ffffff",
+                    "secondary-container": "#e0dfe4",
+                    "on-primary-container": "#fcfbff",
+                    "surface-container-low": "#f6f3f5",
+                    "background": "#fcf8fb",
+                    "on-secondary": "#ffffff",
+                    "on-primary-fixed": "#001b3f",
+                    "tertiary-fixed": "#66ff8e",
+                    "on-surface-variant": "#414753",
+                    "primary-fixed": "#d7e2ff",
+                    "inverse-surface": "#303032",
+                    "inverse-on-surface": "#f3f0f2",
+                    "secondary-fixed": "#e3e2e7",
+                    "primary-fixed-dim": "#abc7ff",
+                    "on-secondary-fixed": "#1a1b1f",
+                    "on-tertiary-container": "#f2ffef"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "margin-mobile": "20px",
+                    "stack-md": "16px",
+                    "container-max": "1200px",
+                    "margin-desktop": "40px",
+                    "stack-lg": "32px",
+                    "gutter": "24px",
+                    "stack-sm": "8px",
+                    "stack-xs": "4px",
+                    "stack-xl": "64px"
+            },
+            "fontFamily": {
+                    "body-lg": ["Inter"],
+                    "headline-xl": ["Inter"],
+                    "label-md": ["Inter"],
+                    "headline-lg": ["Inter"],
+                    "label-sm": ["Inter"],
+                    "display-lg": ["Inter"],
+                    "display-lg-mobile": ["Inter"],
+                    "headline-md": ["Inter"],
+                    "body-md": ["Inter"]
+            },
+            "fontSize": {
+                    "body-lg": ["19px", {"lineHeight": "1.5", "fontWeight": "400"}],
+                    "headline-xl": ["40px", {"lineHeight": "1.2", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+                    "label-md": ["14px", {"lineHeight": "1.4", "letterSpacing": "0.01em", "fontWeight": "500"}],
+                    "headline-lg": ["32px", {"lineHeight": "1.25", "fontWeight": "600"}],
+                    "label-sm": ["12px", {"lineHeight": "1.4", "letterSpacing": "0.02em", "fontWeight": "600"}],
+                    "display-lg": ["56px", {"lineHeight": "1.1", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                    "display-lg-mobile": ["40px", {"lineHeight": "1.1", "letterSpacing": "-0.01em", "fontWeight": "700"}],
+                    "headline-md": ["24px", {"lineHeight": "1.3", "fontWeight": "600"}],
+                    "body-md": ["17px", {"lineHeight": "1.5", "fontWeight": "400"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+            display: inline-block;
+            vertical-align: middle;
+        }
+        .hide-scrollbar::-webkit-scrollbar { display: none; }
+        .hide-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+        
+        .cinematic-shadow {
+            box-shadow: 0 30px 60px -12px rgba(50, 50, 93, 0.12), 0 18px 36px -18px rgba(0, 0, 0, 0.15);
+        }
+        .panel-transition {
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+    </style>
+</head>
+<body class="bg-surface text-on-surface font-body-md text-body-md antialiased">
+<!-- Top Navigation -->
+<header class="sticky top-0 w-full z-50 bg-white/70 backdrop-blur-xl dark:bg-surface-dim/70 border-b border-outline-variant/30">
+<nav class="flex justify-between items-center h-20 px-margin-mobile md:px-margin-desktop max-w-container-max mx-auto">
+<div class="font-headline-md text-headline-md font-bold tracking-tight text-on-surface">ImportadosMDP</div>
+<div class="hidden md:flex items-center gap-stack-lg">
+<a class="text-secondary hover:text-primary transition-colors font-label-md text-label-md" href="#">Catálogo</a>
+<a class="text-secondary hover:text-primary transition-colors font-label-md text-label-md" href="#">Reseñas</a>
+<a class="text-secondary hover:text-primary transition-colors font-label-md text-label-md" href="#">Contacto</a>
+</div>
+<div class="flex items-center gap-stack-md">
+<button class="bg-on-surface text-surface-bright font-label-md text-label-md px-6 py-2.5 rounded-full hover:bg-on-surface/90 active:scale-95 transition-all">
+                Consultar
+            </button>
+<div class="relative cursor-pointer hover:opacity-80 transition-opacity p-2">
+<span class="material-symbols-outlined text-on-surface" style="font-size: 24px;">shopping_bag</span>
+<span class="absolute top-1 right-1 bg-primary text-on-primary text-[10px] w-4 h-4 flex items-center justify-center rounded-full font-bold">0</span>
+</div>
+</div>
+</nav>
+</header>
+<main class="max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop py-stack-lg md:py-stack-xl">
+<!-- Product Section -->
+<div class="grid grid-cols-1 lg:grid-cols-2 gap-stack-xl items-start">
+<!-- Apple-style Image Gallery -->
+<div class="flex flex-col gap-stack-lg">
+<div class="aspect-square bg-white rounded-[2rem] overflow-hidden cinematic-shadow group relative">
+<div class="absolute inset-0 bg-gradient-to-tr from-white/10 via-transparent to-white/30 pointer-events-none"></div>
+<img alt="iPhone 15 Pro" class="w-full h-full object-contain p-stack-xl transition-all duration-700 group-hover:scale-105" data-alt="A professional, high-resolution product shot of the iPhone 15 Pro in Natural Titanium. The device is positioned at a three-quarter angle, highlighting its brushed metal texture and refined edges. The lighting is soft and cinematic, with subtle reflections on the glass and metallic surfaces. Set against a clean, minimal white studio background with soft ambient shadows, emphasizing a premium and sophisticated tech aesthetic." id="main-product-image" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBOrRoP3pR6bFdjjdki99e7fv_rUPQ7z_DjWs8mIV7KiNfPfY3faUI13zSYNnpkE6l-eG1mY1bf4DE_U3Rc0kOEsymrRH0rUJs05l2sk7xjTTQLmvgyI_vpjCWYgq1B4gqYhtwoCTzhJzdgIyXtYA_xWA0wQf0DF-79Vki4cKLLF7t9rvSY1NO2g-raz-G3gnQlo5uJQGCiXmxffzGvoy1JOjSqBjBuuvqr-CL6F7UKPQNglIKe5ziJ_j3B1wmUus8n2QyLvxuQqGs"/>
+</div>
+<div class="grid grid-cols-4 gap-stack-md px-stack-xs">
+<button class="aspect-square bg-white rounded-2xl border-2 border-on-surface p-2 panel-transition">
+<img alt="Thumbnail 1" class="w-full h-full object-contain" data-alt="A detailed close-up shot of the iPhone 15 Pro's Natural Titanium frame and triple-camera system." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCwg7Y-sz3YNI4iXeMl9ZtBgn9HFDy4SGUhC3pMdLUm9WSeEbumoF2ATMozJ2gVfofYfSAAy-SWXjAtFHZ0QFetwVHkwqyRzaQlYWhB7uuTJ1zKgczXXgE14ATOTkaIvnRAFumwQzTHTgmBuPz2C29AC6zO5_9pFy_8N7k4uuoxXaUz0gu4kOx1QnF3FanQNNMQH-eOsN2SXQ39r08_oR40kIEh1GtSd5qftOh4npZbgic0bNPG-wJUzyqGmOplfd-NV3sv1LMjOcM"/>
+</button>
+<button class="aspect-square bg-white rounded-2xl border border-outline-variant/30 p-2 hover:border-on-surface/50 panel-transition">
+<img alt="Thumbnail 2" class="w-full h-full object-contain" data-alt="The front display of the iPhone 15 Pro showing the Dynamic Island feature." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCh7ucEjRmoTE9dI0wGWgwITCkGh5vfNwUsxh93PWfkFIUrzd_WmNk-HHIHLTl_kOyKI8E1oRORe3sEVSJdJtQAMRUXadU94j0JkDZ5pkAvMKqzLFGo0OqMTOra5kZDRc2E2iOXH9tdPblWLJrTukOWnm8UkrmfJWbyyXxydjlx2FzNEAsQ4kzYd4of54j2RZQ7ezf8bK_YTUr9X09obWaYd07o-uFA_6ze2iOU7jpafr8ZN3ebW38bVexOGH97Z5Xxegeqnrld1RM"/>
+</button>
+<button class="aspect-square bg-white rounded-2xl border border-outline-variant/30 p-2 hover:border-on-surface/50 panel-transition">
+<img alt="Thumbnail 3" class="w-full h-full object-contain" data-alt="Side profile view of the iPhone 15 Pro highlighting the new Action Button." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAl2416kE3HuS9ER9MzsnGdn0V-qhlcGzd3edJpfzEzL7y0VpmEt1aMQ_M-ocVXz5BUnxb-lT8g_2DeJN7By_ckJol13x8GIvqCKzU2R0jxGd04ONLDve91qeWr3acsnrz4nhCOkFUQcoi7weEOWTS55SWenyFibiRbChi5D7cqWSBVSSGDsNPWuKQ2i6hkOgjPvJw-5cRAzH02CJGbesN-taHJSfNnCfqVjH9d4oi5t-tTczweaNXjVzCBQ_4uYqwU39jVEUbxqs0"/>
+</button>
+<button class="aspect-square bg-white rounded-2xl border border-outline-variant/30 p-2 hover:border-on-surface/50 panel-transition">
+<img alt="Thumbnail 4" class="w-full h-full object-contain" data-alt="A lifestyle product shot of the iPhone 15 Pro being held by a hand." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCOOWIawgAdUNB2NsKKg1jAjjAoiyRYzfY2fQalrzti3EVUrAMFFolMvyUcQJpxgVgASFEiEUXo1oD_bdoD54Z2ph1X2PNa9rqJqPUWg1lSUXmY6zdq3KxB6diqsRcPcxkPUN3yIuwOTPQSafBmN8TZ-mwZJp8DqM4DzK0-6bbbmD3B8nYu6vUTJEjbZZdU_g4yDAWJVmWpXZKzW_2K73gn5xHRl_5jOhxsKc4DmKo4rvPp2SUDeEDOmbnKtuCeUu2CYvHcZZ3rHqQ"/>
+</button>
+</div>
+</div>
+<!-- Product Details -->
+<div class="flex flex-col gap-stack-lg lg:sticky lg:top-28">
+<div class="flex flex-col gap-stack-xs">
+<span class="text-on-surface/60 font-label-md text-label-md uppercase tracking-[0.2em] font-semibold">Apple</span>
+<h1 class="font-headline-xl text-headline-xl text-on-surface tracking-tight">iPhone 15 Pro</h1>
+<div class="flex items-center gap-stack-sm mt-stack-xs">
+<div class="flex text-on-surface">
+<span class="material-symbols-outlined !text-[18px]" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined !text-[18px]" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined !text-[18px]" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined !text-[18px]" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined !text-[18px]" style="font-variation-settings: 'FILL' 1;">star</span>
+</div>
+<span class="text-secondary font-label-sm text-label-sm">(48 Reseñas)</span>
+</div>
+</div>
+<div class="flex flex-col gap-stack-sm">
+<div class="text-[40px] font-bold text-on-surface tracking-tighter">$1,299</div>
+<p class="text-on-surface/70 font-body-md text-body-md leading-relaxed max-w-lg">
+                    El primer iPhone con un diseño de titanio de grado aeroespacial, con el mismo material que se usa en las naves espaciales para las misiones a Marte.
+                </p>
+</div>
+<!-- Specs Grid - Editorial Panels -->
+<div class="grid grid-cols-2 gap-stack-md">
+<div class="flex flex-col gap-stack-sm bg-white/40 backdrop-blur-sm border border-outline-variant/20 p-stack-md rounded-[1.5rem] hover:bg-white/60 transition-colors">
+<span class="material-symbols-outlined text-on-surface/40">memory</span>
+<div>
+<div class="font-label-sm text-label-sm text-secondary uppercase tracking-wider">Chip</div>
+<div class="font-label-md text-label-md font-bold text-on-surface">A17 Pro</div>
+</div>
+</div>
+<div class="flex flex-col gap-stack-sm bg-white/40 backdrop-blur-sm border border-outline-variant/20 p-stack-md rounded-[1.5rem] hover:bg-white/60 transition-colors">
+<span class="material-symbols-outlined text-on-surface/40">layers</span>
+<div>
+<div class="font-label-sm text-label-sm text-secondary uppercase tracking-wider">Material</div>
+<div class="font-label-md text-label-md font-bold text-on-surface">Titanium</div>
+</div>
+</div>
+<div class="flex flex-col gap-stack-sm bg-white/40 backdrop-blur-sm border border-outline-variant/20 p-stack-md rounded-[1.5rem] hover:bg-white/60 transition-colors">
+<span class="material-symbols-outlined text-on-surface/40">photo_camera</span>
+<div>
+<div class="font-label-sm text-label-sm text-secondary uppercase tracking-wider">Cámara</div>
+<div class="font-label-md text-label-md font-bold text-on-surface">48MP Main</div>
+</div>
+</div>
+<div class="flex flex-col gap-stack-sm bg-white/40 backdrop-blur-sm border border-outline-variant/20 p-stack-md rounded-[1.5rem] hover:bg-white/60 transition-colors">
+<span class="material-symbols-outlined text-on-surface/40">bolt</span>
+<div>
+<div class="font-label-sm text-label-sm text-secondary uppercase tracking-wider">USB-C</div>
+<div class="font-label-md text-label-md font-bold text-on-surface">USB 3</div>
+</div>
+</div>
+</div>
+<!-- Color Selection -->
+<div class="flex flex-col gap-stack-sm">
+<span class="font-label-md text-label-md font-bold text-on-surface/80">Acabado: Titanio Natural</span>
+<div class="flex gap-stack-sm">
+<button class="w-10 h-10 rounded-full border-2 border-on-surface bg-[#bab5ad] ring-2 ring-offset-4 ring-transparent hover:ring-outline-variant/30 transition-all"></button>
+<button class="w-10 h-10 rounded-full border border-outline-variant/30 bg-[#4e4e4e] transition-all hover:scale-105"></button>
+<button class="w-10 h-10 rounded-full border border-outline-variant/30 bg-[#f2f1ed] transition-all hover:scale-105"></button>
+<button class="w-10 h-10 rounded-full border border-outline-variant/30 bg-[#2b2b2c] transition-all hover:scale-105"></button>
+</div>
+</div>
+<!-- CTA - Graphite & Luxury Accents -->
+<div class="flex flex-col gap-stack-md pt-stack-sm">
+<button class="w-full bg-[#1c1c1e] text-surface-bright flex items-center justify-center gap-stack-sm py-4 rounded-2xl font-label-md text-label-md font-bold hover:bg-[#2c2c2e] active:scale-[0.98] transition-all shadow-xl group border border-white/10">
+<svg class="w-5 h-5 fill-[#25D366] group-hover:scale-110 transition-transform" viewbox="0 0 24 24"><path d="M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.38 2.27 1.019 3.284l-.582 2.128 2.182-.573c.978.58 1.911.928 3.145.929 3.178 0 5.767-2.587 5.768-5.766 0-3.18-2.587-5.768-5.764-5.768zm3.393 8.254c-.144.405-.837.774-1.156.823-.319.049-.646.074-1.156.074-.356 0-.816-.046-1.558-.335-1.026-.399-2.022-1.396-2.554-2.22-.532-.823-.842-1.782-.842-2.784 0-1.002.327-1.848.887-2.409.561-.56 1.222-.614 1.393-.614.171 0 .341 0 .49.009.162.008.384-.061.603.46.219.521.752 1.834.818 1.968.066.134.11.289.022.464-.088.176-.132.285-.265.438-.133.153-.28.341-.399.457-.133.129-.272.27-.117.534.155.263.689 1.135 1.479 1.836.789.7 1.451.918 1.714 1.05.263.131.417.109.571-.066.154-.175.658-.766.833-1.029.175-.263.351-.219.593-.131.242.088 1.534.723 1.797.854.263.132.438.197.504.307.066.109.066.634-.155 1.039zM12 2C6.477 2 2 6.477 2 12c0 1.891.528 3.655 1.446 5.162L2 22l4.981-1.31C8.455 21.574 10.151 22 12 22c5.523 0 10-4.477 10-10S17.523 2 12 2z"></path></svg>
+                    Consultar por WhatsApp
+                </button>
+<button class="w-full bg-surface border border-outline-variant/50 text-on-surface py-4 rounded-2xl font-label-md text-label-md font-bold hover:bg-surface-container-low active:scale-[0.98] transition-all">
+                    Reservar Unidad
+                </button>
+</div>
+<!-- Trust Badges -->
+<div class="grid grid-cols-3 gap-stack-sm pt-stack-md border-t border-outline-variant/20">
+<div class="flex flex-col items-center gap-stack-xs text-center">
+<span class="material-symbols-outlined text-on-surface/40">verified</span>
+<span class="font-label-sm text-[11px] text-secondary uppercase tracking-tight">Original Garantizado</span>
+</div>
+<div class="flex flex-col items-center gap-stack-xs text-center">
+<span class="material-symbols-outlined text-on-surface/40">local_shipping</span>
+<span class="font-label-sm text-[11px] text-secondary uppercase tracking-tight">Envío a Todo el País</span>
+</div>
+<div class="flex flex-col items-center gap-stack-xs text-center">
+<span class="material-symbols-outlined text-on-surface/40">security</span>
+<span class="font-label-sm text-[11px] text-secondary uppercase tracking-tight">Compra Protegida</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Related Products Section -->
+<section class="mt-stack-xl pt-stack-xl border-t border-outline-variant/10">
+<div class="flex justify-between items-end mb-stack-lg">
+<div>
+<h2 class="font-headline-lg text-headline-lg text-on-surface tracking-tight">Productos Relacionados</h2>
+<p class="text-secondary font-body-md text-body-md">Complementa tu ecosistema Apple</p>
+</div>
+<a class="text-on-surface font-label-md text-label-md flex items-center gap-stack-xs hover:gap-stack-sm transition-all group" href="#">
+                Ver todos <span class="material-symbols-outlined transition-transform group-hover:translate-x-1">arrow_forward</span>
+</a>
+</div>
+<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-gutter">
+<!-- Related Item 1 -->
+<div class="group bg-white p-6 rounded-[2rem] border border-outline-variant/10 hover:cinematic-shadow transition-all duration-500">
+<div class="aspect-square bg-surface-container-low rounded-2xl overflow-hidden mb-stack-md relative">
+<img alt="Apple Watch Ultra" class="w-full h-full object-contain p-stack-md group-hover:scale-110 transition-transform duration-700" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAV-Hv_offQ6uiIfCSIesIFoEhuVGeOToy09ZDZy_WvcPYY_bSN3IAgV1A_sdxRzA8Wy_uEalPFn8lloL9pGzbTmR3mO1Vf_VgvsKR6bt3xKRbD0Z1fajs8BTddfPEiLyjRuEMJd77PKeloLxpHp4hZZIbpYxLmJkisY-pX_XC8wuJkKrYKRaQOgFfzLJJ_lFEgTNS7Fyt0OV_Y51NHmQfANhWDyi5VzlQjvqw0gXkfjgjtOluuw9T_WBAd5CGAsewymQsRaX2lKMg"/>
+</div>
+<div class="font-label-sm text-on-surface/40 uppercase tracking-widest mb-1">Watch</div>
+<h3 class="font-headline-md text-[20px] text-on-surface mb-stack-xs font-semibold">Apple Watch Ultra 2</h3>
+<div class="font-bold text-on-surface mb-stack-md tracking-tight">$899</div>
+<button class="w-full py-2.5 bg-on-surface/5 text-on-surface rounded-xl font-label-md text-label-md hover:bg-on-surface hover:text-white transition-all">Ver Detalle</button>
+</div>
+<!-- Related Item 2 -->
+<div class="group bg-white p-6 rounded-[2rem] border border-outline-variant/10 hover:cinematic-shadow transition-all duration-500">
+<div class="aspect-square bg-surface-container-low rounded-2xl overflow-hidden mb-stack-md relative">
+<img alt="AirPods Pro 2" class="w-full h-full object-contain p-stack-md group-hover:scale-110 transition-transform duration-700" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCnSK1W1cuyflIKNr-j1IwzQDfhm26HUztvYg5_LnxjfKOgXCld1Mil0LfSkoTTXCIbSBWA76cfGxjBTUIc1Fg_Dt0XDoUsJ3iDqyvmlxkXBVsUtwf-ZNovXRXW5MPY8_9kLF30oqsnaT4QOQQYmxDNor_aY_QDmXGYxu4RI0PZquCdCksg5EhneIB96tAZ1MKdW7wzOHZ0MurAfHYDzR8UQfGCGdNdJJsgySWiqmRiUWd5zO6_y8uBuWaafVnRfGvRkU9__1O7tDw"/>
+</div>
+<div class="font-label-sm text-on-surface/40 uppercase tracking-widest mb-1">Audio</div>
+<h3 class="font-headline-md text-[20px] text-on-surface mb-stack-xs font-semibold">AirPods Pro (2nd Gen)</h3>
+<div class="font-bold text-on-surface mb-stack-md tracking-tight">$249</div>
+<button class="w-full py-2.5 bg-on-surface/5 text-on-surface rounded-xl font-label-md text-label-md hover:bg-on-surface hover:text-white transition-all">Ver Detalle</button>
+</div>
+<!-- Related Item 3 -->
+<div class="group bg-white p-6 rounded-[2rem] border border-outline-variant/10 hover:cinematic-shadow transition-all duration-500">
+<div class="aspect-square bg-surface-container-low rounded-2xl overflow-hidden mb-stack-md relative">
+<img alt="MagSafe Charger" class="w-full h-full object-contain p-stack-md group-hover:scale-110 transition-transform duration-700" src="https://lh3.googleusercontent.com/aida-public/AB6AXuA-mD3gClYqJZuBAvpSmGF2uXxM5o5xkh3dbiw7Pz19v7y9YGtSU7XNOCiVit3ZtJLpDcq8imRkQZBqC0ugGAR2tNhbzCe-qdBU4w8YllTAM7WY9NrIjYBqvEYoneVvOzt1RJE_60a0zuRctSdJgRPgUCN7fhpYC-8Ibp9uGN_3FnyQvLLl8qBGKSWja-bU4CWeySmUBVKebEB5crpVXkJL9TZRyBCUDp5NW3DMJd4DrqwB_wQ9oIYKmUbpoKgynmTzgMfHJjehOrM"/>
+</div>
+<div class="font-label-sm text-on-surface/40 uppercase tracking-widest mb-1">Accesorios</div>
+<h3 class="font-headline-md text-[20px] text-on-surface mb-stack-xs font-semibold">Cargador MagSafe</h3>
+<div class="font-bold text-on-surface mb-stack-md tracking-tight">$49</div>
+<button class="w-full py-2.5 bg-on-surface/5 text-on-surface rounded-xl font-label-md text-label-md hover:bg-on-surface hover:text-white transition-all">Ver Detalle</button>
+</div>
+<!-- Related Item 4 -->
+<div class="group bg-white p-6 rounded-[2rem] border border-outline-variant/10 hover:cinematic-shadow transition-all duration-500">
+<div class="aspect-square bg-surface-container-low rounded-2xl overflow-hidden mb-stack-md relative">
+<img alt="MacBook Air M3" class="w-full h-full object-contain p-stack-md group-hover:scale-110 transition-transform duration-700" src="https://lh3.googleusercontent.com/aida-public/AB6AXuD4zc4VxJ5AIfm3MZa_px3lwcL0jcG8MGHwBOQOjPw9f4NaWKehNUVHlMPXshOIup6c99KX40RA9qophqmntOteNd_uq8ClW3XE3Bwr5O1KgMKkvLv2IRUexzdwjfRfrtPcsSPbOSOQMfDeRdJ4zDpWtKSaHFhJ1gDEoKqEDlBvj-aRz2crzvCjIJ49ABWc25iuO1vrwymnAVpUC5kcXcgeZGKh8dDQlEepCKhbg45hhsyq2Li46qGI3aTIzLpf7vmefU12rRarU6Y"/>
+</div>
+<div class="font-label-sm text-on-surface/40 uppercase tracking-widest mb-1">Mac</div>
+<h3 class="font-headline-md text-[20px] text-on-surface mb-stack-xs font-semibold">MacBook Air M3</h3>
+<div class="font-bold text-on-surface mb-stack-md tracking-tight">$1,099</div>
+<button class="w-full py-2.5 bg-on-surface/5 text-on-surface rounded-xl font-label-md text-label-md hover:bg-on-surface hover:text-white transition-all">Ver Detalle</button>
+</div>
+</div>
+</section>
+</main>
+<!-- Footer -->
+<footer class="bg-[#1c1c1e] text-surface-bright mt-stack-xl pt-stack-xl pb-stack-lg">
+<div class="max-w-container-max mx-auto px-margin-desktop grid grid-cols-1 md:grid-cols-4 gap-gutter mb-stack-xl">
+<div class="flex flex-col gap-stack-md">
+<div class="font-headline-md font-bold tracking-tight">ImportadosMDP</div>
+<p class="text-surface-bright/50 font-body-md text-body-md leading-relaxed">
+                Líderes en tecnología premium en Mar del Plata. Productos Apple con garantía oficial y atención personalizada en cada detalle.
+            </p>
+</div>
+<div>
+<h4 class="font-label-md text-label-md font-bold mb-stack-md uppercase tracking-[0.15em] text-surface-bright/40">Productos</h4>
+<ul class="flex flex-col gap-stack-sm">
+<li><a class="text-surface-bright/70 hover:text-surface-bright transition-colors" href="#">iPhone</a></li>
+<li><a class="text-surface-bright/70 hover:text-surface-bright transition-colors" href="#">MacBook</a></li>
+<li><a class="text-surface-bright/70 hover:text-surface-bright transition-colors" href="#">iPad</a></li>
+<li><a class="text-surface-bright/70 hover:text-surface-bright transition-colors" href="#">Accesorios</a></li>
+</ul>
+</div>
+<div>
+<h4 class="font-label-md text-label-md font-bold mb-stack-md uppercase tracking-[0.15em] text-surface-bright/40">Soporte</h4>
+<ul class="flex flex-col gap-stack-sm">
+<li><a class="text-surface-bright/70 hover:text-surface-bright transition-colors" href="#">Privacidad</a></li>
+<li><a class="text-surface-bright/70 hover:text-surface-bright transition-colors" href="#">Términos</a></li>
+<li><a class="text-surface-bright/70 hover:text-surface-bright transition-colors" href="#">Envíos</a></li>
+<li><a class="text-surface-bright/70 hover:text-surface-bright transition-colors" href="#">Garantía</a></li>
+</ul>
+</div>
+<div>
+<h4 class="font-label-md text-label-md font-bold mb-stack-md uppercase tracking-[0.15em] text-surface-bright/40">Contacto</h4>
+<p class="text-surface-bright/70 mb-stack-sm font-label-md text-label-md">Mar del Plata, Argentina</p>
+<div class="flex gap-stack-md pt-2">
+<span class="material-symbols-outlined text-surface-bright/50 cursor-pointer hover:text-surface-bright transition-all">public</span>
+<span class="material-symbols-outlined text-surface-bright/50 cursor-pointer hover:text-surface-bright transition-all">chat</span>
+<span class="material-symbols-outlined text-surface-bright/50 cursor-pointer hover:text-surface-bright transition-all">mail</span>
+</div>
+</div>
+</div>
+<div class="max-w-container-max mx-auto px-margin-desktop py-stack-md border-t border-white/5 flex flex-col md:flex-row justify-between items-center gap-stack-md">
+<span class="text-surface-bright/30 font-label-sm text-label-sm">© 2024 ImportadosMDP. Todos los derechos reservados.</span>
+<div class="flex gap-stack-lg text-surface-bright/30 font-label-sm text-label-sm">
+<a class="hover:text-surface-bright transition-colors" href="#">Diseño Editorial</a>
+<a class="hover:text-surface-bright transition-colors" href="#">Garantía Premium</a>
+</div>
+</div>
+</footer>
+<!-- Bottom Navigation (Mobile Only) -->
+<nav class="fixed bottom-0 w-full z-50 md:hidden bg-white/80 backdrop-blur-2xl border-t border-outline-variant/30 shadow-[0_-8px_30px_rgba(0,0,0,0.08)]">
+<div class="flex justify-around items-center h-20 pb-safe px-4">
+<div class="flex flex-col items-center justify-center text-on-surface/40">
+<span class="material-symbols-outlined !text-[28px]">home</span>
+<span class="font-label-sm text-[10px] mt-1 font-semibold uppercase tracking-wider">Inicio</span>
+</div>
+<div class="flex flex-col items-center justify-center text-on-surface">
+<span class="material-symbols-outlined !text-[28px]">grid_view</span>
+<span class="font-label-sm text-[10px] mt-1 font-bold uppercase tracking-wider">Catálogo</span>
+</div>
+<div class="flex flex-col items-center justify-center text-on-surface/40">
+<span class="material-symbols-outlined !text-[28px]">shopping_bag</span>
+<span class="font-label-sm text-[10px] mt-1 font-semibold uppercase tracking-wider">Carrito</span>
+</div>
+</div>
+</nav>
+<script>
+    // Interaction: Switch Main Image with transitions
+    const thumbnails = document.querySelectorAll('button img');
+    const mainImg = document.getElementById('main-product-image');
+    
+    thumbnails.forEach(thumb => {
+        const btn = thumb.parentElement;
+        btn.addEventListener('click', () => {
+            // UI state updates
+            thumbnails.forEach(t => {
+                t.parentElement.classList.remove('border-on-surface', 'border-2');
+                t.parentElement.classList.add('border-outline-variant/30', 'border');
+            });
+            
+            btn.classList.add('border-on-surface', 'border-2');
+            btn.classList.remove('border-outline-variant/30', 'border');
+            
+            // Animation for main image
+            mainImg.classList.add('opacity-0', 'scale-95');
+            
+            setTimeout(() => {
+                const newSrc = thumb.getAttribute('src');
+                const newAlt = thumb.getAttribute('data-alt');
+                mainImg.src = newSrc;
+                mainImg.setAttribute('data-alt', newAlt);
+                
+                mainImg.classList.remove('opacity-0', 'scale-95');
+                mainImg.classList.add('opacity-100', 'scale-100');
+            }, 300);
+        });
+    });
+</script>
+</body></html>
