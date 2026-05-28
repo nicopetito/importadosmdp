@@ -17,7 +17,7 @@ export default function HeroSection() {
         <div className="absolute inset-0 bg-gradient-to-r from-[#050505]/30 via-transparent to-[#050505]/30" />
       </div>
 
-      <div className="max-w-6xl mx-auto px-margin-mobile md:px-margin-desktop relative z-10 w-full py-24">
+      <div className="max-w-6xl mx-auto px-6 md:px-12 relative z-10 w-full py-24">
         <div className="flex flex-col items-center text-center">
           
           {/* Badges */}
@@ -40,7 +40,7 @@ export default function HeroSection() {
             initial={{ opacity: 0, y: 25 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.7, delay: 0.1 }}
-            className="font-display text-[60px] sm:text-[80px] md:text-[100px] leading-[0.85] tracking-tighter mb-8 font-black italic uppercase select-none text-white"
+            className="font-display text-[44px] sm:text-[80px] md:text-[100px] leading-[0.85] tracking-tighter mb-8 font-black italic uppercase select-none text-white"
           >
             TECH <br />CURADA.
           </motion.h1>

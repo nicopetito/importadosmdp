@@ -30,7 +30,7 @@ export default function ContactoPage() {
     <div className="min-h-screen bg-background overflow-x-hidden pb-[72px] md:pb-0">
       <Navbar />
 
-      <main className="max-w-6xl mx-auto px-margin-mobile md:px-margin-desktop py-16 md:py-24">
+      <main className="max-w-6xl mx-auto px-6 md:px-12 py-16 md:py-24">
         
         {/* Editorial Header */}
         <header className="mb-20 max-w-2xl">
@@ -53,7 +53,7 @@ export default function ContactoPage() {
             <h2 className="font-sans font-bold text-xs uppercase tracking-widest text-on-surface mb-8">Canales de Contacto</h2>
 
             {/* WhatsApp Concierge Card */}
-            <div className="bg-white border border-outline-variant/20 rounded-[2.5rem] p-10 shadow-sm hover:shadow-2xl hover:border-outline-variant/30 transition-all duration-500 relative overflow-hidden group">
+            <div className="bg-white border border-outline-variant/20 rounded-[1.5rem] md:rounded-[2.5rem] p-6 md:p-10 shadow-sm hover:shadow-2xl hover:border-outline-variant/30 transition-all duration-500 relative overflow-hidden group">
               <div className="flex flex-col md:flex-row md:items-center justify-between gap-6">
                 <div>
                   <span className="text-[10px] text-primary font-bold tracking-widest uppercase mb-2 block">Premium Concierge</span>
@@ -77,7 +77,7 @@ export default function ContactoPage() {
             </div>
 
             {/* Instagram details */}
-            <div className="bg-white border border-outline-variant/20 rounded-[2.5rem] p-10 shadow-sm hover:shadow-2xl hover:border-outline-variant/30 transition-all duration-500 relative overflow-hidden group">
+            <div className="bg-white border border-outline-variant/20 rounded-[1.5rem] md:rounded-[2.5rem] p-6 md:p-10 shadow-sm hover:shadow-2xl hover:border-outline-variant/30 transition-all duration-500 relative overflow-hidden group">
               <div className="flex flex-col md:flex-row md:items-center justify-between gap-6">
                 <div>
                   <span className="text-[10px] text-secondary font-bold tracking-widest uppercase mb-2 block">Social Showcase</span>
@@ -98,12 +98,12 @@ export default function ContactoPage() {
             </div>
 
             {/* Ubicación y Horarios card */}
-            <div className="bg-white border border-outline-variant/20 rounded-[2.5rem] p-10 shadow-sm relative overflow-hidden">
+            <div className="bg-white border border-outline-variant/20 rounded-[1.5rem] md:rounded-[2.5rem] p-6 md:p-10 shadow-sm relative overflow-hidden">
               <h3 className="font-sans font-bold text-xs uppercase tracking-widest text-on-surface mb-8">Coordenadas del Showroom</h3>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-8">
                 <div>
                   <span className="block text-[9px] font-bold text-secondary uppercase tracking-wider mb-2">Visita Presencial</span>
-                  <p className="font-sans font-bold text-base text-on-surface">Jujuy 1811</p>
+                  <p className="font-sans font-bold text-base text-on-surface">Jujuy 1611</p>
                   <p className="text-secondary text-xs mt-1">Mar del Plata, Buenos Aires, Argentina</p>
                 </div>
                 <div>
@@ -118,7 +118,7 @@ export default function ContactoPage() {
 
           {/* Sleek Minimal Inquiry Form - Right Column */}
           <div className="lg:col-span-5">
-            <div className="bg-white border border-outline-variant/20 rounded-[2.5rem] p-8 md:p-10 shadow-sm">
+            <div className="bg-white border border-outline-variant/20 rounded-[1.5rem] md:rounded-[2.5rem] p-6 md:p-10 shadow-sm">
               {!enviado ? (
                 <form onSubmit={handleSubmit} className="space-y-6">
                   <div>
@@ -211,7 +211,7 @@ export default function ContactoPage() {
         {/* Showroom Interactive Map */}
         <section className="mt-20 border-t border-outline-variant/10 pt-20">
           <h3 className="font-sans font-bold text-xs uppercase tracking-widest text-on-surface mb-8">Ubicación Física</h3>
-          <div className="rounded-[3rem] overflow-hidden border border-black/[0.05] shadow-2xl h-[400px]">
+          <div className="rounded-[1.5rem] md:rounded-[2.5rem] overflow-hidden border border-black/[0.05] shadow-2xl h-[400px]">
             <MapEmbed height="400" />
           </div>
         </section>

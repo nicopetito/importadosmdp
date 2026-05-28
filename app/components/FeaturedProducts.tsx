@@ -78,16 +78,15 @@ export default function FeaturedProducts() {
               viewport={{ once: true }}
               transition={{ duration: 0.6, delay: i * 0.1, ease: [0.22, 1, 0.36, 1] }}
               whileHover={{ y: -8 }}
-              className="group bg-white border border-blue-subtle overflow-hidden hover:shadow-[0_20px_48px_rgba(90,114,237,0.15)] hover:border-blue-border transition-all duration-300 flex flex-col h-full text-navy"
+              className="group bg-white border border-gray-200 overflow-hidden hover:shadow-[0_20px_48px_rgba(0,113,227,0.12)] hover:border-primary transition-all duration-300 flex flex-col h-full text-navy"
             >
               <Link href={`/catalogo/${product.id}`} className="block h-full flex flex-col">
                 {/* Image Container with spotlight shadow */}
                 <div 
-                  className="relative aspect-square overflow-hidden flex items-center justify-center transition-colors duration-500"
-                  style={{ background: i === 0 ? 'linear-gradient(135deg, #EEF1FD 0%, #DDE3FA 100%)' : i === 1 ? 'linear-gradient(135deg, #EDF7F2 0%, #D1F0E0 100%)' : 'linear-gradient(135deg, #FDF5EE 0%, #FAE5D0 100%)' }}
+                  className="relative aspect-square overflow-hidden flex items-center justify-center transition-colors duration-500 bg-white border-b border-gray-100"
                 >
                   {/* Spotlight Radial Glow */}
-                  <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(90,114,237,0.04)_0%,transparent_70%)] opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none" />
+                  <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(0,113,227,0.04)_0%,transparent_70%)] opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none" />
 
                   {/* Top Badge Overlay */}
                   {product.badge && (

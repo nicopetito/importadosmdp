@@ -230,7 +230,7 @@ export default function ProductDetailPage() {
       )}
 
       {/* Breadcrumb */}
-      <div className="bg-background px-6 py-5 md:px-16">
+      <div className="bg-background px-6 py-5 md:px-12">
         <div className="max-w-6xl mx-auto flex items-center gap-2 font-sans text-xs uppercase tracking-wider text-secondary">
           <Link href="/" className="hover:text-on-surface transition-colors">Inicio</Link>
           <span className="text-outline-variant/50">/</span>
@@ -241,7 +241,7 @@ export default function ProductDetailPage() {
       </div>
 
       {/* Main Content */}
-      <section className="px-6 pb-12 md:px-16 md:pt-4 md:pb-24">
+      <section className="px-6 pb-12 md:px-12 md:pt-4 md:pb-24">
         <div className="max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-16 items-start">
 
           {/* ── Gallery ── */}
@@ -420,7 +420,7 @@ export default function ProductDetailPage() {
             {product.specs && Object.keys(product.specs).length > 0 && (
               <div className="space-y-4">
                 <h3 className="font-sans font-bold text-xs uppercase tracking-widest text-on-surface">Especificaciones</h3>
-                <div className="grid grid-cols-2 gap-4">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   {Object.entries(product.specs).map(([key, value], i) => (
                     <div
                       key={key}
@@ -474,7 +474,7 @@ export default function ProductDetailPage() {
       </section>
 
       {/* Related Products */}
-      <section className="bg-white px-6 py-20 md:px-16 border-t border-outline-variant/10">
+      <section className="bg-white px-6 py-20 md:px-12 border-t border-outline-variant/10">
         <div className="max-w-6xl mx-auto">
           <div className="flex items-center justify-between mb-12">
             <h2 className="font-sans font-bold text-xl text-on-surface">Productos Relacionados</h2>

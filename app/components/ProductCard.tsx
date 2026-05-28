@@ -17,16 +17,8 @@ interface ProductCardProps {
   index?: number
 }
 
-const categoryGradients: Record<string, string> = {
-  Celulares:   'linear-gradient(135deg, #EEF1FD 0%, #DDE3FA 100%)',
-  Notebooks:   'linear-gradient(135deg, #EDF7F2 0%, #D1F0E0 100%)',
-  Audio:       'linear-gradient(135deg, #FDF5EE 0%, #FAE5D0 100%)',
-  Auriculares: 'linear-gradient(135deg, #FDF5EE 0%, #FAE5D0 100%)',
-  Accesorios:  'linear-gradient(135deg, #F5EEFB 0%, #EDE0F8 100%)',
-}
-
-function getCategoryGradient(category: string): string {
-  return categoryGradients[category] ?? '#F0F4FF'
+function getCategoryGradient(): string {
+  return '#FFFFFF'
 }
 
 export default function ProductCard({
@@ -65,14 +57,13 @@ export default function ProductCard({
       initial={{ opacity: 0, y: 28 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ delay: index * 0.07, duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
-      className="group relative bg-white rounded-[20px] border border-blue-subtle overflow-hidden cursor-pointer
-                 hover:shadow-[0_20px_48px_rgba(90,114,237,0.18)] hover:border-blue-border
-                 transition-shadow duration-300 flex flex-col"
+      className="group relative bg-white rounded-[20px] border border-gray-200 overflow-hidden cursor-pointer
+                 hover:shadow-[0_20px_48px_rgba(0,113,227,0.12)] hover:border-primary
+                 transition-all duration-300 flex flex-col"
     >
       {/* Image area */}
       <div
-        className="relative w-full h-[160px] md:h-[180px] flex items-center justify-center overflow-hidden"
-        style={{ background: getCategoryGradient(category) }}
+        className="relative w-full h-[220px] flex items-center justify-center overflow-hidden bg-white border-b border-gray-100"
       >
         {/* Badge */}
         {badge && (
@@ -92,7 +83,7 @@ export default function ProductCard({
           src={imageUrl}
           alt={name}
           fill
-          className="object-contain p-4 group-hover:scale-110 transition-transform duration-500"
+          className="object-contain p-2 group-hover:scale-105 transition-transform duration-500"
           sizes="(max-width: 768px) 50vw, 20vw"
         />
 

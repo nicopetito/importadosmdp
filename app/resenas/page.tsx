@@ -25,7 +25,7 @@ function ReviewCard({ resena, index }: { resena: typeof resenas[0]; index: numbe
       initial={{ opacity: 0, y: 24 }}
       animate={inView ? { opacity: 1, y: 0 } : {}}
       transition={{ delay: (index % 2) * 0.05, duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
-      className="bg-white border border-outline-variant/20 rounded-[2.5rem] p-10 flex flex-col justify-between editorial-shadow hover:shadow-2xl hover:border-outline-variant/30 transition-all duration-500 group"
+      className="bg-white border border-outline-variant/20 rounded-[1.5rem] md:rounded-[2.5rem] p-6 md:p-10 flex flex-col justify-between editorial-shadow hover:shadow-2xl hover:border-outline-variant/30 transition-all duration-500 group"
     >
       <div>
         <div className="flex justify-between items-start mb-8">
@@ -74,7 +74,7 @@ export default function ResenasPage() {
     <div className="min-h-screen bg-background overflow-x-hidden pb-[72px] md:pb-0">
       <Navbar />
       
-      <main className="max-w-6xl mx-auto px-margin-mobile md:px-margin-desktop py-16 md:py-24">
+      <main className="max-w-6xl mx-auto px-6 md:px-12 py-16 md:py-24">
         {/* Hero Header */}
         <header className="mb-20 text-center max-w-2xl mx-auto">
           <p className="font-sans text-[10px] font-bold text-secondary uppercase tracking-[0.2em] mb-4">
@@ -91,7 +91,7 @@ export default function ResenasPage() {
         {/* Rating Summary Section */}
         <section className="grid grid-cols-1 md:grid-cols-12 gap-8 mb-20">
           {/* Score Card */}
-          <div className="md:col-span-4 bg-white border border-outline-variant/20 rounded-[2.5rem] p-10 flex flex-col justify-center items-center text-center editorial-shadow">
+          <div className="md:col-span-4 bg-white border border-outline-variant/20 rounded-[1.5rem] md:rounded-[2.5rem] p-6 md:p-10 flex flex-col justify-center items-center text-center editorial-shadow">
             <span className="font-sans font-bold text-[80px] text-on-surface leading-none tracking-tighter">4.9</span>
             <div className="flex gap-1 my-4 text-yellow-500">
               {[1,2,3,4,5].map(i => <span key={i} className="text-xl">★</span>)}
@@ -103,7 +103,7 @@ export default function ResenasPage() {
           </div>
 
           {/* Distribution Chart */}
-          <div className="md:col-span-5 bg-white border border-outline-variant/20 rounded-[2.5rem] p-10 editorial-shadow">
+          <div className="md:col-span-5 bg-white border border-outline-variant/20 rounded-[1.5rem] md:rounded-[2.5rem] p-6 md:p-10 editorial-shadow">
             <h3 className="font-sans text-[10px] text-secondary uppercase tracking-widest font-semibold mb-8">Desglose de Calificación</h3>
             <div className="space-y-6">
               {ratingBars.map((bar) => (
@@ -119,7 +119,7 @@ export default function ResenasPage() {
           </div>
 
           {/* CTA Card */}
-          <div className="md:col-span-3 bg-inverse-surface text-white rounded-[2.5rem] p-10 flex flex-col justify-between editorial-shadow">
+          <div className="md:col-span-3 bg-inverse-surface text-white rounded-[1.5rem] md:rounded-[2.5rem] p-6 md:p-10 flex flex-col justify-between editorial-shadow">
             <div>
               <h3 className="font-sans font-bold text-2xl mb-4 leading-snug">Tu experiencia es el sello de nuestra calidad.</h3>
               <p className="font-sans text-xs text-white/50 leading-relaxed uppercase tracking-wider font-semibold">Súmate a nuestra comunidad exclusiva.</p>
