@@ -45,7 +45,7 @@ const steps = [
   {
     num: 3,
     title: 'Visitanos y llevate tu equipo',
-    desc: 'Pasá por nuestra tienda en Jujuy 1811, Mar del Plata. Todos nuestros productos son originales y sellados de fábrica.',
+    desc: 'Pasá por nuestra tienda en Jujuy 1611, Mar del Plata. Todos nuestros productos son originales y sellados de fábrica.',
     icon: <StoreIcon />
   }
 ]
@@ -54,21 +54,19 @@ export default function HowItWorks() {
   const { ref, inView } = useInView({ triggerOnce: true, threshold: 0.2 })
 
   return (
-    <section className="bg-white py-24 px-6 overflow-hidden border-t border-outline-variant/10">
+    <section className="bg-[#f7f8fa] py-24 px-6 overflow-hidden">
       <div className="max-w-6xl mx-auto" ref={ref}>
-        {/* Header */}
         <div className="text-center mb-20">
           <p className="font-sans text-[10px] font-bold text-secondary uppercase tracking-[0.2em] mb-3">
             Simple y transparente
           </p>
-          <h2 className="font-sans text-[36px] md:text-[44px] text-on-surface font-bold leading-none tracking-tight">
+          <h2 className="font-display text-[36px] md:text-[44px] text-on-surface font-bold leading-none tracking-tight">
             ¿Cómo funciona?
           </h2>
         </div>
 
-        {/* Steps */}
         <div className="relative">
-          {/* Animated Dashed Line (Desktop only) */}
+          {/* Línea conectora animada — solo desktop, posicionada entre los círculos numerados */}
           <div className="hidden md:block absolute top-7 left-[16.66%] w-[66.66%] h-[2px] z-0">
             <motion.div
               className="h-full border-t-[2px] border-dashed border-outline-variant/30"
@@ -87,17 +85,14 @@ export default function HowItWorks() {
                 transition={{ duration: 0.5, delay: i * 0.15, ease: [0.22, 1, 0.36, 1] }}
                 className="flex flex-col items-center text-center px-4"
               >
-                {/* Number Circle */}
                 <div className="w-14 h-14 rounded-full bg-inverse-surface flex items-center justify-center font-sans font-black text-xl text-white shadow-md mb-6 relative">
                   {step.num}
                 </div>
 
-                {/* Icon */}
-                <div className="text-primary mb-4 bg-surface p-3.5 rounded-full border border-outline-variant/30 shadow-sm">
+                <div className="text-primary mb-4 bg-white p-3.5 rounded-full border border-black/[0.04] shadow-sm">
                   {step.icon}
                 </div>
 
-                {/* Text */}
                 <h3 className="font-sans font-bold text-lg text-on-surface mb-3">
                   {step.title}
                 </h3>

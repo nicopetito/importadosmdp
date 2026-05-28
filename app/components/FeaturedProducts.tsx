@@ -45,14 +45,15 @@ export default function FeaturedProducts() {
         {/* Section Header */}
         <div className="text-center md:text-left mb-16 relative z-10 flex flex-col md:flex-row md:items-end justify-between gap-6">
           <div>
-            <span className="font-mono text-[9px] font-bold text-primary uppercase tracking-[0.25em] mb-3 block">
-              Aura Favorites
+            <span className="inline-flex items-center gap-2 mb-3">
+              <span className="w-5 h-px bg-primary/60 inline-block" />
+              <span className="font-mono text-[9px] text-primary/70 uppercase tracking-[0.2em]">Destacados</span>
             </span>
             <h2 className="font-display text-[36px] md:text-[44px] text-on-surface font-extrabold leading-none tracking-tight">
               Selección Curada<span className="text-primary">.</span>
             </h2>
             <p className="font-sans text-sm text-secondary/70 mt-3 max-w-xl font-light">
-              Dispositivos insignia seleccionados por su diseño vanguardista, rendimiento de otro nivel y experiencia de usuario excepcional.
+              iPhone, MacBook y AirPods originales, sellados de fábrica. Pasá por el local en Jujuy 1611, Mar del Plata, o consultanos por WhatsApp.
             </p>
           </div>
           
@@ -78,7 +79,7 @@ export default function FeaturedProducts() {
               viewport={{ once: true }}
               transition={{ duration: 0.6, delay: i * 0.1, ease: [0.22, 1, 0.36, 1] }}
               whileHover={{ y: -8 }}
-              className="group bg-white border border-gray-200 overflow-hidden hover:shadow-[0_20px_48px_rgba(0,113,227,0.12)] hover:border-primary transition-all duration-300 flex flex-col h-full text-navy"
+              className="group bg-white border border-black/[0.06] overflow-hidden hover:shadow-[0_20px_48px_rgba(0,113,227,0.10)] hover:border-primary/30 transition-all duration-300 flex flex-col h-full text-on-surface rounded-2xl"
             >
               <Link href={`/catalogo/${product.id}`} className="block h-full flex flex-col">
                 {/* Image Container with spotlight shadow */}
@@ -90,7 +91,7 @@ export default function FeaturedProducts() {
 
                   {/* Top Badge Overlay */}
                   {product.badge && (
-                    <span className="absolute top-4 left-4 z-10 bg-gradient-to-r from-accent-mid to-accent text-white text-[10px] font-bold font-body rounded-full px-2.5 py-1 shadow-sm">
+                    <span className="absolute top-4 left-4 z-10 bg-gradient-to-r from-accent-mid to-accent text-white text-[10px] font-bold font-sans rounded-full px-2.5 py-1 shadow-sm">
                       {product.badge}
                     </span>
                   )}
@@ -113,30 +114,30 @@ export default function FeaturedProducts() {
                 {/* Info Area */}
                 <div className="p-8 pt-6 flex flex-col flex-grow bg-white">
                   {/* Category or tag placeholder to add branding detail */}
-                  <span className="font-body text-[10px] font-bold text-accent uppercase tracking-wider mb-2 block">
+                  <span className="font-sans text-[10px] font-bold text-primary/70 uppercase tracking-wider mb-2 block">
                     Premium Hardware
                   </span>
 
-                  <h3 className="font-display font-black text-base md:text-lg text-navy mb-5 leading-tight group-hover:text-accent transition-colors line-clamp-2 min-h-[50px]">
+                  <h3 className="font-display font-black text-base md:text-lg text-on-surface mb-5 leading-tight group-hover:text-primary transition-colors line-clamp-2 min-h-[50px]">
                     {product.name}
                   </h3>
 
                   {/* Pricing, Financing & CTA */}
-                  <div className="mt-auto pt-5 border-t border-blue-subtle flex items-center justify-between">
+                  <div className="mt-auto pt-5 border-t border-black/[0.05] flex items-center justify-between">
                     <div className="flex flex-col">
-                      <span className="font-body text-[9px] text-[#6B7280] font-bold tracking-widest uppercase mb-1 block">
+                      <span className="font-sans text-[9px] text-secondary font-bold tracking-widest uppercase mb-1 block">
                         Desde
                       </span>
-                      <span className="font-display font-black text-2xl text-navy tracking-tight leading-none">
-                        ${product.price.toLocaleString('es-AR')} <span className="text-[11px] font-body font-normal text-[#6B7280] uppercase">USD</span>
+                      <span className="font-display font-black text-2xl text-on-surface tracking-tight leading-none">
+                        ${product.price.toLocaleString('es-AR')} <span className="text-[11px] font-sans font-normal text-secondary uppercase">u$s</span>
                       </span>
-                      <span className="font-body text-xs text-accent mt-1.5 flex items-center gap-1">
+                      <span className="font-sans text-xs text-primary/80 mt-1.5 flex items-center gap-1">
                         {product.financing}
                       </span>
                     </div>
-                    
+
                     {/* Action Button */}
-                    <div className="w-10 h-10 rounded-full bg-navy text-white flex items-center justify-center group-hover:bg-accent transition-all duration-300 shadow-sm">
+                    <div className="w-10 h-10 rounded-full bg-on-surface text-white flex items-center justify-center group-hover:bg-primary transition-all duration-300 shadow-sm">
                       <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
                         <path d="M5 12h14M12 5l7 7-7 7" />
                       </svg>

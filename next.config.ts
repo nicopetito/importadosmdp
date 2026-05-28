@@ -7,9 +7,6 @@ const nextConfig: NextConfig = {
       { protocol: 'https', hostname: 'images.unsplash.com' }
     ]
   },
-  turbopack: {
-    root: '.',
-  },
 }
 
 export default nextConfig

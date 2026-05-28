@@ -14,21 +14,18 @@ interface ProductCardProps {
   discountPrice?: number
   imageUrl: string
   badge?: string | null
+  inStock?: boolean
   index?: number
 }
 
-function getCategoryGradient(): string {
-  return '#FFFFFF'
-}
-
 export default function ProductCard({
-  id, name, brand, category, price, discountPrice, imageUrl, badge, index = 0,
+  id, name, brand, category, price, discountPrice, imageUrl, badge, inStock = true, index = 0,
 }: ProductCardProps) {
   const cardRef = useRef<HTMLDivElement>(null)
   const x = useMotionValue(0)
   const y = useMotionValue(0)
-  const rotateX = useTransform(y, [-0.5, 0.5], ['6deg', '-6deg'])
-  const rotateY = useTransform(x, [-0.5, 0.5], ['-6deg', '6deg'])
+  const rotateX = useTransform(y, [-0.5, 0.5], ['4deg', '-4deg'])
+  const rotateY = useTransform(x, [-0.5, 0.5], ['-4deg', '4deg'])
   const springRotateX = useSpring(rotateX, { stiffness: 280, damping: 28 })
   const springRotateY = useSpring(rotateY, { stiffness: 280, damping: 28 })
 
@@ -52,13 +49,13 @@ export default function ProductCard({
       onMouseMove={handleMouseMove}
       onMouseLeave={handleMouseLeave}
       style={{ rotateX: springRotateX, rotateY: springRotateY, transformStyle: 'preserve-3d', perspective: 1000 }}
-      whileHover={{ y: -10 }}
+      whileHover={{ y: -6 }}
       whileTap={{ scale: 0.97 }}
       initial={{ opacity: 0, y: 28 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ delay: index * 0.07, duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
       className="group relative bg-white rounded-[20px] border border-gray-200 overflow-hidden cursor-pointer
-                 hover:shadow-[0_20px_48px_rgba(0,113,227,0.12)] hover:border-primary
+                 hover:shadow-[0_16px_32px_rgba(0,0,0,0.08)] hover:border-gray-300
                  transition-all duration-300 flex flex-col"
     >
       {/* Image area */}
@@ -67,14 +64,13 @@ export default function ProductCard({
       >
         {/* Badge */}
         {badge && (
-          <span className="absolute top-3 left-3 z-10 bg-gradient-to-r from-accent-mid to-accent text-white text-[10px] font-bold font-body rounded-full px-2.5 py-1 shadow-sm">
+          <span className="absolute top-3 left-3 z-10 bg-on-surface text-white text-[10px] font-bold font-sans rounded-full px-2.5 py-1 shadow-sm">
             {badge}
           </span>
         )}
 
-        {/* Discount badge */}
         {discountPrice && (
-          <span className="absolute top-3 right-3 z-10 bg-[#FDF3E3] text-[#92400E] text-[10px] font-bold font-body rounded-full px-2.5 py-1">
+          <span className="absolute top-3 right-3 z-10 bg-[#FDF3E3] text-[#92400E] text-[10px] font-bold font-sans rounded-full px-2.5 py-1">
             Oferta
           </span>
         )}
@@ -87,9 +83,8 @@ export default function ProductCard({
           sizes="(max-width: 768px) 50vw, 20vw"
         />
 
-        {/* Hover "Consultar" overlay */}
         <div className="absolute inset-x-3 bottom-2.5 opacity-0 group-hover:opacity-100 transition-opacity duration-200 z-10">
-          <div className="bg-accent text-white text-[11px] font-bold font-body rounded-full px-3 py-1.5 text-center shadow">
+          <div className="bg-on-surface text-white text-[11px] font-bold font-sans rounded-full px-3 py-1.5 text-center shadow">
             Consultar →
           </div>
         </div>
@@ -97,29 +92,32 @@ export default function ProductCard({
 
       {/* Info area */}
       <div className="p-4 flex flex-col flex-1">
-        <span className="font-body text-[10px] font-bold text-accent uppercase tracking-wider mb-1">
+        <span className="font-sans text-[10px] font-bold text-primary/70 uppercase tracking-wider mb-1">
           {brand} · {category}
         </span>
-        <h3 className="font-display font-black text-[13px] md:text-sm text-navy leading-snug line-clamp-2 mb-auto">
+        <h3 className="font-display font-black text-[13px] md:text-sm text-on-surface leading-snug line-clamp-2 mb-auto">
           {name}
         </h3>
 
-        <div className="mt-3 pt-3 border-t border-blue-subtle flex items-center justify-between gap-2">
+        <div className="mt-3 pt-3 border-t border-black/[0.05] flex items-center justify-between gap-2">
           <div>
             {discountPrice && (
-              <p className="font-body text-[11px] text-[#9CA3AF] line-through leading-none mb-0.5">
+              <p className="font-sans text-[11px] text-[#9CA3AF] line-through leading-none mb-0.5">
                 ${price.toLocaleString('es-AR')}
               </p>
             )}
-            <p className="font-display font-black text-base text-navy flex items-baseline gap-1">
-              <span className="text-[11px] font-body font-normal text-[#6B7280]">ARS</span>
+            <p className="font-display font-black text-base text-on-surface flex items-baseline gap-1">
+              <span className="text-[11px] font-sans font-normal text-secondary">ARS</span>
               ${displayPrice.toLocaleString('es-AR')}
             </p>
+            <span className="font-sans text-[9px] text-primary/70 font-medium mt-0.5 block">
+              {inStock ? 'Disponible' : 'Sin stock'}
+            </span>
           </div>
           <motion.div whileTap={{ scale: 0.90 }}>
             <Link
               href={`/catalogo/${id}`}
-              className="flex-shrink-0 w-8 h-8 rounded-full bg-navy flex items-center justify-center hover:bg-accent transition-colors duration-200 shadow-sm"
+              className="flex-shrink-0 w-8 h-8 rounded-full bg-on-surface flex items-center justify-center hover:bg-primary transition-colors duration-200 shadow-sm"
               aria-label={`Ver ${name}`}
             >
               <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">

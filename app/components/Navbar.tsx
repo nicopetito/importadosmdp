@@ -372,23 +372,38 @@ function HeaderSearch({ isMobileSearchOpen, setIsMobileSearchOpen }: {
   )
 }
 
-export default function Navbar() {
+export default function Navbar({ hero = false }: { hero?: boolean }) {
   const [open, setOpen] = useState(false)
   const [isMobileSearchOpen, setIsMobileSearchOpen] = useState(false)
+  const [isScrolled, setIsScrolled] = useState(false)
   const pathname = usePathname()
+
+  useEffect(() => {
+    let ticking = false
+    const handleScroll = () => {
+      if (ticking) return
+      ticking = true
+      requestAnimationFrame(() => {
+        setIsScrolled(window.scrollY > 20)
+        ticking = false
+      })
+    }
+    window.addEventListener('scroll', handleScroll, { passive: true })
+    return () => window.removeEventListener('scroll', handleScroll)
+  }, [])
+
+  const pillClass = isScrolled
+    ? 'bg-white/92 shadow-[0_4px_24px_rgba(0,0,0,0.10)] h-[48px]'
+    : 'bg-white/85 shadow-[0_2px_20px_rgba(0,0,0,0.07)] h-[52px]'
 
   return (
     <>
-      <header className="relative sticky top-0 z-50 h-[64px] flex items-center glass-light border-b border-black/[0.03] shadow-sm">
-        <div className="w-full max-w-6xl mx-auto px-6 flex items-center justify-between relative">
-          {/* Logo */}
-          <div className="flex-shrink-0">
-            <Link href="/" className="font-display font-extrabold text-[18px] text-on-surface tracking-tight">
-              importados<span className="text-primary">mdp</span>
-            </Link>
-          </div>
+      <header className="fixed top-0 left-0 right-0 z-50 bg-transparent px-3 pt-3 md:px-6 md:pt-4">
+        <div className={`w-full md:max-w-[88%] mx-auto px-5 md:px-6 flex items-center justify-between relative border border-white/25 backdrop-blur-[22px] rounded-[18px] md:rounded-[22px] transition-all duration-300 ${pillClass}`}>
+          <Link href="/" className="flex-shrink-0 font-display font-extrabold text-[18px] text-on-surface tracking-tight">
+            importados<span className="text-primary">mdp</span>
+          </Link>
 
-          {/* Desktop nav */}
           <nav className="hidden md:flex items-center gap-8 absolute left-1/2 -translate-x-1/2">
             {navLinks.map((link) => {
               const isActive = pathname === link.href || (link.href !== '/' && pathname.startsWith(link.href))
@@ -411,7 +426,6 @@ export default function Navbar() {
             })}
           </nav>
 
-          {/* Right-side elements (Search and Hamburger) */}
           <div className="flex items-center ml-auto gap-3">
             <Suspense fallback={<div className="w-9 h-9 md:w-44 md:h-9 bg-black/[0.03] rounded-xl animate-pulse" />}>
               <HeaderSearch 
@@ -420,7 +434,6 @@ export default function Navbar() {
               />
             </Suspense>
 
-            {/* Hamburger (mobile) */}
             <button
               onClick={() => setOpen(!open)}
               className="md:hidden flex flex-col gap-[5px] p-2 focus:outline-none"
@@ -435,6 +448,8 @@ export default function Navbar() {
       </header>
 
       <MobileDrawer open={open} onClose={() => setOpen(false)} />
+      {/* Spacer para páginas sin hero — compensa el navbar fixed + padding flotante */}
+      {!hero && <div className="h-[68px] md:h-[76px]" />}
     </>
   )
 }

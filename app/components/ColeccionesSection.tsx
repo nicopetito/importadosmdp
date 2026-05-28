@@ -6,13 +6,17 @@ import { motion } from 'framer-motion'
 
 export default function ColeccionesSection() {
   return (
-    <section className="bg-[#F8F8F6] py-24 px-6 md:px-12 relative z-10">
+    <section className="bg-[#f7f8fa] py-24 px-6 md:px-12 relative z-10">
 
       <div className="max-w-6xl mx-auto">
         
         {/* Header */}
         <div className="flex items-end justify-between mb-12">
           <div>
+            <span className="inline-flex items-center gap-2 mb-3">
+              <span className="w-5 h-px bg-primary/60 inline-block" />
+              <span className="font-mono text-[9px] text-primary/70 uppercase tracking-[0.2em]">Categorías</span>
+            </span>
             <h2 className="font-display text-[32px] md:text-[40px] text-on-surface font-bold tracking-tight mb-2">
               Colecciones
             </h2>
