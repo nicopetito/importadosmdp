@@ -1,6 +1,7 @@
 'use client'
 
 import { useState } from 'react'
+import { motion } from 'framer-motion'
 
 type ProductCategory = 'iPhone' | 'Samsung' | 'MacBook' | 'AirPods' | 'Other'
 type FilterKey = 'Todas' | ProductCategory
@@ -144,7 +145,7 @@ const reviews: Review[] = [
 
 function SectionHeader() {
   return (
-    <div className="mb-10">
+    <div className="mb-12">
       <span className="inline-flex items-center gap-2 mb-3">
         <span className="w-5 h-px bg-primary/60 inline-block" />
         <span className="font-sans text-[9px] text-primary/70 uppercase tracking-[0.2em] font-semibold">
@@ -170,7 +171,9 @@ function RatingBlock() {
             <span key={i} className="text-yellow-500 text-base">★</span>
           ))}
         </div>
-        <p className="font-display font-bold text-on-surface text-2xl leading-none">4.9 / 5.0</p>
+        <p className="font-display font-black text-primary text-5xl leading-none">
+          4.9 <span className="font-bold text-on-surface/40 text-2xl">/ 5.0</span>
+        </p>
         <p className="font-sans text-[10px] text-secondary mt-1 uppercase tracking-wider font-semibold">
           500+ opiniones verificadas
         </p>
@@ -245,12 +248,19 @@ function FilterBar({ activeFilter, onFilterChange }: FilterBarProps) {
   )
 }
 
-function ReviewCard({ review }: { review: Review }) {
+function ReviewCard({ review, index }: { review: Review; index: number }) {
   const { author, date, quote, rating, avatarColor, productLabel, tags } = review
   const initials = author.split(' ').map(w => w[0]).join('').slice(0, 2).toUpperCase()
 
   return (
-    <div className="bg-white rounded-2xl border border-outline-variant/20 p-5 flex flex-col gap-3 shadow-sm hover:shadow-md hover:border-outline-variant/40 transition-all duration-300">
+    <motion.div
+      initial={{ opacity: 0, y: 20 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true }}
+      transition={{ duration: 0.45, delay: index < 6 ? index * 0.06 : 0 }}
+      whileHover={{ y: -4, transition: { duration: 0.2 } }}
+      className="bg-white rounded-2xl border border-outline-variant/20 p-5 flex flex-col gap-3 shadow-sm hover:shadow-md hover:border-outline-variant/40 transition-shadow duration-300"
+    >
       <div className="flex items-start justify-between gap-3">
         <div className="flex items-center gap-2.5">
           <div
@@ -278,7 +288,7 @@ function ReviewCard({ review }: { review: Review }) {
 
       <p className="font-sans text-[10px] text-secondary/70 -mt-1">{date}</p>
 
-      <p className="font-sans text-sm text-on-surface/80 leading-relaxed flex-1">
+      <p className="font-sans text-base text-on-surface/80 leading-relaxed flex-1">
         &ldquo;{quote}&rdquo;
       </p>
 
@@ -294,7 +304,7 @@ function ReviewCard({ review }: { review: Review }) {
           ))}
         </div>
       )}
-    </div>
+    </motion.div>
   )
 }
 
@@ -320,7 +330,7 @@ export default function TestimonialsSection() {
 
   return (
     <section className="py-24 bg-[#f7f8fa]">
-      <div className="max-w-6xl mx-auto px-6">
+      <div className="max-w-6xl mx-auto px-6 md:px-12">
         <SectionHeader />
         <RatingBlock />
         <CtaDarkCard />
@@ -329,7 +339,7 @@ export default function TestimonialsSection() {
           ? <EmptyState />
           : (
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
-              {filtered.map(r => <ReviewCard key={r.id} review={r} />)}
+              {filtered.map((r, i) => <ReviewCard key={r.id} review={r} index={i} />)}
             </div>
           )
         }

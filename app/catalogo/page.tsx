@@ -402,7 +402,7 @@ function CatalogoContenido() {
               <span className="inline-block px-3.5 py-1.5 rounded-full bg-white/10 backdrop-blur-md text-[9px] font-bold tracking-widest uppercase mb-4 border border-white/10">
                 Catálogo Oficial
               </span>
-              <h1 className="font-sans text-3xl sm:text-[48px] md:text-[64px] font-bold tracking-tight mb-3 leading-none text-white">
+              <h1 className="font-display font-black text-3xl sm:text-[48px] md:text-[64px] tracking-tight mb-3 leading-none text-white">
                 Colección curada.
               </h1>
               <p className="text-white/80 font-sans max-w-xl text-sm sm:text-base md:text-lg leading-relaxed font-light">
@@ -574,11 +574,11 @@ function CatalogoContenido() {
                 >
                   <circle cx="11" cy="11" r="8" /><line x1="21" y1="21" x2="16.65" y2="16.65" />
                 </svg>
-                <h3 className="font-sans font-bold text-base text-gray-800">Sin resultados</h3>
+                <h3 className="font-sans font-bold text-base text-gray-800">No encontramos resultados</h3>
                 <p className="font-sans text-gray-500 text-sm max-w-[320px] leading-relaxed">
                   {q
-                    ? `No encontramos productos para "${q}". Probá con otros términos o ajustá los filtros.`
-                    : 'No hay productos disponibles con los filtros seleccionados.'}
+                    ? `No hay productos que coincidan con "${q}". Probá con otra palabra o explorá todo el catálogo.`
+                    : 'Ningún producto coincide con los filtros aplicados. Probá con otra categoría o marca.'}
                 </p>
                 <button
                   onClick={() => {
@@ -587,7 +587,7 @@ function CatalogoContenido() {
                   }}
                   className="mt-4 bg-gray-900 text-white rounded-full px-8 py-3 text-xs font-bold uppercase tracking-widest hover:bg-gray-700 transition-colors shadow-sm cursor-pointer"
                 >
-                  Ver todos los productos
+                  Ver todo el catálogo
                 </button>
               </motion.div>
             )}

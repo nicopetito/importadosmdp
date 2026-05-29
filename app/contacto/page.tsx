@@ -37,7 +37,7 @@ export default function ContactoPage() {
           <p className="font-sans text-[10px] font-bold text-secondary uppercase tracking-[0.2em] mb-4">
             Atención Personalizada
           </p>
-          <h1 className="font-sans font-bold text-[48px] md:text-[64px] text-on-surface leading-none tracking-tight mb-6">
+          <h1 className="font-display font-black text-[48px] md:text-[64px] text-on-surface leading-none tracking-tight mb-6">
             Hablemos.
           </h1>
           <p className="font-sans text-secondary text-sm md:text-base leading-relaxed">
@@ -56,7 +56,6 @@ export default function ContactoPage() {
             <div className="bg-white border border-outline-variant/20 rounded-[1.5rem] md:rounded-[2.5rem] p-6 md:p-10 shadow-sm hover:shadow-2xl hover:border-outline-variant/30 transition-all duration-500 relative overflow-hidden group">
               <div className="flex flex-col md:flex-row md:items-center justify-between gap-6">
                 <div>
-                  <span className="text-[10px] text-primary font-bold tracking-widest uppercase mb-2 block">Premium Concierge</span>
                   <h3 className="font-sans font-bold text-2xl text-on-surface mb-3">WhatsApp Directo</h3>
                   <p className="font-sans text-sm text-secondary leading-relaxed max-w-md">
                     Consultá stock físico, reservá tu equipo de forma inmediata o aclará dudas sobre la garantía oficial.
@@ -80,7 +79,6 @@ export default function ContactoPage() {
             <div className="bg-white border border-outline-variant/20 rounded-[1.5rem] md:rounded-[2.5rem] p-6 md:p-10 shadow-sm hover:shadow-2xl hover:border-outline-variant/30 transition-all duration-500 relative overflow-hidden group">
               <div className="flex flex-col md:flex-row md:items-center justify-between gap-6">
                 <div>
-                  <span className="text-[10px] text-secondary font-bold tracking-widest uppercase mb-2 block">Social Showcase</span>
                   <h3 className="font-sans font-bold text-2xl text-on-surface mb-3">Instagram Showroom</h3>
                   <p className="font-sans text-sm text-secondary leading-relaxed max-w-md">
                     Seguinos para enterarte de ingresos diarios, ver unboxings reales y acceder a promociones flash.
@@ -99,10 +97,10 @@ export default function ContactoPage() {
 
             {/* Ubicación y Horarios card */}
             <div className="bg-white border border-outline-variant/20 rounded-[1.5rem] md:rounded-[2.5rem] p-6 md:p-10 shadow-sm relative overflow-hidden">
-              <h3 className="font-sans font-bold text-xs uppercase tracking-widest text-on-surface mb-8">Coordenadas del Showroom</h3>
+              <h3 className="font-sans font-bold text-xs uppercase tracking-widest text-on-surface mb-8">Dónde encontrarnos</h3>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-8">
                 <div>
-                  <span className="block text-[9px] font-bold text-secondary uppercase tracking-wider mb-2">Visita Presencial</span>
+                  <span className="block text-[9px] font-bold text-secondary uppercase tracking-wider mb-2">Dirección</span>
                   <p className="font-sans font-bold text-base text-on-surface">Jujuy 1611</p>
                   <p className="text-secondary text-xs mt-1">Mar del Plata, Buenos Aires, Argentina</p>
                 </div>
@@ -122,8 +120,8 @@ export default function ContactoPage() {
               {!enviado ? (
                 <form onSubmit={handleSubmit} className="space-y-6">
                   <div>
-                    <h2 className="font-sans font-bold text-lg text-on-surface mb-1">Inquiry</h2>
-                    <p className="font-sans text-xs text-secondary leading-relaxed">Dejanos tus datos si preferís que te contactemos nosotros.</p>
+                    <h2 className="font-sans font-bold text-lg text-on-surface mb-1">Dejá tu consulta</h2>
+                    <p className="font-sans text-xs text-secondary leading-relaxed">Completá el formulario y te respondemos a la brevedad.</p>
                   </div>
 
                   <div className="space-y-4">

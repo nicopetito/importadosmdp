@@ -210,7 +210,7 @@ function HeaderSearch({ isMobileSearchOpen, setIsMobileSearchOpen }: {
       {/* Mobile Search Button */}
       <button
         onClick={() => setIsMobileSearchOpen(true)}
-        className="md:hidden w-9 h-9 flex items-center justify-center rounded-full hover:bg-black/[0.03] text-on-surface/80 hover:text-on-surface transition-colors"
+        className="md:hidden w-11 h-11 flex items-center justify-center rounded-full hover:bg-black/[0.03] text-on-surface/80 hover:text-on-surface transition-colors"
         aria-label="Buscar"
       >
         <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
@@ -436,7 +436,7 @@ export default function Navbar({ hero = false }: { hero?: boolean }) {
 
             <button
               onClick={() => setOpen(!open)}
-              className="md:hidden flex flex-col gap-[5px] p-2 focus:outline-none"
+              className="md:hidden w-11 h-11 flex flex-col gap-[5px] items-center justify-center focus:outline-none"
               aria-label={open ? 'Cerrar menú' : 'Abrir menú'}
             >
               <span className={`block w-5 h-[2px] bg-on-surface rounded transition-all duration-300 ${open ? 'rotate-45 translate-y-[7px]' : ''}`} />

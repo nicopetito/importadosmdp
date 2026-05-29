@@ -27,10 +27,10 @@ export default function HeroSection() {
             transition={{ duration: 0.55 }}
             className="flex items-center gap-3 mb-8"
           >
-            <span className="px-3.5 py-1 bg-primary/15 backdrop-blur-md text-primary text-[8px] font-bold uppercase tracking-[0.02em] rounded-full border border-primary/20">
+            <span className="px-3.5 py-1 bg-primary/15 backdrop-blur-md text-primary text-[8px] font-bold uppercase tracking-[0.02em] rounded-full border border-primary/20 animate-float">
               Disponible hoy
             </span>
-            <span className="px-3.5 py-1 bg-white/8 backdrop-blur-sm text-[8px] font-bold uppercase tracking-[0.02em] rounded-full border border-white/15 text-white/85">
+            <span className="px-3.5 py-1 bg-white/8 backdrop-blur-sm text-[8px] font-bold uppercase tracking-[0.02em] rounded-full border border-white/15 text-white/85 animate-float" style={{ animationDelay: '0.5s' }}>
               Retiro inmediato
             </span>
           </motion.div>

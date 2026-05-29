@@ -54,9 +54,9 @@ export default function HowItWorks() {
   const { ref, inView } = useInView({ triggerOnce: true, threshold: 0.2 })
 
   return (
-    <section className="bg-[#f7f8fa] py-24 px-6 overflow-hidden">
+    <section className="bg-[#f7f8fa] py-24 px-6 md:px-12 overflow-hidden">
       <div className="max-w-6xl mx-auto" ref={ref}>
-        <div className="text-center mb-20">
+        <div className="text-center mb-12">
           <p className="font-sans text-[10px] font-bold text-secondary uppercase tracking-[0.2em] mb-3">
             Simple y transparente
           </p>
@@ -69,7 +69,7 @@ export default function HowItWorks() {
           {/* Línea conectora animada — solo desktop, posicionada entre los círculos numerados */}
           <div className="hidden md:block absolute top-7 left-[16.66%] w-[66.66%] h-[2px] z-0">
             <motion.div
-              className="h-full border-t-[2px] border-dashed border-outline-variant/30"
+              className="h-full border-t-[2px] border-dashed border-primary/20"
               initial={{ width: 0 }}
               animate={inView ? { width: '100%' } : { width: 0 }}
               transition={{ duration: 1, delay: 0.4, ease: "easeOut" }}
@@ -85,15 +85,18 @@ export default function HowItWorks() {
                 transition={{ duration: 0.5, delay: i * 0.15, ease: [0.22, 1, 0.36, 1] }}
                 className="flex flex-col items-center text-center px-4"
               >
-                <div className="w-14 h-14 rounded-full bg-inverse-surface flex items-center justify-center font-sans font-black text-xl text-white shadow-md mb-6 relative">
+                <div className="w-14 h-14 rounded-full bg-gradient-to-br from-primary to-accent flex items-center justify-center font-sans font-black text-xl text-white shadow-md mb-6 relative">
                   {step.num}
                 </div>
 
-                <div className="text-primary mb-4 bg-white p-3.5 rounded-full border border-black/[0.04] shadow-sm">
+                <motion.div
+                  whileHover={{ scale: 1.1, transition: { duration: 0.2 } }}
+                  className="text-primary mb-4 bg-white p-3.5 rounded-full border border-black/[0.04] shadow-sm cursor-default"
+                >
                   {step.icon}
-                </div>
+                </motion.div>
 
-                <h3 className="font-sans font-bold text-lg text-on-surface mb-3">
+                <h3 className="font-sans font-bold text-xl text-on-surface mb-3">
                   {step.title}
                 </h3>
                 <p className="font-sans text-sm text-secondary leading-relaxed max-w-[280px]">

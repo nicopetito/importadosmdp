@@ -14,7 +14,7 @@ export default function MapSection() {
     <section className="py-24 bg-white relative overflow-hidden z-10">
       <div className="absolute top-1/4 left-0 w-[400px] h-[400px] rounded-full bg-primary/[0.03] blur-[120px] pointer-events-none" />
 
-      <div className="max-w-6xl mx-auto px-6 relative z-10">
+      <div className="max-w-6xl mx-auto px-6 md:px-12 relative z-10">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center">
           <motion.div
             initial={{ opacity: 0, y: 30 }}

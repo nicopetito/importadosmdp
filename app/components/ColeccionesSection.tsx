@@ -26,9 +26,9 @@ export default function ColeccionesSection() {
           </div>
           <Link
             href="/catalogo"
-            className="font-mono font-bold text-[10px] uppercase tracking-widest text-primary hover:text-primary-container transition-colors duration-200"
+            className="font-mono font-bold text-[10px] uppercase tracking-widest text-primary hover:text-primary-container transition-colors duration-200 border-b border-primary/20 pb-1"
           >
-            EXPLORAR TODO
+            Ver catálogo completo
           </Link>
         </div>
 
@@ -41,7 +41,7 @@ export default function ColeccionesSection() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
-            className="md:col-span-2 relative aspect-[16/10] md:h-[420px] rounded-[2rem] overflow-hidden group border border-white/5 hover:border-primary/20 bg-gradient-to-br from-[#121316] via-[#1a1b20] to-[#0a0b0d] shadow-xl cursor-pointer transition-all duration-500"
+            className="md:col-span-2 relative aspect-[16/10] md:h-[420px] rounded-3xl overflow-hidden group border border-white/5 hover:border-primary/20 bg-gradient-to-br from-[#121316] via-[#1a1b20] to-[#0a0b0d] shadow-xl cursor-pointer transition-all duration-500"
           >
             <Link href="/catalogo?categoria=Celulares" className="block w-full h-full">
               <Image
@@ -78,7 +78,7 @@ export default function ColeccionesSection() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.6, delay: 0.1 }}
-              className="flex-1 relative min-h-[198px] rounded-[2rem] overflow-hidden group border border-white/5 hover:border-white/15 bg-gradient-to-tr from-[#16171a] via-[#25272e] to-[#0f1012] shadow-md cursor-pointer transition-all duration-500"
+              className="flex-1 relative min-h-[198px] rounded-3xl overflow-hidden group border border-white/5 hover:border-white/15 bg-gradient-to-tr from-[#16171a] via-[#25272e] to-[#0f1012] shadow-md cursor-pointer transition-all duration-500"
             >
               <Link href="/catalogo?categoria=Notebooks" className="block w-full h-full">
                 <Image
@@ -111,7 +111,7 @@ export default function ColeccionesSection() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.6, delay: 0.2 }}
-              className="flex-1 relative min-h-[198px] rounded-[2rem] overflow-hidden group border border-white/5 hover:border-white/10 bg-gradient-to-b from-[#0a0a0c] to-[#020203] shadow-md cursor-pointer transition-all duration-500"
+              className="flex-1 relative min-h-[198px] rounded-3xl overflow-hidden group border border-white/5 hover:border-white/10 bg-gradient-to-b from-[#0a0a0c] to-[#020203] shadow-md cursor-pointer transition-all duration-500"
             >
               <Link href="/catalogo?categoria=Auriculares" className="block w-full h-full">
                 <Image
